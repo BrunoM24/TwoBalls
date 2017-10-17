@@ -6,10 +6,5 @@ package org.academiadecodigo.twoballs.gameobjects.move;
 
 public interface Movable {
 
-    //TODO SAME REFERENCE FOR ALL OBJECTS
-    Direction direction = new Direction();
-
-    Speed speed = new Speed();
-
     void move();
 }

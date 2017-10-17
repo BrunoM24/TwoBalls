@@ -3,7 +3,9 @@ package org.academiadecodigo.twoballs.gameobjects;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.twoballs.gameobjects.move.Direction;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
+import org.academiadecodigo.twoballs.gameobjects.move.Speed;
 
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
@@ -13,6 +15,9 @@ public class Ball extends GameObject implements Movable {
     private Ellipse ball;
     private Rectangle background;
     private int radius = 15;
+
+    private Speed speed = new Speed();
+    private Direction direction = new Direction();
 
     public Ball(Rectangle backgroundImage, int x, int y) {
 
