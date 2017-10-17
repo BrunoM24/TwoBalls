@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="VSimpleGFX">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/VSimpleGFX.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
