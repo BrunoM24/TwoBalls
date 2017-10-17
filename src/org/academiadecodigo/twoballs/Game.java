@@ -1,15 +1,15 @@
 package org.academiadecodigo.twoballs;
 
-import org.academiadecodigo.twoballs.gameobjects.Ball;
-import org.academiadecodigo.twoballs.gameobjects.GameObject;
-
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
  */
 public class Game {
+
+    private static final double IDEAL_DELTA = 1000000000.0 / 60.0;
+
+    long lastTime = System.nanoTime();
+
+    double delta = 0.0f;
 
     private Stage stage;
 
@@ -30,11 +30,23 @@ public class Game {
 
     public void start() throws InterruptedException {
 
-        while (true) {
+        while(true) {
 
-            Thread.sleep(10);
+            long now = System.nanoTime();
 
-            stage.run(0.0f);
+            //divide the current delta by the IDEAL FPS (60)
+            delta += (now - lastTime) / IDEAL_DELTA;
+
+            //sets the new time
+            lastTime = now;
+
+            //Executes this 60FPS
+            while(delta >= 1) {
+
+                //run x 60FPS
+                stage.run((float) delta);
+                delta--;
+            }
         }
     }
 }

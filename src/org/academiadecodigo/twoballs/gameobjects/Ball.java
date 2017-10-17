@@ -42,6 +42,12 @@ public class Ball extends GameObject implements Movable {
     }
 
     @Override
+    public void move(float delta) {
+
+
+    }
+
+    @Override
     public void checkCollision() {
 
     }

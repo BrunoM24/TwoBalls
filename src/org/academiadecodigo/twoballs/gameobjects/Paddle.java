@@ -40,6 +40,12 @@ public class Paddle extends GameObject implements Movable {
         paddle.translate(0, direction * speed);
     }
 
+    @Override
+    public void move(float delta) {
+
+
+    }
+
     public void checkDirection() {
 
         if(paddle.getY() <= Stage.PADDING || paddle.getY() + paddle.getHeight() >= backgroundImage.getHeight() + Stage.PADDING) {

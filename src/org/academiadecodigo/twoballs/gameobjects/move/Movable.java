@@ -7,4 +7,6 @@ package org.academiadecodigo.twoballs.gameobjects.move;
 public interface Movable {
 
     void move();
+
+    void move(float delta);
 }
