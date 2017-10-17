@@ -2,6 +2,7 @@ package org.academiadecodigo.twoballs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 
 
 /**

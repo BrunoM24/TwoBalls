@@ -1,17 +1,14 @@
 package org.academiadecodigo.twoballs;
 
-import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
-import org.academiadecodigo.simplegraphics.keyboard.VKeyboard;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
-import org.academiadecodigo.twoballs.gameobjects.Movable;
+import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 
-import java.awt.event.KeyEvent;
+import javax.tools.Tool;
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,8 +24,6 @@ public class Game {
     private static final int PADDING = 10;
 
     private Rectangle bkgImage;
-    private Paddle bluePaddle;
-    private Paddle pinkPaddle;
     private Ball ball;
 
     Game() {
@@ -45,13 +40,12 @@ public class Game {
         bkgImage.draw();
 
         //make factory and do gameobject.add both paddles
-        bluePaddle = new Paddle(bkgImage, Color.BLUE);
-        pinkPaddle = new Paddle(bkgImage, Color.PINK, bkgImage.getWidth() - PADDING, bkgImage.getY());
-        ball = new Ball(bkgImage, 150, 190);
+        gameObjects.add(ball = new Ball(bkgImage, 150, 190)); //TODO: to remove
 
-        gameObjects.add(bluePaddle);
-        gameObjects.add(pinkPaddle);
-        gameObjects.add(ball);
+
+        gameObjects.add(ObjectFactory.getNewPaddle(bkgImage, Color.BLUE, bkgImage.getWidth() - PADDING, bkgImage.getY()));
+        gameObjects.add(ObjectFactory.getNewPaddle(bkgImage, Color.PINK, PADDING, 190));
+        gameObjects.add(ObjectFactory.getNewBall(bkgImage, 90,90));
     }
 
     public void start() throws InterruptedException {
@@ -75,5 +69,15 @@ public class Game {
 
             object.checkCollision();
         }
+    }
+
+    public static int getWidth() {
+
+        return Toolkit.getDefaultToolkit().getScreenSize().width;
+    }
+
+    public static int getHeight() {
+
+        return Toolkit.getDefaultToolkit().getScreenSize().height;
     }
 }
