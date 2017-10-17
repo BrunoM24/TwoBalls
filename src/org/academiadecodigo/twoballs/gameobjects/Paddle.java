@@ -1,7 +1,8 @@
 package org.academiadecodigo.twoballs.gameobjects;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.twoballs.Stage;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 
 
@@ -12,24 +13,28 @@ import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 
 public class Paddle extends GameObject implements Movable {
 
-    private Rectangle paddle;
-    private int direction = -1;
+    private Picture paddle;
+
+    private int direction = Math.random() > 0.5f ? 1 : -1;
+
     private int speed = 4;
-    private int paddleWidth = 20;
-    private int paddleHeight = 80;
 
     private Rectangle backgroundImage;
 
-    public Paddle(Rectangle backgroundImage, Color paddleColor) {
+    public Paddle(Rectangle backgroundImage, String paddleColor) {
 
         this(backgroundImage, paddleColor, backgroundImage.getX(), backgroundImage.getHeight() / 2);
     }
 
-    public Paddle(Rectangle backgroundImage, Color paddleColor, int posX, int posY) {
+    public Paddle(Rectangle backgroundImage, String paddleColor, int posX, int posY) {
 
-        paddle = new Rectangle(posX, posY, paddleWidth, paddleHeight);
-        paddle.setColor(paddleColor);
-        paddle.fill();
+        if(posX - 14 > backgroundImage.getWidth() / 2) {
+
+            posX -= 4;
+        }
+
+        paddle = new Picture(posX, posY, "assets/" + paddleColor + "Paddle.png");
+        paddle.draw();
 
         this.backgroundImage = backgroundImage;
     }
@@ -44,8 +49,8 @@ public class Paddle extends GameObject implements Movable {
 
     public void checkDirection() {
 
-        if (paddle.getY() <= 10 ||      //TODO 10 of PADDING....improve this ..seems ugly
-                paddle.getY() + paddle.getHeight() >= backgroundImage.getHeight() + 10) {
+        if(paddle.getY() <= Stage.PADDING ||
+                paddle.getY() + paddle.getHeight() >= backgroundImage.getHeight() + Stage.PADDING) {
 
             changeDirection();
         }
@@ -59,11 +64,6 @@ public class Paddle extends GameObject implements Movable {
     @Override
     public void checkCollision() {
 
-    }
-
-    public void setPaddleHeight(int newPaddleHeight) {  //for further 'boosts'
-
-        paddleHeight = newPaddleHeight;
     }
 
     public void setSpeed(int newSpeed) {

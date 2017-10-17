@@ -7,11 +7,19 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
  */
 public class Stage {
 
-    private Rectangle stage;
-    public Stage (int PADDING, int width, int height) {
-        this.stage = new Rectangle(PADDING, PADDING, width, height);
+    private Rectangle bkgRectangle;
+
+    public static final int PADDING = 10;
+
+    public Stage(int width, int height) {
+
+        this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
+
+        bkgRectangle.draw();
     }
 
+    public Rectangle getBounds() {
 
-
+        return bkgRectangle;
+    }
 }

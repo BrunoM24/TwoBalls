@@ -21,9 +21,8 @@ public class Game {
 
     private Set<GameObject> gameObjects = new HashSet<>();  //elaborate a functional SET list
 
-    private static final int PADDING = 10;
+    private Stage stage;
 
-    private Rectangle bkgImage;
     private Ball ball;
 
     Game() {
@@ -36,16 +35,14 @@ public class Game {
         int width = 960;
         int height = 544;
 
-        bkgImage = new Rectangle(PADDING, PADDING, width, height);
-        bkgImage.draw();
+        stage = new Stage(width, height);
 
-        //make factory and do gameobject.add both paddles
-        gameObjects.add(ball = new Ball(bkgImage, 150, 190)); //TODO: to remove
+        gameObjects.add(ball = new Ball(stage.getBounds(), 150, 190)); //TODO: to remove
 
 
-        gameObjects.add(ObjectFactory.getNewPaddle(bkgImage, Color.BLUE, bkgImage.getWidth() - PADDING, bkgImage.getY()));
-        gameObjects.add(ObjectFactory.getNewPaddle(bkgImage, Color.PINK, PADDING, 190));
-        gameObjects.add(ObjectFactory.getNewBall(bkgImage, 90,90));
+        gameObjects.add(ObjectFactory.getLeftPaddle(stage.getBounds(), "blue"));
+        gameObjects.add(ObjectFactory.getRightPaddle(stage.getBounds(), "red"));
+        gameObjects.add(ObjectFactory.getNewBall(stage.getBounds(), 90,90));
     }
 
     public void start() throws InterruptedException {
@@ -69,15 +66,5 @@ public class Game {
 
             object.checkCollision();
         }
-    }
-
-    public static int getWidth() {
-
-        return Toolkit.getDefaultToolkit().getScreenSize().width;
-    }
-
-    public static int getHeight() {
-
-        return Toolkit.getDefaultToolkit().getScreenSize().height;
     }
 }
