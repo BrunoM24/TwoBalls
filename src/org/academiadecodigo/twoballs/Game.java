@@ -6,6 +6,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.keyboard.VKeyboard;
+import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Movable;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
@@ -28,6 +29,7 @@ public class Game {
     private Rectangle bkgImage;
     private Paddle bluePaddle;
     private Paddle pinkPaddle;
+    private Ball ball;
 
     Game() {
 
@@ -45,9 +47,11 @@ public class Game {
         //make factory and do gameobject.add both paddles
         bluePaddle = new Paddle(bkgImage, Color.BLUE);
         pinkPaddle = new Paddle(bkgImage, Color.PINK, bkgImage.getWidth() - PADDING, bkgImage.getY());
+        ball = new Ball(bkgImage, 150, 190);
 
         gameObjects.add(bluePaddle);
         gameObjects.add(pinkPaddle);
+        gameObjects.add(ball);
     }
 
     public void start() throws InterruptedException {
