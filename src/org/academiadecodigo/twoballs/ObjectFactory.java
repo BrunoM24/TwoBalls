@@ -24,8 +24,7 @@ public class ObjectFactory {
 
     //TODO REPLACE WITH BRICK
     public static Brick getNewBrick(int x, int y) {
-
-
+        
         return new Brick();
     }
 }
