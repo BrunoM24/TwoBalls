@@ -1,5 +1,7 @@
 package org.academiadecodigo.twoballs;
 
+import org.academiadecodigo.twoballs.input.KeyboardManager;
+
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
  */
@@ -12,6 +14,8 @@ public class Game {
     double delta = 0.0f;
 
     private Stage stage;
+
+    private KeyboardManager keyboardManager;
 
     Game() {
 
@@ -26,6 +30,8 @@ public class Game {
         stage = new Stage(width, height);
 
         stage.initializeObjects();
+
+        keyboardManager = new KeyboardManager(this);
     }
 
     public void start() throws InterruptedException {
@@ -48,5 +54,15 @@ public class Game {
                 delta--;
             }
         }
+    }
+
+    public void keyPressed(int key) {
+
+        stage.keyPressed(key);
+    }
+
+    public void keyReleased(int key) {
+
+        stage.keyReleased(key);
     }
 }

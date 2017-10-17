@@ -13,7 +13,7 @@ public class Paddle extends GameObject implements Movable {
 
     private Picture paddle;
 
-    private int direction = Math.random() > 0.5f ? 1 : -1;
+    private int direction = 0;
 
     private int speed = 4;
 
@@ -30,6 +30,11 @@ public class Paddle extends GameObject implements Movable {
         paddle.draw();
 
         this.backgroundImage = backgroundImage;
+    }
+
+    public void updateDirection(int newValue) {
+
+        direction = newValue;
     }
 
     @Override
@@ -62,10 +67,5 @@ public class Paddle extends GameObject implements Movable {
     @Override
     public void checkCollision() {
 
-    }
-
-    public void setSpeed(int newSpeed) {
-
-        speed = newSpeed;
     }
 }

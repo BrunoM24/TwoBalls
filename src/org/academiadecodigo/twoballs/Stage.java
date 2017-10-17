@@ -2,7 +2,9 @@ package org.academiadecodigo.twoballs;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
+import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
+import org.academiadecodigo.twoballs.input.KeyboardManager;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +20,10 @@ public class Stage {
 
     private Set<GameObject> gameObjects = new HashSet<>();  //elaborate a functional SET list
 
+    private Paddle player1;
+
+    private Paddle player2;
+
     public Stage(int width, int height) {
 
         this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
@@ -27,8 +33,8 @@ public class Stage {
 
     public void initializeObjects() {
 
-        gameObjects.add(ObjectFactory.getLeftPaddle(bkgRectangle, "blue"));
-        gameObjects.add(ObjectFactory.getRightPaddle(bkgRectangle, "red"));
+        gameObjects.add(player1 = ObjectFactory.getLeftPaddle(bkgRectangle, "blue"));
+        gameObjects.add(player2 = ObjectFactory.getRightPaddle(bkgRectangle, "red"));
         gameObjects.add(ObjectFactory.getNewBall(bkgRectangle, 90, 90));
         gameObjects.add(ObjectFactory.getNewBall(bkgRectangle, 190, 190));
     }
@@ -43,6 +49,32 @@ public class Stage {
             }
 
             object.checkCollision();
+        }
+    }
+
+
+    void keyPressed(int key) {
+
+        //paddle.keyUP
+        if(key == KeyboardManager.P1_DOWN || key == KeyboardManager.P1_UP) {
+
+            if(key == KeyboardManager.P1_UP) {
+
+                player1.updateDirection(-1);
+                return;
+            }
+
+            player1.updateDirection(1);
+            return;
+        }
+    }
+
+    void keyReleased(int key) {
+
+        //paddle.keyReleased
+        if(key == KeyboardManager.P1_DOWN || key == KeyboardManager.P1_UP) {
+
+            player1.updateDirection(0);
         }
     }
 }
