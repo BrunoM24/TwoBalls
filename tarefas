@@ -1,0 +1,15 @@
+TODO:
+    BALLS COLLIDE WITH EACH OTHER
+    BALLS COLLIDE WITH PADDLES
+    CREATE NEW BRICK(objFactory)
+    Assets
+    score
+    keyboard
+
+IDEIAS:
+    PowerUps
+        Shoot
+        Freeze
+        swap Paddle
+        New Balls
+        speed up/slow down

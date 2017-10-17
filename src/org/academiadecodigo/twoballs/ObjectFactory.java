@@ -30,9 +30,8 @@ public class ObjectFactory {
         return new Paddle(bounds, color, x, y);
     }
 
-    //TODO REPLACE WITH BRICK
     public static Brick getNewBrick(int x, int y) {
 
-        return new Brick();
+        return new Brick(x, y);
     }
 }
