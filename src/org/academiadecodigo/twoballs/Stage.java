@@ -31,9 +31,15 @@ public class Stage {
         gameObjects.add(ObjectFactory.getRightPaddle(bkgRectangle, "red"));
         gameObjects.add(ObjectFactory.getNewBall(bkgRectangle, 90, 90));
         gameObjects.add(ObjectFactory.getNewBall(bkgRectangle, 190, 190));
+        gameObjects.add(ObjectFactory.getNewBrick(200, 200));
     }
 
     public void run(float delta) {
+
+        //TODO: kill bricks
+        //kill bricks
+        //spawn powers if any
+        //update objects
 
         for(GameObject object : gameObjects) {
 

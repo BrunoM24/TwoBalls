@@ -3,10 +3,13 @@ TODO:
     BALLS COLLIDE WITH PADDLES
     CREATE NEW BRICK(objFactory)
     Assets
+    score
+    keyboard
 
 IDEIAS:
     PowerUps
         Shoot
         Freeze
-        Change Paddle
+        swap Paddle
         New Balls
+        speed up/slow down
