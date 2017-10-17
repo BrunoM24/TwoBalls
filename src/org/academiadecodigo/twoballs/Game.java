@@ -1,13 +1,17 @@
 package org.academiadecodigo.twoballs;
 
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.keyboard.VKeyboard;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Movable;
+import org.academiadecodigo.twoballs.gameobjects.Paddle;
 
 import java.awt.event.KeyEvent;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -15,31 +19,45 @@ import java.util.Set;
  */
 
 
-public class Game implements KeyboardHandler {
+public class Game {
 
-    private Set<GameObject> gameObjects;
+    private Set<GameObject> gameObjects = new HashSet<>();  //elaborate a functional SET list
+
+    private static final int PADDING = 10;
+
+    private Rectangle bkgImage;
+    private Paddle bluePaddle;
+    private Paddle pinkPaddle;
 
     Game() {
+
         init();
     }
 
     private void init() {
 
-        VKeyboard keyboard = new VKeyboard(this);
+        int width = 960;
+        int height = 544;
 
+        bkgImage = new Rectangle(PADDING, PADDING, width, height);
+        bkgImage.draw();
 
-        keyboard.listenToKey(KeyEvent.VK_ENTER); //Keys are here
+        //make factory and do gameobject.add both paddles
+        bluePaddle = new Paddle(bkgImage, Color.BLUE);
+        pinkPaddle = new Paddle(bkgImage, Color.PINK, bkgImage.getWidth() - PADDING, bkgImage.getY());
 
-        Canvas.getInstance().addKeyListener(keyboard);
-
+        gameObjects.add(bluePaddle);
+        gameObjects.add(pinkPaddle);
     }
 
-    public void start() {
+    public void start() throws InterruptedException {
 
         while (true) {
+
+            Thread.sleep(10);
+
             run();
         }
-
     }
 
     private void run() {
@@ -47,27 +65,11 @@ public class Game implements KeyboardHandler {
         for (GameObject object : gameObjects) {
 
             if (object instanceof Movable) {
+
                 ((Movable) object).move();
             }
 
             object.checkCollision();
-
         }
-
-    }
-
-    @Override
-    public void keyPressed(KeyboardEvent keyboardEvent) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyboardEvent keyboardEvent) {
-
-    }
-
-    @Override
-    public void keyTyped(KeyboardEvent keyboardEvent) {
-
     }
 }
