@@ -1,6 +1,9 @@
 package org.academiadecodigo.twoballs;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
+import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 
@@ -9,19 +12,20 @@ import org.academiadecodigo.twoballs.gameobjects.Paddle;
  */
 public class ObjectFactory {
 
-    public Ball getNewBall(int x, int y) {
+    public static Ball getNewBall(Rectangle bounds, int x, int y) {
 
-        return null;
+        return new Ball(bounds, x, y);
     }
 
-    public Paddle getNewPaddle(int x, int y) {
+    public static Paddle getNewPaddle(Rectangle bounds, Color color ,int x, int y) {
 
-        return null;
+        return new Paddle(bounds, color, x, y);
     }
 
     //TODO REPLACE WITH BRICK
-    public GameObject getNewBrick(int x, int y) {
+    public static Brick getNewBrick(int x, int y) {
 
-        return null;
+
+        return new Brick();
     }
 }
