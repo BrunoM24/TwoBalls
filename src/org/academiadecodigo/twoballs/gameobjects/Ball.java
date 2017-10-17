@@ -1,8 +1,7 @@
 package org.academiadecodigo.twoballs.gameobjects;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.gameobjects.move.Direction;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.gameobjects.move.Speed;
@@ -12,19 +11,20 @@ import org.academiadecodigo.twoballs.gameobjects.move.Speed;
  */
 public class Ball extends GameObject implements Movable {
 
-    private Ellipse ball;
-    private Rectangle background;
-    private int radius = 15;
+    private Picture ball;
+
+    private Rectangle bounds;
 
     private Speed speed = new Speed();
+
     private Direction direction = new Direction();
 
     public Ball(Rectangle backgroundImage, int x, int y) {
 
-        ball = new Ellipse(x, y, radius, radius);
-        ball.setColor(Color.BLUE);
-        ball.fill();
-        background = backgroundImage;
+        ball = new Picture(x, y, "assets/ball.png");
+        ball.draw();
+
+        bounds = backgroundImage;
 
         speed.x = 2;
         speed.y = 1;
@@ -49,27 +49,30 @@ public class Ball extends GameObject implements Movable {
     public void checkDirection() {
 
         //bottom
-        if (ball.getY() + ball.getHeight() > background.getHeight() + background.getY()) {
+        if(ball.getY() + ball.getHeight() > bounds.getHeight() + bounds.getY()) {
+
             changeY();
             return;
         }
 
         // top
-        if (ball.getY() < background.getY()) {
+        if(ball.getY() < bounds.getY()) {
+
             changeY();
             return;
         }
 
         //right
-        if (ball.getX() + ball.getWidth() > background.getWidth() + background.getX()) {
+        if(ball.getX() + ball.getWidth() > bounds.getWidth() + bounds.getX()) {
+
             changeX();
             return;
         }
 
         //left? for now I'll set the four sides
-        if (ball.getX() < background.getX()) {
+        if(ball.getX() < bounds.getX()) {
+
             changeX();
-            return;
         }
     }
 

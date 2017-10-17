@@ -1,15 +1,22 @@
 package org.academiadecodigo.twoballs;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.twoballs.gameobjects.GameObject;
+import org.academiadecodigo.twoballs.gameobjects.move.Movable;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by codecadet on 16/10/17.
  */
 public class Stage {
 
+    public static final int PADDING = 10;
+
     private Rectangle bkgRectangle;
 
-    public static final int PADDING = 10;
+    private Set<GameObject> gameObjects = new HashSet<>();  //elaborate a functional SET list
 
     public Stage(int width, int height) {
 
@@ -18,8 +25,24 @@ public class Stage {
         bkgRectangle.draw();
     }
 
-    public Rectangle getBounds() {
+    public void initializeObjects() {
 
-        return bkgRectangle;
+        gameObjects.add(ObjectFactory.getLeftPaddle(bkgRectangle, "blue"));
+        gameObjects.add(ObjectFactory.getRightPaddle(bkgRectangle, "red"));
+        gameObjects.add(ObjectFactory.getNewBall(bkgRectangle, 90, 90));
+        gameObjects.add(ObjectFactory.getNewBall(bkgRectangle, 190, 190));
+    }
+
+    public void run(float delta) {
+
+        for(GameObject object : gameObjects) {
+
+            if(object instanceof Movable) {
+
+                ((Movable) object).move();
+            }
+
+            object.checkCollision();
+        }
     }
 }

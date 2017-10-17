@@ -9,8 +9,6 @@ import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
  */
-
-
 public class Paddle extends GameObject implements Movable {
 
     private Picture paddle;
@@ -20,11 +18,6 @@ public class Paddle extends GameObject implements Movable {
     private int speed = 4;
 
     private Rectangle backgroundImage;
-
-    public Paddle(Rectangle backgroundImage, String paddleColor) {
-
-        this(backgroundImage, paddleColor, backgroundImage.getX(), backgroundImage.getHeight() / 2);
-    }
 
     public Paddle(Rectangle backgroundImage, String paddleColor, int posX, int posY) {
 
@@ -49,8 +42,7 @@ public class Paddle extends GameObject implements Movable {
 
     public void checkDirection() {
 
-        if(paddle.getY() <= Stage.PADDING ||
-                paddle.getY() + paddle.getHeight() >= backgroundImage.getHeight() + Stage.PADDING) {
+        if(paddle.getY() <= Stage.PADDING || paddle.getY() + paddle.getHeight() >= backgroundImage.getHeight() + Stage.PADDING) {
 
             changeDirection();
         }
