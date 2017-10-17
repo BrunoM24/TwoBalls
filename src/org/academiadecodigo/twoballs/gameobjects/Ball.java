@@ -3,11 +3,7 @@ package org.academiadecodigo.twoballs.gameobjects;
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
  */
-
-
 public class Ball extends GameObject implements Movable{
-
-
 
     @Override
     public void move() {
@@ -18,5 +14,4 @@ public class Ball extends GameObject implements Movable{
     public void checkCollision() {
 
     }
-
 }

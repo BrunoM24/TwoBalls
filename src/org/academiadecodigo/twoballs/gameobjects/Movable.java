@@ -8,5 +8,4 @@ package org.academiadecodigo.twoballs.gameobjects;
 public interface Movable {
 
     public void move();
-
 }

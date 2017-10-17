@@ -19,15 +19,9 @@ public class Paddle extends GameObject implements Movable {
 
     private Rectangle backgroundImage;
 
-
     public Paddle(Rectangle backgroundImage, Color paddleColor) {
 
-        paddle = new Rectangle(backgroundImage.getX(), backgroundImage.getHeight() / 2, paddleWidth, paddleHeight);
-        paddle.setColor(paddleColor);
-        paddle.fill();
-
-        this.backgroundImage = backgroundImage;
-
+        this(backgroundImage, paddleColor, backgroundImage.getX(), backgroundImage.getHeight() / 2);
     }
 
     public Paddle(Rectangle backgroundImage, Color paddleColor, int posX, int posY) {
@@ -39,42 +33,40 @@ public class Paddle extends GameObject implements Movable {
         this.backgroundImage = backgroundImage;
     }
 
-
     @Override
     public void move() {
 
         checkDirection();
+
         paddle.translate(0, direction * speed);
-
     }
-
 
     public void checkDirection() {
 
-        if (paddle.getY() <= 10 ||      //10 of PADDING....improve this ..seems ugly
+        if (paddle.getY() <= 10 ||      //TODO 10 of PADDING....improve this ..seems ugly
                 paddle.getY() + paddle.getHeight() >= backgroundImage.getHeight() + 10) {
+
             changeDirection();
         }
     }
 
-
     public void changeDirection() {
+
         direction = direction * (-1);
     }
 
-
-
     @Override
-    public void checkCollision() { //TODO colisions and isTouching()
+    public void checkCollision() {
 
     }
 
-
     public void setPaddleHeight(int newPaddleHeight) {  //for further 'boosts'
+
         paddleHeight = newPaddleHeight;
     }
 
-    public void setSpeed(int newSpeed){
+    public void setSpeed(int newSpeed) {
+
         speed = newSpeed;
     }
 }
