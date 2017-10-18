@@ -9,22 +9,26 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public abstract class GameObject {
 
-    Rectangle rectangle;
-    
-    public int getX(){
-        return rectangle.getX();
+    Rectangle objectBoundaries;
+
+    public int getX() {
+
+        return objectBoundaries.getX();
     }
-    
-    public int getY(){
-        return rectangle.getY();
+
+    public int getY() {
+
+        return objectBoundaries.getY();
     }
-    
-    public int getWidth(){
-        return rectangle.getWidth();
+
+    public int getWidth() {
+
+        return objectBoundaries.getWidth();
     }
-    
-    public int getHeight(){
-        return rectangle.getHeight();
+
+    public int getHeight() {
+
+        return objectBoundaries.getHeight();
     }
 
     public abstract void checkCollision();

@@ -24,6 +24,7 @@ public class Stage {
 
     private Paddle player2;
 
+
     public Stage(int width, int height) {
 
         this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
@@ -35,9 +36,15 @@ public class Stage {
 
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle(bkgRectangle, "blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle(bkgRectangle, "red"));
-        gameObjects.add(ObjectFactory.getNewBall(bkgRectangle, 90, 90));
-        gameObjects.add(ObjectFactory.getNewBall(bkgRectangle, 190, 190));
-        gameObjects.add(ObjectFactory.getNewBrick(200, 200));
+
+        int numberOfBalls = 1;
+
+        for(int i = 0; i < numberOfBalls; i++) {
+
+            gameObjects.add(ObjectFactory.getNewBall(bkgRectangle));
+        }
+
+        //gameObjects.add(ObjectFactory.getNewBrick(200, 200));
     }
 
     public void run(float delta) {
@@ -51,26 +58,25 @@ public class Stage {
 
             if(object instanceof Movable) {
 
-                ((Movable) object).move();
+                ((Movable) object).move(delta);
             }
 
             object.checkCollision();
         }
     }
 
-
     void keyPressed(int key) {
 
-        //paddle.keyUP
+        //PLAYER 1 KEYBOARD
         if(key == KeyboardManager.P1_DOWN || key == KeyboardManager.P1_UP) {
 
+            int nDir = 1;
             if(key == KeyboardManager.P1_UP) {
 
-                player1.updateDirection(-1);
-                return;
+                nDir = -1;
             }
 
-            player1.updateDirection(1);
+            player1.updateDirection(nDir);
             return;
         }
     }

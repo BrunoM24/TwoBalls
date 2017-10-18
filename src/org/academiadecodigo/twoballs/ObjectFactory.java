@@ -10,6 +10,10 @@ import org.academiadecodigo.twoballs.gameobjects.Paddle;
  */
 public class ObjectFactory {
 
+    public static Ball getNewBall(Rectangle bounds) {
+
+        return new Ball(bounds);
+    }
     public static Ball getNewBall(Rectangle bounds, int x, int y) {
 
         return new Ball(bounds, x, y);

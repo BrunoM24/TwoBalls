@@ -21,4 +21,9 @@ public class Direction {
         this.y = y;
     }
 
+    @Override
+    public String toString() {
+
+        return getClass().getSimpleName() + ": x=" + x + ", y=" + y;
+    }
 }

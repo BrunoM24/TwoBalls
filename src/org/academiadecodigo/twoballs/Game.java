@@ -13,6 +13,8 @@ public class Game {
 
     double delta = 0.0f;
 
+    private boolean gamePaused = true;
+
     private Stage stage;
 
     private KeyboardManager keyboardManager;
@@ -34,7 +36,7 @@ public class Game {
         keyboardManager = new KeyboardManager(this);
     }
 
-    public void start() throws InterruptedException {
+    public void start() {
 
         while(true) {
 
@@ -50,13 +52,25 @@ public class Game {
             while(delta >= 1) {
 
                 //run x 60FPS
+                if(gamePaused) {
+
+                    delta = 0;
+                }
+
                 stage.run((float) delta);
                 delta--;
+                //TODO move up?
             }
         }
     }
 
     public void keyPressed(int key) {
+
+        if(key == KeyboardManager.GAME_PAUSE) {
+
+            gamePaused = !gamePaused;
+            return;
+        }
 
         stage.keyPressed(key);
     }

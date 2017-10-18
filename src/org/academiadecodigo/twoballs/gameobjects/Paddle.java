@@ -17,11 +17,13 @@ public class Paddle extends GameObject implements Movable {
 
     private int speed = 4;
 
-    private Rectangle backgroundImage;
+    private Rectangle stageBoundaries;
 
-    public Paddle(Rectangle backgroundImage, String paddleColor, int posX, int posY) {
+    private int dy;
 
-        if(posX - 14 > backgroundImage.getWidth() / 2) {
+    public Paddle(Rectangle stageBoundaries, String paddleColor, int posX, int posY) {
+
+        if(posX - 14 > stageBoundaries.getWidth() / 2) {
 
             posX -= 4;
         }
@@ -29,7 +31,7 @@ public class Paddle extends GameObject implements Movable {
         paddle = new Picture(posX, posY, "assets/" + paddleColor + "Paddle.png");
         paddle.draw();
 
-        this.backgroundImage = backgroundImage;
+        this.stageBoundaries = stageBoundaries;
     }
 
     public void updateDirection(int newValue) {
@@ -40,32 +42,58 @@ public class Paddle extends GameObject implements Movable {
     @Override
     public void move() {
 
-        checkDirection();
-
-        paddle.translate(0, direction * speed);
     }
 
     @Override
     public void move(float delta) {
 
+        dy = direction * speed;
 
+        checkBoundaries();
+
+        paddle.translate(0, dy * delta);
     }
 
-    public void checkDirection() {
+    private void checkBoundaries() {
 
-        if(paddle.getY() <= Stage.PADDING || paddle.getY() + paddle.getHeight() >= backgroundImage.getHeight() + Stage.PADDING) {
+        if(getY() + dy < stageBoundaries.getY() || getY() + getHeight() + dy > stageBoundaries.getHeight() + stageBoundaries.getY()) {
 
-            changeDirection();
+            dy *= -1;
         }
     }
 
-    public void changeDirection() {
+    @Deprecated
+    public void checkDirection() {
 
-        direction = direction * (-1);
     }
 
     @Override
     public void checkCollision() {
 
+        //get all the shapes in area
+    }
+
+    @Override
+    public int getX() {
+
+        return paddle.getX();
+    }
+
+    @Override
+    public int getY() {
+
+        return paddle.getY();
+    }
+
+    @Override
+    public int getWidth() {
+
+        return paddle.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+
+        return paddle.getHeight();
     }
 }
