@@ -87,6 +87,19 @@ public class Stage {
             player1.updateDirection(nDir);
             return;
         }
+
+        //Player 2 Keyboard
+        if(key == KeyboardManager.P2_DOWN || key == KeyboardManager.P2_UP){
+
+            int nDir = 1;
+            if(key == KeyboardManager.P2_UP){
+                nDir = -1;
+            }
+
+            player2.updateDirection(nDir);
+            return;
+        }
+
     }
 
     void keyReleased(int key) {
@@ -95,6 +108,11 @@ public class Stage {
         if(key == KeyboardManager.P1_DOWN || key == KeyboardManager.P1_UP) {
 
             player1.updateDirection(0);
+        }
+
+        if(key == KeyboardManager.P2_DOWN || key == KeyboardManager.P2_UP){
+
+            player2.updateDirection(0);
         }
     }
 }
