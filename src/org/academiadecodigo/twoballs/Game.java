@@ -55,6 +55,7 @@ public class Game {
                 if(gamePaused) {
 
                     delta = 0;
+                    //TODO SHOW PAUSED TEXT
                 }
 
                 stage.run((float) delta);

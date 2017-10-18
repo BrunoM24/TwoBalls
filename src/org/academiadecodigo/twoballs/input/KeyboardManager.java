@@ -17,10 +17,7 @@ public class KeyboardManager implements KeyboardHandler {
     public static final int P1_DOWN = KeyEvent.VK_S;
     public static final int P2_DOWN = KeyEvent.VK_DOWN;
 
-    public static final int GAME_PAUSE = KeyEvent.VK_ENTER;
-    public static final int GAME_SPEED_1 = KeyEvent.VK_1;
-    public static final int GAME_SPEED_2 = KeyEvent.VK_2;
-    public static final int GAME_SPEED_3 = KeyEvent.VK_3;
+    public static final int GAME_PAUSE = KeyEvent.VK_P;
 
     VKeyboard keyboard;
 
@@ -39,9 +36,6 @@ public class KeyboardManager implements KeyboardHandler {
         keyboard.listenToKey(P2_UP);
 
         keyboard.listenToKey(GAME_PAUSE);
-        keyboard.listenToKey(GAME_SPEED_1);
-        keyboard.listenToKey(GAME_SPEED_2);
-        keyboard.listenToKey(GAME_SPEED_3);
     }
 
     @Override

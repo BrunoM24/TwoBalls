@@ -2,7 +2,6 @@ package org.academiadecodigo.twoballs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.academiadecodigo.twoballs.Stage;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 
 
@@ -19,7 +18,7 @@ public class Paddle extends GameObject implements Movable {
 
     private Rectangle stageBoundaries;
 
-    private int dy;
+    private int deltaY;
 
     public Paddle(Rectangle stageBoundaries, String paddleColor, int posX, int posY) {
 
@@ -47,18 +46,18 @@ public class Paddle extends GameObject implements Movable {
     @Override
     public void move(float delta) {
 
-        dy = direction * speed;
+        deltaY = direction * speed;
 
         checkBoundaries();
 
-        paddle.translate(0, dy * delta);
+        paddle.translate(0, deltaY * delta);
     }
 
     private void checkBoundaries() {
 
-        if(getY() + dy < stageBoundaries.getY() || getY() + getHeight() + dy > stageBoundaries.getHeight() + stageBoundaries.getY()) {
+        if(getY() + deltaY < stageBoundaries.getY() || getY() + getHeight() + deltaY > stageBoundaries.getHeight() + stageBoundaries.getY()) {
 
-            dy *= -1;
+            deltaY *= -1;
         }
     }
 

@@ -14,9 +14,3 @@ IDEIAS:
         swap Paddle controls UP=DOWN
         New Balls
         speed up/slow down
-
-DONE (NEED TO EXPLAIN):
-    - Added the delta to every object
-    - Added a pause button
-    - Added new keys
-    - Fixed the clamping for balls and paddles

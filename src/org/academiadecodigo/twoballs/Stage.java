@@ -6,6 +6,8 @@ import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.input.KeyboardManager;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,7 +39,7 @@ public class Stage {
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle(bkgRectangle, "blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle(bkgRectangle, "red"));
 
-        int numberOfBalls = 1;
+        int numberOfBalls = 2;
 
         for(int i = 0; i < numberOfBalls; i++) {
 
