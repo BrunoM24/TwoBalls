@@ -1,8 +1,11 @@
 package org.academiadecodigo.twoballs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.Shape;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
+
+import java.util.ArrayList;
 
 
 /**
@@ -69,7 +72,27 @@ public class Paddle extends GameObject implements Movable {
     @Override
     public void checkCollision() {
 
-        //get all the shapes in area
+    }
+
+    @Override
+    public void checkCollision(ArrayList<Shape> onTopArray) {
+
+        for(Shape s : onTopArray) {
+
+            if(s == paddle) {
+
+                continue;
+            }
+
+            //se bola, inverte direction && SPEEEEEEEED a bola
+            //se powerup, collect
+        }
+    }
+
+    @Override
+    public Shape getShape() {
+
+        return paddle;
     }
 
     @Override

@@ -1,13 +1,14 @@
 package org.academiadecodigo.twoballs;
 
+import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.Shape;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.input.KeyboardManager;
 
-import javax.swing.*;
-import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +26,6 @@ public class Stage {
     private Paddle player1;
 
     private Paddle player2;
-
 
     public Stage(int width, int height) {
 
@@ -63,8 +63,14 @@ public class Stage {
                 ((Movable) object).move(delta);
             }
 
-            object.checkCollision();
+
+            object.checkCollision(shapesOnTop(object));
         }
+    }
+
+    private ArrayList<Shape> shapesOnTop(GameObject object) {
+
+        return Canvas.getInstance().getShapesInArea(object.getX(), object.getY(), object.getX() + object.getWidth(), object.getY() + object.getHeight())
     }
 
     void keyPressed(int key) {

@@ -1,18 +1,19 @@
 package org.academiadecodigo.twoballs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.Shape;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.Stage;
 import org.academiadecodigo.twoballs.gameobjects.move.Direction;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.gameobjects.move.Speed;
 
+import java.util.ArrayList;
+
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
  */
 public class Ball extends GameObject implements Movable {
-
-    private final int BUFFER = Stage.PADDING;
 
     private Picture ball;
 
@@ -67,6 +68,24 @@ public class Ball extends GameObject implements Movable {
     @Override
     public void checkCollision() {
 
+    }
+
+    @Override
+    public void checkCollision(ArrayList<Shape> onTopArray) {
+
+        for(Shape s : onTopArray) {
+
+            if(s == ball) {
+
+                continue;
+            }
+        }
+    }
+
+    @Override
+    public Shape getShape() {
+
+        return ball;
     }
 
     private void checkBoundaries() {
