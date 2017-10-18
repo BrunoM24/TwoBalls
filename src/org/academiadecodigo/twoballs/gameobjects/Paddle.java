@@ -64,31 +64,6 @@ public class Paddle extends GameObject implements Movable {
         }
     }
 
-    @Deprecated
-    public void checkDirection() {
-
-    }
-
-    @Override
-    public void checkCollision() {
-
-    }
-
-    @Override
-    public void checkCollision(ArrayList<Shape> onTopArray) {
-
-        for(Shape s : onTopArray) {
-
-            if(s == paddle) {
-
-                continue;
-            }
-
-            //se bola, inverte direction && SPEEEEEEEED a bola
-            //se powerup, collect
-        }
-    }
-
     @Override
     public Shape getShape() {
 

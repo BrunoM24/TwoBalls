@@ -22,14 +22,25 @@ public class Brick extends GameObject {
         rectangle.fill();
     }
 
-    @Override
-    public void checkCollision() {
 
+    @Override
+    public int getX() {
+        return rectangle.getX();
     }
 
     @Override
-    public void checkCollision(ArrayList<Shape> onTopArray) {
+    public int getY() {
+        return rectangle.getY();
+    }
 
+    @Override
+    public int getWidth() {
+        return rectangle.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return rectangle.getHeight();
     }
 
     @Override

@@ -66,23 +66,6 @@ public class Ball extends GameObject implements Movable {
     }
 
     @Override
-    public void checkCollision() {
-
-    }
-
-    @Override
-    public void checkCollision(ArrayList<Shape> onTopArray) {
-
-        for(Shape s : onTopArray) {
-
-            if(s == ball) {
-
-                continue;
-            }
-        }
-    }
-
-    @Override
     public Shape getShape() {
 
         return ball;
@@ -100,37 +83,6 @@ public class Ball extends GameObject implements Movable {
 
             dy *= -1;
             changeY();
-        }
-    }
-
-    @Deprecated
-    public void checkDirection() {
-
-        //bottom
-        if(ball.getY() + ball.getHeight() > stageBoundaries.getHeight() + stageBoundaries.getY()) {
-
-            changeY();
-            return;
-        }
-
-        // top
-        if(ball.getY() < stageBoundaries.getY()) {
-
-            changeY();
-            return;
-        }
-
-        //right
-        if(ball.getX() + ball.getWidth() > stageBoundaries.getWidth() + stageBoundaries.getX()) {
-
-            changeX();
-            return;
-        }
-
-        //left? for now I'll set the four sides
-        if(ball.getX() < stageBoundaries.getX()) {
-
-            changeX();
         }
     }
 

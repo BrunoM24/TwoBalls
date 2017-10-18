@@ -1,9 +1,6 @@
 package org.academiadecodigo.twoballs.gameobjects;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Shape;
-
-import java.util.ArrayList;
 
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
@@ -12,31 +9,13 @@ import java.util.ArrayList;
 
 public abstract class GameObject {
 
-    Rectangle objectBoundaries;
+    public abstract int getX();
 
-    public int getX() {
+    public abstract int getY();
 
-        return objectBoundaries.getX();
-    }
+    public abstract int getWidth();
 
-    public int getY() {
-
-        return objectBoundaries.getY();
-    }
-
-    public int getWidth() {
-
-        return objectBoundaries.getWidth();
-    }
-
-    public int getHeight() {
-
-        return objectBoundaries.getHeight();
-    }
-
-    public abstract void checkCollision();
-
-    public abstract void checkCollision(ArrayList<Shape> onTopArray);
+    public abstract int getHeight();
 
     public abstract Shape getShape();
 }

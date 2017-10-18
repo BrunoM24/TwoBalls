@@ -27,6 +27,8 @@ public class Stage {
 
     private Paddle player2;
 
+    private CollisionDetector collisionDetector = new CollisionDetector();
+
     public Stage(int width, int height) {
 
         this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
@@ -64,14 +66,12 @@ public class Stage {
             }
 
 
-            object.checkCollision(shapesOnTop(object));
+            // object.checkCollision(shapesOnTop(object));
+            collisionDetector.checkCollision(gameObjects, object);
         }
     }
 
-    private ArrayList<Shape> shapesOnTop(GameObject object) {
 
-        return Canvas.getInstance().getShapesInArea(object.getX(), object.getY(), object.getX() + object.getWidth(), object.getY() + object.getHeight())
-    }
 
     void keyPressed(int key) {
 
