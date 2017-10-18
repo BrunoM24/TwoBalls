@@ -21,32 +21,32 @@ public class CollisionDetector {
     }
 
 
-    private ArrayList<Shape> isTouching(Set<GameObject> gameObjects, GameObject object){
+    private ArrayList<Shape> isTouching(Set<GameObject> gameObjects, GameObject object) {
 
         List<Shape> list = new ArrayList<>();
 
-        for (GameObject obj : gameObjects){
+        for (GameObject objectB : gameObjects) {
 
-            if(obj.equals(object) ){
+            if (objectB.equals(object)) {
+                continue;
+            }
+            // TODO  isTouching conditions still need to be tested
+            boolean abTouchX = (object.getX() >= objectB.getX() && object.getX() <= objectB.getX() + objectB.getWidth()) ||
+                    (object.getX() + object.getWidth() >= objectB.getX() + objectB.getWidth()) &&
+                            (object.getX() + object.getWidth() <= objectB.getX() + objectB.getWidth());
+
+            boolean abTouchY = (object.getY() >= objectB.getY() && object.getY() <= objectB.getY() + objectB.getHeight()) ||
+                    (object.getY() + object.getHeight() >= objectB.getY()) && (object.getY() + object.getHeight() <= objectB.getY() + objectB.getHeight());
+
+            if (!(abTouchX && abTouchY)) {
                 continue;
             }
 
-            boolean abTouchX = object.getX()>= obj.getX() && object.getX() <= obj.getX()+obj.getWidth();
-            //boolean baTouchX
-
-
-            boolean abTouchY = object.getY()<=obj.getY() && object.getY() >= obj.getY()+obj.getHeight();
-
-
-
-
-
+            list.add(object.getShape());
         }
-
-
-        return  new ArrayList<Shape>();
+        //Should return 'list'???
+        return new ArrayList<Shape>();
     }
-
 
 
     public void checkCollision(Set<GameObject> gameObjects, GameObject object) {
