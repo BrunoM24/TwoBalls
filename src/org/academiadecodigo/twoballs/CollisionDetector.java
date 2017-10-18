@@ -32,7 +32,7 @@ public class CollisionDetector {
             }
             // TODO  isTouching conditions still need to be tested
             boolean abTouchX = (object.getX() >= objectB.getX() && object.getX() <= objectB.getX() + objectB.getWidth()) ||
-                    (object.getX() + object.getWidth() >= objectB.getX() + objectB.getWidth()) &&
+                    (object.getX() + object.getWidth() >= objectB.getX()) &&
                             (object.getX() + object.getWidth() <= objectB.getX() + objectB.getWidth());
 
             boolean abTouchY = (object.getY() >= objectB.getY() && object.getY() <= objectB.getY() + objectB.getHeight()) ||
