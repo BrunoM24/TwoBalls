@@ -88,11 +88,4 @@ public class CollisionDetector {
             }
         }
     }
-
-    private void collide(Ball ball, GameObject objectB) {
-
-        //ball on ball
-        //ball on paddle
-        //ball.changeX(false);//TODO Add timer to prevent multiple changes in 1 frame
-    }
 }
