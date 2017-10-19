@@ -3,6 +3,7 @@ package org.academiadecodigo.twoballs;
 import org.academiadecodigo.simplegraphics.graphics.Shape;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
+import org.academiadecodigo.twoballs.gameobjects.Paddle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +18,9 @@ public class CollisionDetector {
 
         List<Shape> list = new ArrayList<>();
 
-        for(GameObject objectB : gameObjects) {
+        for (GameObject objectB : gameObjects) {
 
-            if(objectB.equals(areaObject)) {
+            if (objectB.equals(areaObject)) {
 
                 continue;
             }
@@ -30,7 +31,7 @@ public class CollisionDetector {
 
             boolean abTouchY = (areaObject.getY() >= objectB.getY() && areaObject.getY() <= objectB.getY() + objectB.getHeight()) || ((areaObject.getY() + areaObject.getHeight() >= objectB.getY()) && (areaObject.getY() + areaObject.getHeight() <= objectB.getY() + objectB.getHeight()));
 
-            if(!(abTouchX && abTouchY)) {
+            if (!(abTouchX && abTouchY)) {
 
                 continue;
             }
@@ -46,18 +47,18 @@ public class CollisionDetector {
 
         List<Shape> shapeList = isTouching(gameObjects, object);
 
-        if(shapeList.size() < 1) {
+        if (shapeList.size() < 1) {
 
             return;
         }
 
-        for(GameObject objectB : gameObjects) {
+        for (GameObject objectB : gameObjects) {
 
-            if(objectB.equals(object)) {
+            if (objectB.equals(object)) {
                 continue;
             }
 
-            if(!shapeList.contains(objectB.getShape())) {
+            if (!shapeList.contains(objectB.getShape())) {
                 continue;
             }
             //a e b colidem
@@ -68,7 +69,7 @@ public class CollisionDetector {
 
     private void collide(GameObject object, GameObject objectB) {
 
-        if(object instanceof Ball) {
+        if (object instanceof Ball) {
 
             ((Ball) object).changeX();//TODO Add timer to prevent multiple changes in 1 frame
             //if touched on top || if touched on bottom
@@ -76,5 +77,25 @@ public class CollisionDetector {
             //if touched on left || if touched on right
             //flip x
         }
+
+        //TODO Eduardo working on paddle ball interaction
+
+
+        if (object instanceof Ball && objectB instanceof Paddle) {
+
+            float ballCenterLine = object.getY() + (1f / 2f) * object.getHeight();
+
+
+            //boolean touchCenter = ;
+            boolean touchCenterLeft = (object.getY() + object.getHeight() >= objectB.getY()) && (ballCenterLine <= (objectB.getY() + (1f / 3f) * objectB.getHeight()));
+            //boolean touchRight = ;
+
+            if (touchCenterLeft) {
+                count++;
+                System.out.println("touching left " + count);
+            }
+        }
     }
+
+    private int count = 0;
 }
