@@ -8,38 +8,40 @@ import org.academiadecodigo.twoballs.GameScreen;
  */
 public class ScoreManager {
 
-    int[] score = new int[3];
+    int[] playerScore = new int[3];
 
-    Text tP1Score;
-    Text tP2Score;
+    Text textScorePlayerOne;
+    Text textScorePlayerTwo;
 
     public void draw() {
 
-        tP1Score = new Text(70, 40, score[1] + "");
-        tP2Score = new Text(GameScreen.getWidth() - 70, 40, score[2] + "");
-        tP1Score.grow(5, 10);
-        tP2Score.grow(5, 10);
-        tP1Score.draw();
-        tP2Score.draw();
+        textScorePlayerOne = new Text(70, 40, playerScore[1] + "");
+        textScorePlayerTwo = new Text(GameScreen.getWidth() - 70, 40, playerScore[2] + "");
+
+        textScorePlayerOne.grow(5, 10);
+        textScorePlayerTwo.grow(5, 10);
+
+        textScorePlayerOne.draw();
+        textScorePlayerTwo.draw();
     }
 
 
-    public void increasePoints(int player, int points) {
+    public void addPoints(int player, int points) {
 
-        score[player] += points;
-        Text text;
+        playerScore[player] += points;
+        Text text = textScorePlayerTwo;
 
         if (player == 1) {
-            text = tP1Score;
-        } else {
-            text = tP2Score;
+
+            text = textScorePlayerOne;
         }
 
         int textSize = text.getText().length();
-        text.setText(Integer.toString(score[player]));
+        text.setText(Integer.toString(playerScore[player]));
+
         if (textSize != text.getText().length()) {
+
             text.grow(5, 0);
         }
     }
-
 }
