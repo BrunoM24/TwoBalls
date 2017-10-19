@@ -1,4 +1,4 @@
-package org.academiadecodigo.twoballs;
+package org.academiadecodigo.twoballs.manage;
 
 import org.academiadecodigo.simplegraphics.graphics.Shape;
 import org.academiadecodigo.twoballs.gameobjects.Ball;

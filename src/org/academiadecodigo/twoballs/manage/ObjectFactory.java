@@ -1,6 +1,8 @@
-package org.academiadecodigo.twoballs;
+package org.academiadecodigo.twoballs.manage;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.twoballs.GameScreen;
+import org.academiadecodigo.twoballs.Stage;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;

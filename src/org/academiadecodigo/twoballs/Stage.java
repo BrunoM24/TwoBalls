@@ -4,6 +4,8 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
+import org.academiadecodigo.twoballs.manage.CollisionDetector;
+import org.academiadecodigo.twoballs.manage.ObjectFactory;
 
 import java.util.HashSet;
 import java.util.Set;

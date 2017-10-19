@@ -99,4 +99,9 @@ public class Ball extends GameObject implements Movable {
         lastChanged = System.currentTimeMillis();
         return true;
     }
+
+    public void collideLeft() {
+
+
+    }
 }
