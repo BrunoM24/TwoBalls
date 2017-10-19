@@ -14,4 +14,9 @@ public class Brick extends GameObject {
         shape = new Picture(x, y, "assets/brickGray.png");
         shape.draw();
     }
+
+
+    public void deleteBrick() {
+        shape.delete();
+    }
 }

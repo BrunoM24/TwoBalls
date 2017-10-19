@@ -2,6 +2,7 @@ package org.academiadecodigo.twoballs.manage;
 
 import org.academiadecodigo.simplegraphics.graphics.Shape;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
+import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 
@@ -84,6 +85,10 @@ public class CollisionDetector {
                 else if(objectB instanceof Ball) {
 
                     collider.collide((Ball) gameObject, (Ball) objectB);
+                }
+                else if(objectB instanceof Brick) {
+
+                    collider.collide((Ball) gameObject, (Brick) objectB );
                 }
             }
         }
