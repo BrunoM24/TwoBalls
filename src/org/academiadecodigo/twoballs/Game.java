@@ -7,11 +7,13 @@ import org.academiadecodigo.twoballs.input.KeyboardManager;
  */
 public class Game {
 
-    private static final double IDEAL_DELTA = 1000000000.0 / 60.0;
+    private static final float IDEAL_TIMED_DELTA = 15;
 
-    long lastTime = System.nanoTime();
+    long lastTime = System.currentTimeMillis();
 
     double delta = 0.0f;
+
+    int frames = 0;
 
     private boolean gamePaused = true;
 
@@ -26,7 +28,6 @@ public class Game {
 
         init();
     }
-
 
     private void init() {
 
@@ -45,52 +46,49 @@ public class Game {
 
     public void start() {
 
+        long timer = System.currentTimeMillis();
+
         while(true) {
 
-            long now = System.nanoTime();
+            if((delta = System.currentTimeMillis() - lastTime) > IDEAL_TIMED_DELTA) {
 
-            //divide the current delta by the IDEAL FPS (60)
-            delta += (now - lastTime) / IDEAL_DELTA;
+                delta /= 10;
 
-            run();
+                run();
+                lastTime = System.currentTimeMillis();
+            }
 
-            //sets the new time
-            lastTime = now;
+            if(System.currentTimeMillis() - timer > 1000) {
+
+                timer += 1000;
+                PauseText.fpsText.setText("" + frames);
+                //System.out.println("FPS: " + frames + ", " + System.currentTimeMillis() + ", " + delta);
+                frames = 0;
+            }
         }
     }
 
     private void run() {
 
+        //oldRun x 60FPS
+        if(gamePaused) {
 
+            delta = 0;
+            //TODO SHOW PAUSED TEXT
 
-
-        //Executes this 60FPS
-        while(delta >= 1) {
-
-
-            //run x 60FPS
-            if(gamePaused) {
-
-                delta = 0;
-                //TODO SHOW PAUSED TEXT
-
-                pauseText.draw();
-
-            } else {
-                pauseText.delete();
-            }
-
-
-            if(delta > 3) {
-
-                delta = 3;
-            }
-
-            stage.run((float) delta);
-            delta--;
+            pauseText.draw();
         }
-    }
+        else {
 
+            pauseText.delete();
+        }
+
+
+
+        stage.run((float) delta);
+
+        frames++;
+    }
 
     public void keyPressed(int key) {
 

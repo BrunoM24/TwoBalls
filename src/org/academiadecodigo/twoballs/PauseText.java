@@ -10,11 +10,16 @@ public class PauseText {
 
     Text pauseText;
     String textToDisplay = " -PAUSE- ";
+    public static Text fpsText;
 
     public PauseText() {
         pauseText = new Text (470,272,textToDisplay);
         pauseText.setColor(Color.YELLOW);
         pauseText.grow(80,25);
+
+        fpsText = new Text(GameScreen.getX(), GameScreen.getHeight() - 25, "60");
+        fpsText.setColor(Color.WHITE);
+        fpsText.draw();
     }
 
 
