@@ -47,7 +47,7 @@ public class Stage {
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
 
-        int numberOfBalls = 3;
+        int numberOfBalls = 10;
 
         for(int i = 1; i <= numberOfBalls; i++) {
 

@@ -23,48 +23,59 @@ public class Collider {
         float firstDivision = paddleHeightDivision(1, paddle);
         float secondDivision = paddleHeightDivision(2, paddle);
 
+        //boolean touchCenter = (ballCenterLine >= firstDivision && ballCenterLine <= secondDivision);
+        boolean touchUp = (ball.getY() + ball.getHeight() >= paddle.getY()) && (ballCenterLine < firstDivision);
+        boolean touchDown = (ball.getY() <= paddle.getY() + paddle.getHeight()) && (ballCenterLine > (paddle.getY() + secondDivision));
 
-        boolean touchCenter = (ballCenterLine >= firstDivision && ballCenterLine <= secondDivision);
-
-        boolean touchUp = (ball.getY() + ball.getHeight() >= paddle.getY()) && (ballCenterLine < (paddle.getY() + (1f / 3f) * paddle.getHeight()));
-        boolean touchDown = (ball.getY() <= paddle.getY() + paddle.getHeight()) && (ballCenterLine > (paddle.getY() + (2f / 3f) * paddle.getHeight()));
 
         ball.flipX(true);
 
-        //TODO: > if touchup && getDirY > 0
-        if(touchUp) {
-
-            if(ball.getDirectionY() > 0) {
-
-                ball.flipY(true);
-            }
-
-            //countUp++;
-            //System.out.println("touching up " + countUp);
+        if (touchUp && ball.getDirectionY() > 0) {
+            ball.flipY(true);
         }
 
-        if(touchDown) {
-
-            if(ball.getDirectionY() < 0) {
-
-                ball.flipY(true);
-            }
-
-            //countDown++;
-            //System.out.println("touching down baby..hmmm " + countDown);
-        }
-
-        if(touchCenter) {
-
-            //countCenter++;
-            //System.out.println("na muche CENTER " + countCenter);
+        if (touchDown && ball.getDirectionY() < 0) {
+            ball.flipY(true);
         }
     }
+
 
     public void collide(Ball ballA, Ball ballB) {
 
         //TODO GOOD WORK EDU
+
+        boolean ballA_TouchingFromTop = (ballA.getY() + ballA.getHeight() >= ballB.getY());// || (ballA.getY() <= ballB.getY() + ballB.getHeight());
+        boolean ballA_TouchingFromLeft = (ballA.getX() + ballA.getWidth() >= ballB.getX());// || (ballA.getX() <= ballB.getX() + ballB.getWidth());
+
+
+        if (ballA.getDirectionX() > 0 && ballB.getDirectionX() < 0 && ballA_TouchingFromLeft) {
+            ballA.flipX(true);
+            ballB.flipX(true);
+        }
+
+        if (ballA.getDirectionX() < 0 && ballB.getDirectionX() < 0 && ballA_TouchingFromLeft) {
+            ballB.flipX(true);
+        }
+
+        if (ballA.getDirectionX() > 0 && ballB.getDirectionX() > 0 && ballA_TouchingFromLeft) {
+            ballA.flipX(true);
+        }
+
+        if (ballA.getDirectionY() > 0 && ballB.getDirectionY() < 0 && ballA_TouchingFromTop) {
+            ballA.flipY(true);
+            ballB.flipY(true);
+        }
+
+        if (ballA.getDirectionY() < 0 && ballB.getDirectionY() < 0 && ballA_TouchingFromTop) {
+            ballB.flipY(true);
+        }
+
+        if (ballA.getDirectionY() > 0 && ballB.getDirectionY() > 0 && ballA_TouchingFromTop) {
+            ballA.flipY(true);
+        }
+
     }
+
 
     private float paddleHeightDivision(int divisionNumber, GameObject object) {
 
