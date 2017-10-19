@@ -1,6 +1,7 @@
 package org.academiadecodigo.twoballs.manage;
 
 import org.academiadecodigo.simplegraphics.graphics.Text;
+import org.academiadecodigo.twoballs.GameScreen;
 
 /**
  * TwoBalls Created by BrunoM24 on 17/10/2017.
