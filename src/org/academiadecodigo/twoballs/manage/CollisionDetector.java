@@ -15,6 +15,8 @@ import java.util.Set;
  */
 public class CollisionDetector {
 
+    private Collider collider = new Collider();
+
     private List<Shape> shapesOnTop(Set<GameObject> gameObjects, GameObject a) {
 
         List<Shape> shapes = new ArrayList<>();
@@ -75,21 +77,11 @@ public class CollisionDetector {
                     continue;
                 }
 
-                collide((Ball) gameObject, objectB);
+                if (objectB instanceof Paddle) {
+
+                    collider.collide((Ball) gameObject, (Paddle) objectB);
+                }
             }
-        }
-    }
-
-    private void collide(Ball ball, GameObject objectB) {
-
-        //ball on ball
-        //ball on paddle
-        //ball.flipX(false);//TODO Add timer to prevent multiple changes in 1 frame
-
-        //TODO Eduardo working on paddle ball interaction
-        if (objectB instanceof Paddle) {
-
-            Collider.collide(ball, (Paddle) objectB);
         }
     }
 }

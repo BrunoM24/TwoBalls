@@ -64,21 +64,12 @@ public class Stage {
 
     public void run(float delta) {
 
-        //TODO: kill bricks
-        //kill bricks
-        //spawn powers if any
-        //update objects
-
         for(GameObject object : gameObjects) {
 
             if(object instanceof Movable) {
 
                 ((Movable) object).move(delta);
             }
-
-            //TODO Check only balls?
-            //Powerup extends ball
-            //collisionDetector.checkCollision(gameObjects, object);
         }
 
         collisionDetector.checkCollision(gameObjects);

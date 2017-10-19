@@ -9,13 +9,15 @@ import org.academiadecodigo.twoballs.gameobjects.Paddle;
  */
 public class Collider {
 
-    private static int countCenter = 0;
+    /*
+    private int countCenter = 0;
 
-    private static int countDown = 0;
+    private int countDown = 0;
 
-    private static int countUp = 0;
+    private int countUp = 0;
+    */
 
-    public static void collide(Ball ball, Paddle paddle) {
+    public void collide(Ball ball, Paddle paddle) {
 
         float ballCenterLine = ball.getY() + (1f / 2f) * ball.getHeight();
         float firstDivision = paddleHeightDivision(1, paddle);
@@ -29,30 +31,37 @@ public class Collider {
 
         ball.flipX(true);
 
+        //TODO: > if touchup && getDirY > 0
         if(touchUp) {
+
             if(ball.getDirectionY() > 0) {
+
                 ball.flipY(true);
             }
-            countUp++;
-            System.out.println("touching up " + countUp);
+
+            //countUp++;
+            //System.out.println("touching up " + countUp);
         }
 
         if(touchDown) {
+
             if(ball.getDirectionY() < 0) {
+
                 ball.flipY(true);
             }
 
-            countDown++;
-            System.out.println("touching down baby..hmmm " + countDown);
+            //countDown++;
+            //System.out.println("touching down baby..hmmm " + countDown);
         }
 
         if(touchCenter) {
-            countCenter++;
-            System.out.println("na muche CENTER " + countCenter);
+
+            //countCenter++;
+            //System.out.println("na muche CENTER " + countCenter);
         }
     }
 
-    private static float paddleHeightDivision(int divisionNumber, GameObject object) {
+    private float paddleHeightDivision(int divisionNumber, GameObject object) {
 
         return (object.getY() + (divisionNumber / 3f) * object.getHeight());
     }
