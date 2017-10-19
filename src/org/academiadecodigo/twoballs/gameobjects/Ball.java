@@ -22,7 +22,7 @@ public class Ball extends GameObject implements Movable {
     private long lastChanged;
 
     //TODO IF RUBBERBANDING HAPPENS, CHANGE IT HERE
-    private int timeToBounce = 250;
+    private int timeToBounce = 300;
 
     public Ball(int x, int y) {
 
@@ -100,13 +100,8 @@ public class Ball extends GameObject implements Movable {
         return true;
     }
 
-    public void touchUp() {
-
-        //se vieres d baixo
-        //s vieres d cima
-    }
-
     public int getDirectionX() {
+
         return direction.x;
     }
 

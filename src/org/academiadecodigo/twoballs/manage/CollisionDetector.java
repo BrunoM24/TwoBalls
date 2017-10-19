@@ -84,6 +84,12 @@ public class CollisionDetector {
 
         //ball on ball
         //ball on paddle
-        ball.changeX(false);//TODO Add timer to prevent multiple changes in 1 frame
+        //ball.flipX(false);//TODO Add timer to prevent multiple changes in 1 frame
+
+        //TODO Eduardo working on paddle ball interaction
+        if (objectB instanceof Paddle) {
+
+            Collider.collide(ball, (Paddle) objectB);
+        }
     }
 }
