@@ -77,7 +77,8 @@ public class Stage {
                 ((Movable) object).move(delta);
             }
 
-            // object.checkCollision(shapesOnTop(object));
+            //TODO Check only balls?
+            //Powerup extends ball
             collisionDetector.checkCollision(gameObjects, object);
         }
     }
