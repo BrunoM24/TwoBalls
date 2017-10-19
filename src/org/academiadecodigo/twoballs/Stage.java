@@ -29,11 +29,16 @@ public class Stage {
 
     private CollisionDetector collisionDetector = new CollisionDetector();
 
+    ScoreManager scoreManager;
+
     public Stage(int width, int height) {
 
         this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
 
         bkgRectangle.draw();
+
+        scoreManager = new ScoreManager();
+        scoreManager.draw();
     }
 
     public void initializeObjects() {
@@ -60,6 +65,8 @@ public class Stage {
                 //0 - 4, 0 - 6
             }
         }
+
+        //gameObjects.add(ObjectFactory.getNewBrick(200, 200));
     }
 
     public void run(float delta) {
@@ -111,7 +118,6 @@ public class Stage {
 
     void keyReleased(int key) {
 
-        //paddle.keyReleased
         if(key == P1_DOWN || key == P1_UP) {
 
             player1.updateDirection(0);
