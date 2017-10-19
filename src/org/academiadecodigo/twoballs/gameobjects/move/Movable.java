@@ -6,8 +6,5 @@ package org.academiadecodigo.twoballs.gameobjects.move;
 
 public interface Movable {
 
-    @Deprecated
-    void move();
-
     void move(float delta);
 }

@@ -42,11 +42,6 @@ public class Paddle extends GameObject implements Movable {
     }
 
     @Override
-    public void move() {
-
-    }
-
-    @Override
     public void move(float delta) {
 
         deltaY = direction * speed;

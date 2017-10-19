@@ -5,8 +5,6 @@ import org.academiadecodigo.simplegraphics.graphics.Shape;
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
  */
-
-
 public abstract class GameObject {
 
     public abstract int getX();

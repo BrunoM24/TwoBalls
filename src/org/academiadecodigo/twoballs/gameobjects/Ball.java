@@ -8,8 +8,6 @@ import org.academiadecodigo.twoballs.gameobjects.move.Direction;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.gameobjects.move.Speed;
 
-import java.util.ArrayList;
-
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
  */
@@ -40,22 +38,14 @@ public class Ball extends GameObject implements Movable {
         speed.x = calcSpeed();
         speed.y = calcSpeed();
 
-        direction.x = Math.random() > 0.5f ? 1 : -1;
-        direction.y = Math.random() > 0.5f ? 1 : -1;
-    }
-
-    @Override
-    public void move() {
-
+        direction.x = -1;
+        //TODO Remove this
+        // direction.x = Math.random() > 0.5f ? 1 : -1;
+        //direction.y = Math.random() > 0.5f ? 1 : -1;
     }
 
     @Override
     public void move(float delta) {
-
-        if(delta > 10) {
-
-            delta = 10;
-        }
 
         dx = direction.x * speed.x;
         dy = direction.y * speed.y;
@@ -100,7 +90,7 @@ public class Ball extends GameObject implements Movable {
 
     public int calcSpeed() {
 
-        return (int) ((Math.random() * 9) + 1);
+        return (int) ((Math.random() * 3) + 1);
     }
 
     @Override

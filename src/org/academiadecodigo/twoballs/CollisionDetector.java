@@ -6,7 +6,6 @@ import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -20,32 +19,34 @@ public class CollisionDetector {
         return Canvas.getInstance().getShapesInArea(object.getX(), object.getY(), object.getX() + object.getWidth(), object.getY() + object.getHeight());
     }
 
+    private List<Shape> isTouched(Set<GameObject> gameObjects, GameObject areaObject) {
 
-    private List<Shape> isTouching(Set<GameObject> gameObjects, GameObject object) {
+        return null;
+    }
+
+    private List<Shape> isTouching(Set<GameObject> gameObjects, GameObject areaObject) {
 
         List<Shape> list = new ArrayList<>();
 
-        for (GameObject objectB : gameObjects) {
+        for(GameObject objectB : gameObjects) {
 
-            if (objectB.equals(object)) {
+            if(objectB.equals(areaObject)) {
+
                 continue;
             }
+
             // TODO  isTouching conditions still need to be tested
-            boolean abTouchX = (object.getX() >= objectB.getX() && object.getX() <= objectB.getX() + objectB.getWidth()) ||
-                    ((object.getX() + object.getWidth() >= objectB.getX()) &&
-                            (object.getX() + object.getWidth() <= objectB.getX() + objectB.getWidth()));
+            boolean abTouchX = (areaObject.getX() >= objectB.getX() && areaObject.getX() <= objectB.getX() + objectB.getWidth()) || ((areaObject.getX() + areaObject.getWidth() >= objectB.getX()) && (areaObject.getX() + areaObject.getWidth() <= objectB.getX() + objectB.getWidth()));
 
-            boolean abTouchY = (object.getY() >= objectB.getY() && object.getY() <= objectB.getY() + objectB.getHeight()) ||
-                    ((object.getY() + object.getHeight() >= objectB.getY()) && (object.getY() + object.getHeight() <= objectB.getY() + objectB.getHeight()));
+            boolean abTouchY = (areaObject.getY() >= objectB.getY() && areaObject.getY() <= objectB.getY() + objectB.getHeight()) || ((areaObject.getY() + areaObject.getHeight() >= objectB.getY()) && (areaObject.getY() + areaObject.getHeight() <= objectB.getY() + objectB.getHeight()));
 
-            if (!(abTouchX && abTouchY)) {
+            if(!(abTouchX && abTouchY)) {
+
                 continue;
             }
 
-            list.add(object.getShape());
+            list.add(objectB.getShape());
         }
-        //Should return 'list'???
-        //return new ArrayList<Shape>();
 
         return list;
     }
@@ -55,13 +56,18 @@ public class CollisionDetector {
 
         List<Shape> shapeList = isTouching(gameObjects, object);
 
-        for (GameObject objectB : gameObjects) {
+        if(shapeList.size() < 1) {
 
-            if (objectB.equals(object)) {
+            return;
+        }
+
+        for(GameObject objectB : gameObjects) {
+
+            if(objectB.equals(object)) {
                 continue;
             }
 
-            if (!shapeList.contains(objectB.getShape())) {
+            if(!shapeList.contains(objectB.getShape())) {
                 continue;
             }
             //a e b colidem
@@ -72,14 +78,9 @@ public class CollisionDetector {
 
     private void collide(GameObject object, GameObject objectB) {
 
-        /* precisamos de saber se algum dos objectos é bola.
-        se for bola, vamos ter que inverter o x e y.
-         */
+        if(object instanceof Ball) {
 
-        System.out.println(object + "?" + objectB);
-        if (object instanceof Ball) {
-            ((Ball) object).changeX();
+            ((Ball) object).changeX();//TODO Add timer to prevent multiple changes in 1 frame
         }
-
     }
 }

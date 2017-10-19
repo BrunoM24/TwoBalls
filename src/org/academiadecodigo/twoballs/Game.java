@@ -45,23 +45,32 @@ public class Game {
             //divide the current delta by the IDEAL FPS (60)
             delta += (now - lastTime) / IDEAL_DELTA;
 
+            run();
+
             //sets the new time
             lastTime = now;
+        }
+    }
 
-            //Executes this 60FPS
-            while(delta >= 1) {
+    private void run() {
 
-                //run x 60FPS
-                if(gamePaused) {
+        //Executes this 60FPS
+        while(delta >= 1) {
 
-                    delta = 0;
-                    //TODO SHOW PAUSED TEXT
-                }
+            //run x 60FPS
+            if(gamePaused) {
 
-                stage.run((float) delta);
-                delta--;
-                //TODO move up?
+                delta = 0;
+                //TODO SHOW PAUSED TEXT
             }
+
+            if(delta > 3) {
+
+                delta = 3;
+            }
+
+            stage.run((float) delta);
+            delta--;
         }
     }
 

@@ -1,14 +1,11 @@
 package org.academiadecodigo.twoballs;
 
-import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.simplegraphics.graphics.Shape;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.input.KeyboardManager;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,7 +38,7 @@ public class Stage {
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle(bkgRectangle, "blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle(bkgRectangle, "red"));
 
-        int numberOfBalls = 2;
+        int numberOfBalls = 1;
 
         for(int i = 0; i < numberOfBalls; i++) {
 
@@ -65,12 +62,10 @@ public class Stage {
                 ((Movable) object).move(delta);
             }
 
-
             // object.checkCollision(shapesOnTop(object));
             collisionDetector.checkCollision(gameObjects, object);
         }
     }
-
 
 
     void keyPressed(int key) {
@@ -87,12 +82,12 @@ public class Stage {
             player1.updateDirection(nDir);
             return;
         }
-
+        //TODO Unify this into 1 method handleKey(player1, key, P1_DOWN, P1_UP)
         //Player 2 Keyboard
-        if(key == KeyboardManager.P2_DOWN || key == KeyboardManager.P2_UP){
+        if(key == KeyboardManager.P2_DOWN || key == KeyboardManager.P2_UP) {
 
             int nDir = 1;
-            if(key == KeyboardManager.P2_UP){
+            if(key == KeyboardManager.P2_UP) {
                 nDir = -1;
             }
 
@@ -110,7 +105,7 @@ public class Stage {
             player1.updateDirection(0);
         }
 
-        if(key == KeyboardManager.P2_DOWN || key == KeyboardManager.P2_UP){
+        if(key == KeyboardManager.P2_DOWN || key == KeyboardManager.P2_UP) {
 
             player2.updateDirection(0);
         }
