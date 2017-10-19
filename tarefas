@@ -14,3 +14,8 @@ IDEIAS:
         swap Paddle controls UP=DOWN
         New Balls
         speed up/slow down
+
+DONE:
+    - Added MIN_SPEED, MAX_SPEED
+    - ObjectFActory removed bounds need
+    - Stage, added skeleton for spawning bricks

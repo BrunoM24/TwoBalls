@@ -1,10 +1,7 @@
 package org.academiadecodigo.twoballs.gameobjects;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.academiadecodigo.twoballs.Game;
 import org.academiadecodigo.twoballs.GameScreen;
-import org.academiadecodigo.twoballs.Stage;
 import org.academiadecodigo.twoballs.gameobjects.move.Direction;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.gameobjects.move.Speed;
@@ -14,11 +11,18 @@ import org.academiadecodigo.twoballs.gameobjects.move.Speed;
  */
 public class Ball extends GameObject implements Movable {
 
+    private final int MIN_SPEED = 2, MAX_SPEED = 3;
+
     private Speed speed = new Speed();
 
     private Direction direction = new Direction();
 
     private int dx, dy;
+
+    private long lastChanged;
+
+    //TODO IF RUBBERBANDING HAPPENS, CHANGE IT HERE
+    private int timeToBounce = 250;
 
     public Ball(int x, int y) {
 
@@ -60,11 +64,21 @@ public class Ball extends GameObject implements Movable {
 
     public void changeX() {
 
+        if(!canBounce()) {
+
+            return;
+        }
+
         direction.x *= -1;
         speed.x = calcSpeed();
     }
 
     public void changeY() {
+
+        if(!canBounce()) {
+
+            return;
+        }
 
         direction.y *= -1;
         speed.y = calcSpeed();
@@ -72,6 +86,17 @@ public class Ball extends GameObject implements Movable {
 
     public int calcSpeed() {
 
-        return (int) ((Math.random() * 5) + 1);
+        return (int) ((Math.random() * MAX_SPEED) + MIN_SPEED);
+    }
+
+    private boolean canBounce() {
+
+        if(System.currentTimeMillis() - lastChanged < timeToBounce) {
+
+            return false;
+        }
+
+        lastChanged = System.currentTimeMillis();
+        return true;
     }
 }
