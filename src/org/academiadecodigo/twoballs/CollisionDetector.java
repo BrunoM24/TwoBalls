@@ -100,6 +100,7 @@ public class CollisionDetector {
 
 
             boolean touchCenter = (ballCenterLine >= firstDivision && ballCenterLine <= secondDivision);
+
             boolean touchUp = (object.getY() + object.getHeight() >= objectB.getY()) && (ballCenterLine < (objectB.getY() + (1f / 3f) * objectB.getHeight()));
             boolean touchDown = (object.getY() <= objectB.getY() + objectB.getHeight()) && (ballCenterLine > (objectB.getY() + (2f / 3f) * objectB.getHeight()));
             ;
