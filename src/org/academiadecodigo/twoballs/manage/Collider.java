@@ -61,6 +61,11 @@ public class Collider {
         }
     }
 
+    public void collide(Ball ballA, Ball ballB) {
+
+        //TODO GOOD WORK EDU
+    }
+
     private float paddleHeightDivision(int divisionNumber, GameObject object) {
 
         return (object.getY() + (divisionNumber / 3f) * object.getHeight());

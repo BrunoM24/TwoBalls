@@ -77,9 +77,13 @@ public class CollisionDetector {
                     continue;
                 }
 
-                if (objectB instanceof Paddle) {
+                if(objectB instanceof Paddle) {
 
                     collider.collide((Ball) gameObject, (Paddle) objectB);
+                }
+                else if(objectB instanceof Ball) {
+
+                    collider.collide((Ball) gameObject, (Ball) objectB);
                 }
             }
         }
