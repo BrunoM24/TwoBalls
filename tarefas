@@ -1,11 +1,12 @@
 TODO:
-    BALLS COLLIDE WITH EACH OTHER
-    BALLS COLLIDE WITH PADDLES
     CREATE NEW BRICK(objFactory)
     Assets
     score
     keyboard
     spawn balls with paddles
+
+    FIX:
+        Collision
 
 IDEIAS:
     PowerUps
