@@ -53,12 +53,13 @@ public class Stage {
         gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2, GameScreen.getHeight() / 2, 1, 0));
         gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2, GameScreen.getHeight() / 2, -1, 0));
 
-        int numberOfBalls = 30;
+        /*
+        int numberOfBalls = 0;
 
         for(int i = 1; i <= numberOfBalls; i++) {
 
             gameObjects.add(ObjectFactory.getNewBall(250, 250, -1, -1));
-        }
+        }*/
 
         //TODO SPAWN BRICKS
         int xRange = 5;

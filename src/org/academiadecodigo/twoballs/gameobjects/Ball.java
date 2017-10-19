@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class Ball extends GameObject implements Movable {
 
-    private final int MIN_SPEED = 2, MAX_SPEED = 3;
+    private final int MIN_SPEED = 3, MAX_SPEED = 4;
 
     private Speed speed = new Speed();
 
@@ -118,22 +118,22 @@ public class Ball extends GameObject implements Movable {
     }
 
     public void flipX(boolean force) {
-/*
+
         if(!canBounce() && !force) {
 
             return;
-        }*/
+        }
 
         direction.x *= -1;
         speed.x = calcSpeed();
     }
 
     public void flipY(boolean force) {
-/*
+
         if(!canBounce() && !force) {
 
             return;
-        }*/
+        }
 
         direction.y *= -1;
         speed.y = calcSpeed();
@@ -144,7 +144,7 @@ public class Ball extends GameObject implements Movable {
         return (int) ((Math.random() * MAX_SPEED) + MIN_SPEED);
     }
 
-    /*
+
     private boolean canBounce() {
 
         if(System.currentTimeMillis() - lastChanged < timeToBounce) {
@@ -155,7 +155,12 @@ public class Ball extends GameObject implements Movable {
         lastChanged = System.currentTimeMillis();
         return true;
     }
-    */
+
+
+    public Direction getDirection() {
+
+        return direction;
+    }
 
     public int getDirectionX() {
 
