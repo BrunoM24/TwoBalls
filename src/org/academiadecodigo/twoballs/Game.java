@@ -1,6 +1,5 @@
 package org.academiadecodigo.twoballs;
 
-import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.twoballs.input.KeyboardManager;
 
 /**
@@ -20,6 +19,9 @@ public class Game {
 
     private KeyboardManager keyboardManager;
 
+    private PauseText pauseText;
+
+
     Game() {
 
         init();
@@ -36,6 +38,9 @@ public class Game {
         stage.initializeObjects();
 
         keyboardManager = new KeyboardManager(this);
+
+        pauseText = new PauseText();
+
     }
 
     public void start() {
@@ -56,15 +61,25 @@ public class Game {
 
     private void run() {
 
+
+
+
         //Executes this 60FPS
         while(delta >= 1) {
+
 
             //run x 60FPS
             if(gamePaused) {
 
                 delta = 0;
                 //TODO SHOW PAUSED TEXT
+
+                pauseText.draw();
+
+            } else {
+                pauseText.delete();
             }
+
 
             if(delta > 3) {
 
@@ -76,11 +91,13 @@ public class Game {
         }
     }
 
+
     public void keyPressed(int key) {
 
         if(key == KeyboardManager.GAME_PAUSE) {
 
             gamePaused = !gamePaused;
+
             return;
         }
 
