@@ -84,6 +84,6 @@ public class CollisionDetector {
 
         //ball on ball
         //ball on paddle
-        ball.changeX(false);//TODO Add timer to prevent multiple changes in 1 frame
+        //ball.changeX(false);//TODO Add timer to prevent multiple changes in 1 frame
     }
 }

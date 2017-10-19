@@ -15,8 +15,6 @@ public class PauseText {
         pauseText = new Text (470,272,textToDisplay);
         pauseText.setColor(Color.DARK_GRAY);
         pauseText.grow(80,25);
-        // Checking coordinates and pixels
-        // System.out.println("X = " + pauseText.getX() + "\nY = " + pauseText.getY() + ";\nWidth = " + pauseText.getWidth() + "\nHeight = " + pauseText.getHeight());
     }
 
 
