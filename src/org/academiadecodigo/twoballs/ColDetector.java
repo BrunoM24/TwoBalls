@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class ColDetector {
 
-    public void checkCollision(Set<GameObject> objSet) {
+    /*public void checkCollision(Set<GameObject> objSet) {
 
         Iterator<GameObject> iterator = objSet.iterator();
         while(iterator.hasNext()) {
@@ -83,5 +83,5 @@ public class ColDetector {
         }
 
         return shapes;
-    }
+    }*/
 }

@@ -25,7 +25,7 @@ public class Stage {
 
     private Paddle player2;
 
-    private ColDetector collisionDetector = new ColDetector();
+    private CollisionDetector collisionDetector = new CollisionDetector();
 
     public Stage(int width, int height) {
 

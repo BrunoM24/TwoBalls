@@ -6,6 +6,7 @@ import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -14,99 +15,75 @@ import java.util.Set;
  */
 public class CollisionDetector {
 
-    private List<Shape> isTouching(Set<GameObject> gameObjects, GameObject areaObject) {
+    private List<Shape> shapesOnTop(Set<GameObject> gameObjects, GameObject a) {
 
-        List<Shape> list = new ArrayList<>();
+        List<Shape> shapes = new ArrayList<>();
 
-        int buffer = 2;
-        for(GameObject objectB : gameObjects) {
+        for(GameObject b : gameObjects) {
 
-            if (objectB.equals(areaObject)) {
-
-                continue;
-            }
-
-
-            int x = areaObject.getX();
-            int rightX = x + areaObject.getWidth();
-            int y = areaObject.getY();
-            int rightY = y + areaObject.getHeight();
-
-            // TODO  isTouching conditions still need to be tested
-            boolean leftXTouching = x + buffer >= objectB.getX() - buffer && x - buffer <= objectB.getX() + objectB.getWidth() + buffer;
-            boolean leftYTouching = y + buffer >= objectB.getY() - buffer && y - buffer <= objectB.getY() + objectB.getHeight() + buffer;
-            boolean rightXTouching = rightX + buffer >= objectB.getX() - buffer && rightX <= objectB.getX() + objectB.getWidth();
-            boolean rightYTouching = rightY + buffer >= objectB.getY() - buffer && rightY <= objectB.getY() + objectB.getHeight();
-
-            boolean abTouchX = leftXTouching || rightXTouching;
-
-            boolean abTouchY = leftYTouching || rightYTouching;
-
-            if (!(abTouchX && abTouchY)) {
+            if(a.equals(b)) {
 
                 continue;
             }
 
-            list.add(objectB.getShape());
+            int buffer = 2;
+            int x = a.getX();
+            int rightX = x + a.getWidth();
+            int y = a.getY();
+            int rightY = y + a.getHeight();
+
+            boolean topLeftSameX = x + buffer >= b.getX() - buffer && x - buffer <= b.getX() + b.getWidth() + buffer;
+            boolean topLeftSameY = y + buffer >= b.getY() - buffer && y - buffer <= b.getY() + b.getHeight() + buffer;
+
+            boolean bottomRightSameX = rightX + buffer >= b.getX() - buffer && rightX <= b.getX() + b.getWidth();
+            boolean bottomRightSameY = rightY + buffer >= b.getY() - buffer && rightY <= b.getY() + b.getHeight();
+
+            //System.out.println("A: " + (topLeftSameX && topLeftSameY));
+            //System.out.println("B: " + (bottomRightSameX && bottomRightSameY));
+
+            if((topLeftSameX && topLeftSameY) || (bottomRightSameX && bottomRightSameY)) {
+
+                shapes.add(b.getShape());
+            }
         }
 
-        return list;
+        return shapes;
     }
 
 
-    public void checkCollision(Set<GameObject> gameObjects, GameObject object) {
+    public void checkCollision(Set<GameObject> objSet) {
 
-        List<Shape> shapeList = isTouching(gameObjects, object);
+        Iterator<GameObject> iterator = objSet.iterator();
+        while(iterator.hasNext()) {
 
-        if (shapeList.size() < 1) {
+            GameObject gameObject = iterator.next();
 
-            return;
-        }
+            if(!(gameObject instanceof Ball)) {
 
-        for (GameObject objectB : gameObjects) {
-
-            if (objectB.equals(object)) {
                 continue;
             }
 
-            if (!shapeList.contains(objectB.getShape())) {
-                continue;
-            }
+            List<Shape> shapes = shapesOnTop(objSet, gameObject);
 
-            //a e b colidem
-            collide(object, objectB);
-        }
-    }
+            Iterator<GameObject> innerIterator = objSet.iterator();
+            while(innerIterator.hasNext()) {
 
-    private void collide(GameObject object, GameObject objectB) {
+                GameObject objectB = innerIterator.next();
 
-        if (object instanceof Ball) {
+                if(!shapes.contains(objectB.getShape())) {
 
-            ((Ball) object).changeX(false);//TODO Add timer to prevent multiple changes in 1 frame
-            //if touched on top || if touched on bottom
-            //flip y
-            //if touched on left || if touched on right
-            //flip x
-        }
+                    continue;
+                }
 
-        //TODO Eduardo working on paddle ball interaction
-
-
-        if (object instanceof Ball && objectB instanceof Paddle) {
-
-            float ballCenterLine = object.getY() + (1f / 2f) * object.getHeight();
-
-
-            //boolean touchCenter = ;
-            boolean touchCenterLeft = (object.getY() + object.getHeight() >= objectB.getY()) && (ballCenterLine <= (objectB.getY() + (1f / 3f) * objectB.getHeight()));
-            //boolean touchRight = ;
-
-            if (touchCenterLeft) {
-                count++;
-                System.out.println("touching left " + count);
+                collide((Ball) gameObject, objectB);
             }
         }
     }
 
-    private int count = 0;
+    private void collide(Ball ball, GameObject objectB) {
+
+        //ball on ball
+        //ball on paddle
+        ball.changeX(false);//TODO Add timer to prevent multiple changes in 1 frame
+    }
 }
