@@ -79,7 +79,8 @@ public class CollisionDetector {
 
                 if(objectB instanceof Paddle) {
 
-                    collider.collide((Ball) gameObject, (Paddle) objectB);
+                    collide((Ball) gameObject, (Paddle) objectB);
+                    //collider.collide((Ball) gameObject, (Paddle) objectB);
                 }
                 else if(objectB instanceof Ball) {
 
@@ -87,5 +88,28 @@ public class CollisionDetector {
                 }
             }
         }
+    }
+
+    private void collide(Ball ball, Paddle paddle) {
+
+        //System.out.println(ball + "_____" + paddle);
+
+        //if on the left side of the paddle
+        int buffer = 2;
+        int x = ball.getX();
+        int rightX = x + ball.getWidth();
+        int y = ball.getY();
+        int rightY = y + ball.getHeight();
+
+        boolean topLeftSameX = x + buffer >= paddle.getX() - buffer && x - buffer <= paddle.getX() + paddle.getWidth() + buffer;
+        boolean topLeftSameY = y + buffer >= paddle.getY() - buffer && y - buffer <= paddle.getY() + paddle.getHeight() + buffer;
+
+        boolean bottomRightSameX = rightX + buffer >= paddle.getX() - buffer && rightX <= paddle.getX() + paddle.getWidth();
+        boolean bottomRightSameY = rightY + buffer >= paddle.getY() - buffer && rightY <= paddle.getY() + paddle.getHeight();
+
+        boolean sameX = topLeftSameX || bottomRightSameX;
+        boolean sameY = topLeftSameY || bottomRightSameY;
+
+        System.out.println(sameX || sameY);
     }
 }

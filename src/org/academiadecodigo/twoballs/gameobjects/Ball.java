@@ -26,14 +26,19 @@ public class Ball extends GameObject implements Movable {
 
     public Ball(int x, int y) {
 
+        this(x, y, Math.random() > 0.5f ? 1 : -1, Math.random() > 0.5f ? 1 : -1);
+    }
+
+    public Ball(int x, int y, int dirX, int dirY) {
+
         shape = new Picture(x, y, "assets/ball.png");
         shape.draw();
 
         speed.x = calcSpeed();
         speed.y = calcSpeed();
 
-        direction.x = Math.random() > 0.5f ? 1 : -1;
-        direction.y = Math.random() > 0.5f ? 1 : -1;
+        direction.x = dirX;
+        direction.y = dirY;
     }
 
     @Override
@@ -49,13 +54,13 @@ public class Ball extends GameObject implements Movable {
 
     private void checkBoundaries() {
 
-        if (getX() + dx < GameScreen.getX() || getX() + getWidth() + dx > GameScreen.getWidth() + GameScreen.getX()) {
+        if(getX() + dx < GameScreen.getX() || getX() + getWidth() + dx > GameScreen.getWidth() + GameScreen.getX()) {
 
             dx *= -1;
             flipX(true);
         }
 
-        if (getY() + dy < GameScreen.getY() || getY() + getHeight() + dy > GameScreen.getHeight() + GameScreen.getY()) {
+        if(getY() + dy < GameScreen.getY() || getY() + getHeight() + dy > GameScreen.getHeight() + GameScreen.getY()) {
 
             dy *= -1;
             flipY(true);
@@ -64,7 +69,7 @@ public class Ball extends GameObject implements Movable {
 
     public void flipX(boolean force) {
 
-        if (!canBounce() && !force) {
+        if(!canBounce() && !force) {
 
             return;
         }
@@ -75,7 +80,7 @@ public class Ball extends GameObject implements Movable {
 
     public void flipY(boolean force) {
 
-        if (!canBounce() && !force) {
+        if(!canBounce() && !force) {
 
             return;
         }
@@ -91,7 +96,7 @@ public class Ball extends GameObject implements Movable {
 
     private boolean canBounce() {
 
-        if (System.currentTimeMillis() - lastChanged < timeToBounce) {
+        if(System.currentTimeMillis() - lastChanged < timeToBounce) {
 
             return false;
         }
