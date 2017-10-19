@@ -1,6 +1,7 @@
 package org.academiadecodigo.twoballs;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
@@ -55,15 +56,25 @@ public class Stage {
         }
 
         //TODO SPAWN BRICKS
-        int xRange = 5;
-        int yRange = 7;
+        int xRange = 7;
+        int yRange = 5;
+        int brickWidth = 32;
+        int brickHeight = 64;
+        int brickSpacing = 2;
+
+
+        System.out.println("Hright : " + GameScreen.getHeight() + " Width : " + GameScreen.getWidth());
+        System.out.println();
 
         for(int y = 0; y < yRange; y++) {
 
+            new Brick (400+brickWidth*y+brickSpacing*y, 58);
+
+
+
             for(int x = 0; x < xRange; x++) {
 
-                //x, y
-                //0 - 4, 0 - 6
+               new Brick (400+brickWidth*y+brickSpacing*y, 58+brickHeight*x+brickSpacing*x );
             }
         }
 
