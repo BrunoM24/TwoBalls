@@ -101,10 +101,15 @@ public class CollisionDetector {
         int y = ball.getY();
         int rightY = y + ball.getHeight();
 
-        boolean left = rightX + buffer <= paddle.getX() - buffer;
-        boolean down = x + buffer <= paddle.getY();
-        boolean up = y >= paddle.getY() + paddle.getHeight();
+        boolean topLeftSameX = x + buffer >= paddle.getX() - buffer && x - buffer <= paddle.getX() + paddle.getWidth() + buffer;
+        boolean topLeftSameY = y + buffer >= paddle.getY() - buffer && y - buffer <= paddle.getY() + paddle.getHeight() + buffer;
 
-        System.out.println(left);
+        boolean bottomRightSameX = rightX + buffer >= paddle.getX() - buffer && rightX <= paddle.getX() + paddle.getWidth();
+        boolean bottomRightSameY = rightY + buffer >= paddle.getY() - buffer && rightY <= paddle.getY() + paddle.getHeight();
+
+        boolean sameX = topLeftSameX || bottomRightSameX;
+        boolean sameY = topLeftSameY || bottomRightSameY;
+
+        System.out.println(sameX || sameY);
     }
 }
