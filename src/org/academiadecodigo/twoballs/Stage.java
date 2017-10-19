@@ -58,6 +58,8 @@ public class Stage {
             }
         }
 
+        ScoreManager scoreManager = new ScoreManager();
+        scoreManager.draw();
         //gameObjects.add(ObjectFactory.getNewBrick(200, 200));
     }
 
@@ -107,7 +109,6 @@ public class Stage {
 
     void keyReleased(int key) {
 
-        //paddle.keyReleased
         if (key == P1_DOWN || key == P1_UP) {
 
             player1.updateDirection(0);
