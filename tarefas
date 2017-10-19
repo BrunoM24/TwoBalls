@@ -1,8 +1,6 @@
 TODO:
     CREATE NEW BRICK(objFactory)
-    Assets
     keyboard
-    spawn balls with paddles
     Powerup extends ball
 
     FIX:

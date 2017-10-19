@@ -1,5 +1,6 @@
 package org.academiadecodigo.twoballs.manage;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.twoballs.GameScreen;
 
@@ -17,6 +18,9 @@ public class ScoreManager {
 
         textScorePlayerOne = new Text(70, 40, playerScore[1] + "");
         textScorePlayerTwo = new Text(GameScreen.getWidth() - 70, 40, playerScore[2] + "");
+
+        textScorePlayerOne.setColor(Color.RED);
+        textScorePlayerTwo.setColor(Color.RED);
 
         textScorePlayerOne.grow(5, 10);
         textScorePlayerTwo.grow(5, 10);

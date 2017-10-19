@@ -13,7 +13,7 @@ public class PauseText {
 
     public PauseText() {
         pauseText = new Text (470,272,textToDisplay);
-        pauseText.setColor(Color.DARK_GRAY);
+        pauseText.setColor(Color.YELLOW);
         pauseText.grow(80,25);
     }
 
