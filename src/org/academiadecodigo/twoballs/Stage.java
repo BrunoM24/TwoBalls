@@ -1,6 +1,7 @@
 package org.academiadecodigo.twoballs;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
@@ -21,7 +22,8 @@ public class Stage {
 
     public static final int PADDING = 10;
 
-    private Rectangle bkgRectangle;
+    //private Rectangle bkgRectangle;
+    private Picture backGround;
 
     private Set<GameObject> gameObjects = new HashSet<>();  //elaborate a functional SET list
 
@@ -35,9 +37,10 @@ public class Stage {
 
     public Stage(int width, int height) {
 
-        this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
-
-        bkgRectangle.draw();
+        //this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
+        this.backGround = new Picture(PADDING, PADDING, "assets/background.jpg");
+        //bkgRectangle.draw();
+        this.backGround.draw();
 
         scoreManager = new ScoreManager();
         scoreManager.draw();
@@ -47,6 +50,8 @@ public class Stage {
 
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
+        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2, GameScreen.getHeight() / 2, 1, 0));
+        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2, GameScreen.getHeight() / 2, -1, 0));
 
         int numberOfBalls = 30;
 
