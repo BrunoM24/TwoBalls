@@ -29,7 +29,8 @@ public class Collider {
         boolean touchUp = (ball.getY() + ball.getHeight() >= paddle.getY()) && (ballCenterLine < (paddle.getY() + (1f / 3f) * paddle.getHeight()));
         boolean touchDown = (ball.getY() <= paddle.getY() + paddle.getHeight()) && (ballCenterLine > (paddle.getY() + (2f / 3f) * paddle.getHeight()));
 
-        ball.flipX(true);
+        ball.flipX(false);
+        ball.move(1.5f);
 
         //TODO: > if touchup && getDirY > 0
         if(touchUp) {
