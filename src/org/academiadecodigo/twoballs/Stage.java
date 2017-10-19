@@ -4,7 +4,8 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
-import org.academiadecodigo.twoballs.input.KeyboardManager;
+
+import static org.academiadecodigo.twoballs.input.KeyboardManager.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,18 +41,18 @@ public class Stage {
 
         int numberOfBalls = 3;
 
-        for(int i = 1; i <= numberOfBalls; i++) {
+        for (int i = 1; i <= numberOfBalls; i++) {
 
             gameObjects.add(ObjectFactory.getNewBall(100 * i, 100 * i));
         }
 
         //TODO SPAWN BRICKS
-        int xRange = 1;
-        int yRange = 1;
+        int xRange = 5;
+        int yRange = 7;
 
-        for(int y = 0; y < yRange; y++) {
+        for (int y = 0; y < yRange; y++) {
 
-            for(int x = 0; x < xRange; x++) {
+            for (int x = 0; x < xRange; x++) {
 
 
             }
@@ -65,9 +66,9 @@ public class Stage {
         //spawn powers if any
         //update objects
 
-        for(GameObject object : gameObjects) {
+        for (GameObject object : gameObjects) {
 
-            if(object instanceof Movable) {
+            if (object instanceof Movable) {
 
                 ((Movable) object).move(delta);
             }
@@ -81,42 +82,37 @@ public class Stage {
 
     void keyPressed(int key) {
 
-        //PLAYER 1 KEYBOARD
-        if(key == KeyboardManager.P1_DOWN || key == KeyboardManager.P1_UP) {
+        if (handleKey(player1, key, P1_UP, P1_DOWN)) {
 
-            int nDir = 1;
-            if(key == KeyboardManager.P1_UP) {
-
-                nDir = -1;
-            }
-
-            player1.updateDirection(nDir);
-            return;
-        }
-        //TODO Unify this into 1 method handleKey(player1, key, P1_DOWN, P1_UP)
-        //Player 2 Keyboard
-        if(key == KeyboardManager.P2_DOWN || key == KeyboardManager.P2_UP) {
-
-            int nDir = 1;
-            if(key == KeyboardManager.P2_UP) {
-                nDir = -1;
-            }
-
-            player2.updateDirection(nDir);
             return;
         }
 
+        if (handleKey(player2, key, P2_UP, P2_DOWN)) {
+
+            return;
+        }
+    }
+
+    private boolean handleKey(Paddle player, int key, int up, int down) {
+
+        if (key == down || key == up) {
+
+            player.updateDirection(key == up ? -1 : 1);
+            return true;
+        }
+
+        return false;
     }
 
     void keyReleased(int key) {
 
         //paddle.keyReleased
-        if(key == KeyboardManager.P1_DOWN || key == KeyboardManager.P1_UP) {
+        if (key == P1_DOWN || key == P1_UP) {
 
             player1.updateDirection(0);
         }
 
-        if(key == KeyboardManager.P2_DOWN || key == KeyboardManager.P2_UP) {
+        if (key == P2_DOWN || key == P2_UP) {
 
             player2.updateDirection(0);
         }
