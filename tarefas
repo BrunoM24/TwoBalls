@@ -20,3 +20,4 @@ DONE:
     - Added MIN_SPEED, MAX_SPEED
     - ObjectFActory removed bounds need
     - Stage, added skeleton for spawning bricks
+    - Added text when paused
