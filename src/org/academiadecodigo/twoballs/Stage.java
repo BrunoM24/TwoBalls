@@ -27,6 +27,8 @@ public class Stage {
 
     private CollisionDetector collisionDetector = new CollisionDetector();
 
+    ScoreManager scoreManager;
+
     public Stage(int width, int height) {
 
         this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
@@ -58,7 +60,7 @@ public class Stage {
             }
         }
 
-        ScoreManager scoreManager = new ScoreManager();
+        scoreManager = new ScoreManager();
         scoreManager.draw();
         //gameObjects.add(ObjectFactory.getNewBrick(200, 200));
     }
@@ -113,11 +115,13 @@ public class Stage {
         if (key == P1_DOWN || key == P1_UP) {
 
             player1.updateDirection(0);
+            scoreManager.setScore(1, 5);
         }
 
         if (key == P2_DOWN || key == P2_UP) {
 
             player2.updateDirection(0);
+            scoreManager.setScore(2, 5);
         }
     }
 }

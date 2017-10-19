@@ -1,7 +1,5 @@
 package org.academiadecodigo.twoballs;
 
-import org.academiadecodigo.simplegraphics.graphics.Canvas;
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
 /**
@@ -9,39 +7,42 @@ import org.academiadecodigo.simplegraphics.graphics.Text;
  */
 public class ScoreManager {
 
-    private int p1Score = 0;
-    private int p2Score = 50;
+    int[] score = new int[3];
+
     Text tP1Score;
     Text tP2Score;
 
     public void draw() {
 
-        String s1 = Integer.toString(p1Score);
-        String s2 = Integer.toString(p2Score);
-
-
-        tP1Score = new Text(50, 40, s1);
-        tP2Score = new Text(GameScreen.getWidth() - 100, 40, s2);
-        tP1Score.grow(5 * s1.length(), 10);
-        tP1Score.grow(5 * s1.length(), 10);
+        tP1Score = new Text(50, 40, score[1] + "");
+        tP2Score = new Text(GameScreen.getWidth() - 100, 40, score[2] + "");
+        System.out.println("Width: " + tP1Score.getWidth() + " Height: " + tP1Score.getHeight());
+        tP1Score.grow(5, 10);
+        tP2Score.grow(5, 10);
+        System.out.println("Width: " + tP1Score.getWidth() + " Height: " + tP1Score.getHeight());
         tP1Score.draw();
         tP2Score.draw();
-
-        setScore(10000000);
     }
 
 
-    public void setScore(int score) {
+    public void setScore(int player, int points) {
 
-        p1Score = score;
-        tP1Score.setText(Integer.toString(score));
-        tP1Score.grow(5 * tP1Score.getText().length(), 10);
+        score[player] += points;
+        Text text;
+
+        if (player == 1) {
+            text = tP1Score;
+        } else {
+            text = tP2Score;
+        }
+
+        int textSize = text.getText().length();
+        text.setText(Integer.toString(score[player]));
+        if (textSize != text.getText().length()) {
+            System.out.println(text.getText().length());
+            text.grow(5 * text.getText().length(), 0);
+            System.out.println("Width: " + tP1Score.getWidth() + " Height: " + tP1Score.getHeight());
+        }
     }
 
-    /*
-    Text t2 = new Text(115, 70, "Points " + score);
-        t2.setColor(Color.RED);
-        t2.grow(50, 10);
-        t2.draw();
-     */
 }
