@@ -21,7 +21,7 @@ public class CollisionDetector {
     }
 
 
-    private ArrayList<Shape> isTouching(Set<GameObject> gameObjects, GameObject object) {
+    private List<Shape> isTouching(Set<GameObject> gameObjects, GameObject object) {
 
         List<Shape> list = new ArrayList<>();
 
@@ -32,11 +32,11 @@ public class CollisionDetector {
             }
             // TODO  isTouching conditions still need to be tested
             boolean abTouchX = (object.getX() >= objectB.getX() && object.getX() <= objectB.getX() + objectB.getWidth()) ||
-                    (object.getX() + object.getWidth() >= objectB.getX()) &&
-                            (object.getX() + object.getWidth() <= objectB.getX() + objectB.getWidth());
+                    ((object.getX() + object.getWidth() >= objectB.getX()) &&
+                            (object.getX() + object.getWidth() <= objectB.getX() + objectB.getWidth()));
 
             boolean abTouchY = (object.getY() >= objectB.getY() && object.getY() <= objectB.getY() + objectB.getHeight()) ||
-                    (object.getY() + object.getHeight() >= objectB.getY()) && (object.getY() + object.getHeight() <= objectB.getY() + objectB.getHeight());
+                    ((object.getY() + object.getHeight() >= objectB.getY()) && (object.getY() + object.getHeight() <= objectB.getY() + objectB.getHeight()));
 
             if (!(abTouchX && abTouchY)) {
                 continue;
@@ -45,13 +45,15 @@ public class CollisionDetector {
             list.add(object.getShape());
         }
         //Should return 'list'???
-        return new ArrayList<Shape>();
+        //return new ArrayList<Shape>();
+
+        return list;
     }
 
 
     public void checkCollision(Set<GameObject> gameObjects, GameObject object) {
 
-        List<Shape> shapeList = shapesOnTop(object);
+        List<Shape> shapeList = isTouching(gameObjects, object);
 
         for (GameObject objectB : gameObjects) {
 
@@ -70,11 +72,11 @@ public class CollisionDetector {
 
     private void collide(GameObject object, GameObject objectB) {
 
-        System.out.println(object + " e " + objectB);
         /* precisamos de saber se algum dos objectos é bola.
         se for bola, vamos ter que inverter o x e y.
          */
 
+        System.out.println(object + "?" + objectB);
         if (object instanceof Ball) {
             ((Ball) object).changeX();
         }

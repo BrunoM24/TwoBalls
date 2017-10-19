@@ -100,7 +100,7 @@ public class Ball extends GameObject implements Movable {
 
     public int calcSpeed() {
 
-        return (int) ((Math.random() * 3) + 1);
+        return (int) ((Math.random() * 9) + 1);
     }
 
     @Override
