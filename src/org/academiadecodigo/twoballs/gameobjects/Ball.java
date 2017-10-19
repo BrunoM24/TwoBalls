@@ -13,8 +13,6 @@ import org.academiadecodigo.twoballs.gameobjects.move.Speed;
  */
 public class Ball extends GameObject implements Movable {
 
-    private Picture ball;
-
     private Rectangle stageBoundaries;
 
     private Speed speed = new Speed();
@@ -30,8 +28,8 @@ public class Ball extends GameObject implements Movable {
 
     public Ball(Rectangle backgroundImage, int x, int y) {
 
-        ball = new Picture(x, y, "assets/ball.png");
-        ball.draw();
+        shape = new Picture(x, y, "assets/ball.png");
+        shape.draw();
 
         stageBoundaries = backgroundImage;
 
@@ -52,13 +50,7 @@ public class Ball extends GameObject implements Movable {
 
         checkBoundaries();
 
-        ball.translate(dx * delta, dy * delta);
-    }
-
-    @Override
-    public Shape getShape() {
-
-        return ball;
+        ((Picture) shape).translate(dx * delta, dy * delta);
     }
 
     private void checkBoundaries() {
@@ -91,29 +83,5 @@ public class Ball extends GameObject implements Movable {
     public int calcSpeed() {
 
         return (int) ((Math.random() * 3) + 1);
-    }
-
-    @Override
-    public int getX() {
-
-        return ball.getX();
-    }
-
-    @Override
-    public int getY() {
-
-        return ball.getY();
-    }
-
-    @Override
-    public int getWidth() {
-
-        return ball.getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-
-        return ball.getHeight();
     }
 }

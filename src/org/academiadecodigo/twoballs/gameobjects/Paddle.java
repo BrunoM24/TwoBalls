@@ -13,8 +13,6 @@ import java.util.ArrayList;
  */
 public class Paddle extends GameObject implements Movable {
 
-    private Picture paddle;
-
     private int direction = 0;
 
     private int speed = 4;
@@ -30,8 +28,8 @@ public class Paddle extends GameObject implements Movable {
             posX -= 4;
         }
 
-        paddle = new Picture(posX, posY, "assets/" + paddleColor + "Paddle.png");
-        paddle.draw();
+        shape = new Picture(posX, posY, "assets/" + paddleColor + "Paddle.png");
+        shape.draw();
 
         this.stageBoundaries = stageBoundaries;
     }
@@ -48,7 +46,7 @@ public class Paddle extends GameObject implements Movable {
 
         checkBoundaries();
 
-        paddle.translate(0, deltaY * delta);
+        ((Picture) shape).translate(0, deltaY * delta);
     }
 
     private void checkBoundaries() {
@@ -57,35 +55,5 @@ public class Paddle extends GameObject implements Movable {
 
             deltaY *= -1;
         }
-    }
-
-    @Override
-    public Shape getShape() {
-
-        return paddle;
-    }
-
-    @Override
-    public int getX() {
-
-        return paddle.getX();
-    }
-
-    @Override
-    public int getY() {
-
-        return paddle.getY();
-    }
-
-    @Override
-    public int getWidth() {
-
-        return paddle.getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-
-        return paddle.getHeight();
     }
 }

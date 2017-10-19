@@ -81,6 +81,10 @@ public class CollisionDetector {
         if(object instanceof Ball) {
 
             ((Ball) object).changeX();//TODO Add timer to prevent multiple changes in 1 frame
+            //if touched on top || if touched on bottom
+                //flip y
+            //if touched on left || if touched on right
+                //flip x
         }
     }
 }

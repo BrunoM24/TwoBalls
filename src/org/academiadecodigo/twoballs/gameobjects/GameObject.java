@@ -7,13 +7,30 @@ import org.academiadecodigo.simplegraphics.graphics.Shape;
  */
 public abstract class GameObject {
 
-    public abstract int getX();
+    protected Shape shape;
 
-    public abstract int getY();
+    public int getX() {
 
-    public abstract int getWidth();
+        return shape.getX();
+    }
 
-    public abstract int getHeight();
+    public int getY() {
 
-    public abstract Shape getShape();
+        return shape.getY();
+    }
+
+    public int getWidth() {
+
+        return shape.getWidth();
+    }
+
+    public int getHeight() {
+
+        return shape.getHeight();
+    }
+
+    public Shape getShape() {
+
+        return shape;
+    }
 }
