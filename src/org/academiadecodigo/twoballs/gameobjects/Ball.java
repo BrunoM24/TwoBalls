@@ -100,8 +100,13 @@ public class Ball extends GameObject implements Movable {
         return true;
     }
 
-    public int getDirectionX() {
+    public void touchUp() {
 
+        //se vieres d baixo
+        //s vieres d cima
+    }
+
+    public int getDirectionX() {
         return direction.x;
     }
 
