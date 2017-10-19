@@ -82,7 +82,7 @@ public class CollisionDetector {
 
         if (object instanceof Ball) {
 
-            ((Ball) object).changeX();//TODO Add timer to prevent multiple changes in 1 frame
+            //((Ball) object).flipX();//TODO Add timer to prevent multiple changes in 1 frame
             //if touched on top || if touched on bottom
             //flip y
             //if touched on left || if touched on right
@@ -104,13 +104,21 @@ public class CollisionDetector {
             boolean touchUp = (object.getY() + object.getHeight() >= objectB.getY()) && (ballCenterLine < (objectB.getY() + (1f / 3f) * objectB.getHeight()));
             boolean touchDown = (object.getY() <= objectB.getY() + objectB.getHeight()) && (ballCenterLine > (objectB.getY() + (2f / 3f) * objectB.getHeight()));
             ;
+            ((Ball) object).flipX(false);
 
             if (touchUp) {
+                if (((Ball) object).getDirectionY() > 0) {
+                    ((Ball) object).flipY(true);
+                }
                 countUp++;
                 System.out.println("touching up " + countUp);
             }
 
             if (touchDown) {
+                if (((Ball) object).getDirectionY() < 0) {
+                    ((Ball) object).flipY(true);
+                }
+
                 countDown++;
                 System.out.println("touching down baby..hmmm " + countDown);
             }
@@ -123,7 +131,7 @@ public class CollisionDetector {
         }
     }
 
-    public float paddleHeightDivision(int divisionNumber, GameObject object) {
+    private float paddleHeightDivision(int divisionNumber, GameObject object) {
         return (object.getY() + (divisionNumber / 3f) * object.getHeight());
     }
 
