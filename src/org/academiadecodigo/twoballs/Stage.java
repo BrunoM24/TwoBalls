@@ -57,8 +57,6 @@ public class Stage {
 
             }
         }
-
-        //gameObjects.add(ObjectFactory.getNewBrick(200, 200));
     }
 
     public void run(float delta) {
@@ -75,7 +73,8 @@ public class Stage {
                 ((Movable) object).move(delta);
             }
 
-            // object.checkCollision(shapesOnTop(object));
+            //TODO Check only balls?
+            //Powerup extends ball
             collisionDetector.checkCollision(gameObjects, object);
         }
     }
