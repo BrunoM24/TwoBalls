@@ -15,6 +15,8 @@ import java.util.Set;
  */
 public class CollisionDetector {
 
+    private Collider collider = new Collider();
+
     private List<Shape> shapesOnTop(Set<GameObject> gameObjects, GameObject a) {
 
         List<Shape> shapes = new ArrayList<>();
@@ -75,7 +77,10 @@ public class CollisionDetector {
                     continue;
                 }
 
-                collide((Ball) gameObject, objectB);
+                if (objectB instanceof Paddle) {
+
+                    collider.collide((Ball) gameObject, (Paddle) objectB);
+                }
             }
         }
     }

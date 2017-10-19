@@ -6,6 +6,7 @@ import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.manage.CollisionDetector;
 import org.academiadecodigo.twoballs.manage.ObjectFactory;
+import org.academiadecodigo.twoballs.manage.ScoreManager;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -71,21 +72,12 @@ public class Stage {
 
     public void run(float delta) {
 
-        //TODO: kill bricks
-        //kill bricks
-        //spawn powers if any
-        //update objects
-
         for(GameObject object : gameObjects) {
 
             if(object instanceof Movable) {
 
                 ((Movable) object).move(delta);
             }
-
-            //TODO Check only balls?
-            //Powerup extends ball
-            //collisionDetector.checkCollision(gameObjects, object);
         }
 
         collisionDetector.checkCollision(gameObjects);

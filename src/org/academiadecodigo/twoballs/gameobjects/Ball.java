@@ -22,7 +22,7 @@ public class Ball extends GameObject implements Movable {
     private long lastChanged;
 
     //TODO IF RUBBERBANDING HAPPENS, CHANGE IT HERE
-    private int timeToBounce = 250;
+    private int timeToBounce = 300;
 
     public Ball(int x, int y) {
 
