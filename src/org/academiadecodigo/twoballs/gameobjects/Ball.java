@@ -49,22 +49,22 @@ public class Ball extends GameObject implements Movable {
 
     private void checkBoundaries() {
 
-        if(getX() + dx < GameScreen.getX() || getX() + getWidth() + dx > GameScreen.getWidth() + GameScreen.getX()) {
+        if (getX() + dx < GameScreen.getX() || getX() + getWidth() + dx > GameScreen.getWidth() + GameScreen.getX()) {
 
             dx *= -1;
-            changeX(true);
+            flipX(true);
         }
 
-        if(getY() + dy < GameScreen.getY() || getY() + getHeight() + dy > GameScreen.getHeight() + GameScreen.getY()) {
+        if (getY() + dy < GameScreen.getY() || getY() + getHeight() + dy > GameScreen.getHeight() + GameScreen.getY()) {
 
             dy *= -1;
-            changeY(true);
+            flipY(true);
         }
     }
 
-    public void changeX(boolean force) {
+    public void flipX(boolean force) {
 
-        if(!canBounce() && !force) {
+        if (!canBounce() && !force) {
 
             return;
         }
@@ -73,9 +73,9 @@ public class Ball extends GameObject implements Movable {
         speed.x = calcSpeed();
     }
 
-    public void changeY(boolean force) {
+    public void flipY(boolean force) {
 
-        if(!canBounce() && !force) {
+        if (!canBounce() && !force) {
 
             return;
         }
@@ -91,7 +91,7 @@ public class Ball extends GameObject implements Movable {
 
     private boolean canBounce() {
 
-        if(System.currentTimeMillis() - lastChanged < timeToBounce) {
+        if (System.currentTimeMillis() - lastChanged < timeToBounce) {
 
             return false;
         }
@@ -100,8 +100,17 @@ public class Ball extends GameObject implements Movable {
         return true;
     }
 
-    public void collideLeft() {
+    public void touchUp() {
 
+        //se vieres d baixo
+        //s vieres d cima
+    }
 
+    public int getDirectionX() {
+        return direction.x;
+    }
+
+    public int getDirectionY() {
+        return direction.y;
     }
 }
