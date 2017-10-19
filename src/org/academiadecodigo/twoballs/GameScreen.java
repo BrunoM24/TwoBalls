@@ -11,12 +11,12 @@ public class GameScreen {
 
     public static int getX() {
 
-        return component().getX();
+        return component().getX() + Stage.PADDING;
     }
 
     public static int getY() {
 
-        return component().getY();
+        return component().getY() + Stage.PADDING;
     }
 
     public static int getWidth() {

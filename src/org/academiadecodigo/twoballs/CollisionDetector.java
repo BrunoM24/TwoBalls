@@ -1,6 +1,5 @@
 package org.academiadecodigo.twoballs;
 
-import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.graphics.Shape;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
@@ -14,16 +13,6 @@ import java.util.Set;
  */
 public class CollisionDetector {
 
-    private ArrayList<Shape> shapesOnTop(GameObject object) {
-
-        return Canvas.getInstance().getShapesInArea(object.getX(), object.getY(), object.getX() + object.getWidth(), object.getY() + object.getHeight());
-    }
-
-    private List<Shape> isTouched(Set<GameObject> gameObjects, GameObject areaObject) {
-
-        return null;
-    }
-
     private List<Shape> isTouching(Set<GameObject> gameObjects, GameObject areaObject) {
 
         List<Shape> list = new ArrayList<>();
@@ -35,6 +24,7 @@ public class CollisionDetector {
                 continue;
             }
 
+            //TODO Increase the area a bit to include FUTURE TOUCH
             // TODO  isTouching conditions still need to be tested
             boolean abTouchX = (areaObject.getX() >= objectB.getX() && areaObject.getX() <= objectB.getX() + objectB.getWidth()) || ((areaObject.getX() + areaObject.getWidth() >= objectB.getX()) && (areaObject.getX() + areaObject.getWidth() <= objectB.getX() + objectB.getWidth()));
 
@@ -82,9 +72,9 @@ public class CollisionDetector {
 
             ((Ball) object).changeX();//TODO Add timer to prevent multiple changes in 1 frame
             //if touched on top || if touched on bottom
-                //flip y
+            //flip y
             //if touched on left || if touched on right
-                //flip x
+            //flip x
         }
     }
 }

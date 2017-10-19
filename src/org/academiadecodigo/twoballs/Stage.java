@@ -38,11 +38,23 @@ public class Stage {
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
 
-        int numberOfBalls = 5;
+        int numberOfBalls = 3;
 
-        for(int i = 0; i < numberOfBalls; i++) {
+        for(int i = 1; i <= numberOfBalls; i++) {
 
-            gameObjects.add(ObjectFactory.getNewBall());
+            gameObjects.add(ObjectFactory.getNewBall(100 * i, 100 * i));
+        }
+
+        //TODO SPAWN BRICKS
+        int xRange = 1;
+        int yRange = 1;
+
+        for(int y = 0; y < yRange; y++) {
+
+            for(int x = 0; x < xRange; x++) {
+
+
+            }
         }
 
         //gameObjects.add(ObjectFactory.getNewBrick(200, 200));
