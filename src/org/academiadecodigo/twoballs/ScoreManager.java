@@ -14,18 +14,16 @@ public class ScoreManager {
 
     public void draw() {
 
-        tP1Score = new Text(50, 40, score[1] + "");
-        tP2Score = new Text(GameScreen.getWidth() - 100, 40, score[2] + "");
-        System.out.println("Width: " + tP1Score.getWidth() + " Height: " + tP1Score.getHeight());
+        tP1Score = new Text(70, 40, score[1] + "");
+        tP2Score = new Text(GameScreen.getWidth() - 70, 40, score[2] + "");
         tP1Score.grow(5, 10);
         tP2Score.grow(5, 10);
-        System.out.println("Width: " + tP1Score.getWidth() + " Height: " + tP1Score.getHeight());
         tP1Score.draw();
         tP2Score.draw();
     }
 
 
-    public void setScore(int player, int points) {
+    public void increasePoints(int player, int points) {
 
         score[player] += points;
         Text text;
@@ -39,9 +37,7 @@ public class ScoreManager {
         int textSize = text.getText().length();
         text.setText(Integer.toString(score[player]));
         if (textSize != text.getText().length()) {
-            System.out.println(text.getText().length());
-            text.grow(5 * text.getText().length(), 0);
-            System.out.println("Width: " + tP1Score.getWidth() + " Height: " + tP1Score.getHeight());
+            text.grow(5, 0);
         }
     }
 

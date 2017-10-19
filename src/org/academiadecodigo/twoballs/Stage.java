@@ -34,6 +34,9 @@ public class Stage {
         this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
 
         bkgRectangle.draw();
+
+        scoreManager = new ScoreManager();
+        scoreManager.draw();
     }
 
     public void initializeObjects() {
@@ -60,8 +63,6 @@ public class Stage {
             }
         }
 
-        scoreManager = new ScoreManager();
-        scoreManager.draw();
         //gameObjects.add(ObjectFactory.getNewBrick(200, 200));
     }
 
@@ -115,13 +116,11 @@ public class Stage {
         if (key == P1_DOWN || key == P1_UP) {
 
             player1.updateDirection(0);
-            scoreManager.setScore(1, 5);
         }
 
         if (key == P2_DOWN || key == P2_UP) {
 
             player2.updateDirection(0);
-            scoreManager.setScore(2, 5);
         }
     }
 }
