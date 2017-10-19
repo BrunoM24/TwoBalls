@@ -1,5 +1,4 @@
 TODO:
-    CREATE NEW BRICK(objFactory)
     keyboard
     Powerup extends ball
 
@@ -14,7 +13,3 @@ IDEIAS:
         New Balls
         speed up/slow down
 
-DONE:
-    - Added MIN_SPEED, MAX_SPEED
-    - ObjectFActory removed bounds need
-    - Stage, added skeleton for spawning bricks
