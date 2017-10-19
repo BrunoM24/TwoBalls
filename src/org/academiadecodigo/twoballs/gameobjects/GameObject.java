@@ -33,4 +33,10 @@ public abstract class GameObject {
 
         return shape;
     }
+
+    @Override
+    public String toString() {
+
+        return getClass().getSimpleName() + ": {x=" + getX() + ", y=" + getY() + ", w=" + getWidth() + ", h=" + getHeight() + "}";
+    }
 }

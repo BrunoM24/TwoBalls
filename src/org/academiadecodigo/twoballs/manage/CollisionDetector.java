@@ -79,7 +79,8 @@ public class CollisionDetector {
 
                 if(objectB instanceof Paddle) {
 
-                    collider.collide((Ball) gameObject, (Paddle) objectB);
+                    collide((Ball) gameObject, (Paddle) objectB);
+                    //collider.collide((Ball) gameObject, (Paddle) objectB);
                 }
                 else if(objectB instanceof Ball) {
 
@@ -87,5 +88,23 @@ public class CollisionDetector {
                 }
             }
         }
+    }
+
+    private void collide(Ball ball, Paddle paddle) {
+
+        //System.out.println(ball + "_____" + paddle);
+
+        //if on the left side of the paddle
+        int buffer = 2;
+        int x = ball.getX();
+        int rightX = x + ball.getWidth();
+        int y = ball.getY();
+        int rightY = y + ball.getHeight();
+
+        boolean left = rightX + buffer <= paddle.getX() - buffer;
+        boolean down = x + buffer <= paddle.getY();
+        boolean up = y >= paddle.getY() + paddle.getHeight();
+
+        System.out.println(left);
     }
 }

@@ -1,6 +1,7 @@
 package org.academiadecodigo.twoballs;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
@@ -47,11 +48,11 @@ public class Stage {
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
 
-        int numberOfBalls = 3;
+        int numberOfBalls = 1;
 
         for(int i = 1; i <= numberOfBalls; i++) {
 
-            gameObjects.add(ObjectFactory.getNewBall(150, 150));
+            gameObjects.add(ObjectFactory.getNewBall(250, 250, -1, 0));
         }
 
         //TODO SPAWN BRICKS
