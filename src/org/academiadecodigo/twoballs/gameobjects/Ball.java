@@ -52,19 +52,19 @@ public class Ball extends GameObject implements Movable {
         if(getX() + dx < GameScreen.getX() || getX() + getWidth() + dx > GameScreen.getWidth() + GameScreen.getX()) {
 
             dx *= -1;
-            changeX();
+            changeX(true);
         }
 
         if(getY() + dy < GameScreen.getY() || getY() + getHeight() + dy > GameScreen.getHeight() + GameScreen.getY()) {
 
             dy *= -1;
-            changeY();
+            changeY(true);
         }
     }
 
-    public void changeX() {
+    public void changeX(boolean force) {
 
-        if(!canBounce()) {
+        if(!canBounce() && !force) {
 
             return;
         }
@@ -73,9 +73,9 @@ public class Ball extends GameObject implements Movable {
         speed.x = calcSpeed();
     }
 
-    public void changeY() {
+    public void changeY(boolean force) {
 
-        if(!canBounce()) {
+        if(!canBounce() && !force) {
 
             return;
         }
