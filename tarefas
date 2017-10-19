@@ -4,6 +4,7 @@ TODO:
     score
     keyboard
     spawn balls with paddles
+    Powerup extends ball
 
     FIX:
         Collision

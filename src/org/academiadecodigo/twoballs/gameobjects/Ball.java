@@ -22,7 +22,7 @@ public class Ball extends GameObject implements Movable {
     private long lastChanged;
 
     //TODO IF RUBBERBANDING HAPPENS, CHANGE IT HERE
-    private int timeToBounce = 250;
+    private int timeToBounce = 300;
 
     public Ball(int x, int y) {
 
@@ -49,22 +49,22 @@ public class Ball extends GameObject implements Movable {
 
     private void checkBoundaries() {
 
-        if(getX() + dx < GameScreen.getX() || getX() + getWidth() + dx > GameScreen.getWidth() + GameScreen.getX()) {
+        if (getX() + dx < GameScreen.getX() || getX() + getWidth() + dx > GameScreen.getWidth() + GameScreen.getX()) {
 
             dx *= -1;
-            changeX();
+            flipX(true);
         }
 
-        if(getY() + dy < GameScreen.getY() || getY() + getHeight() + dy > GameScreen.getHeight() + GameScreen.getY()) {
+        if (getY() + dy < GameScreen.getY() || getY() + getHeight() + dy > GameScreen.getHeight() + GameScreen.getY()) {
 
             dy *= -1;
-            changeY();
+            flipY(true);
         }
     }
 
-    public void changeX() {
+    public void flipX(boolean force) {
 
-        if(!canBounce()) {
+        if (!canBounce() && !force) {
 
             return;
         }
@@ -73,9 +73,9 @@ public class Ball extends GameObject implements Movable {
         speed.x = calcSpeed();
     }
 
-    public void changeY() {
+    public void flipY(boolean force) {
 
-        if(!canBounce()) {
+        if (!canBounce() && !force) {
 
             return;
         }
@@ -91,12 +91,26 @@ public class Ball extends GameObject implements Movable {
 
     private boolean canBounce() {
 
-        if(System.currentTimeMillis() - lastChanged < timeToBounce) {
+        if (System.currentTimeMillis() - lastChanged < timeToBounce) {
 
             return false;
         }
 
         lastChanged = System.currentTimeMillis();
         return true;
+    }
+
+    public void touchUp() {
+
+        //se vieres d baixo
+        //s vieres d cima
+    }
+
+    public int getDirectionX() {
+        return direction.x;
+    }
+
+    public int getDirectionY() {
+        return direction.y;
     }
 }

@@ -4,11 +4,13 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
-
-import static org.academiadecodigo.twoballs.input.KeyboardManager.*;
+import org.academiadecodigo.twoballs.manage.CollisionDetector;
+import org.academiadecodigo.twoballs.manage.ObjectFactory;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.academiadecodigo.twoballs.input.KeyboardManager.*;
 
 /**
  * Created by codecadet on 16/10/17.
@@ -43,57 +45,49 @@ public class Stage {
 
         int numberOfBalls = 3;
 
-        for (int i = 1; i <= numberOfBalls; i++) {
+        for(int i = 1; i <= numberOfBalls; i++) {
 
-            gameObjects.add(ObjectFactory.getNewBall(100 * i, 100 * i));
+            gameObjects.add(ObjectFactory.getNewBall(150, 150));
         }
 
         //TODO SPAWN BRICKS
         int xRange = 5;
         int yRange = 7;
 
-        for (int y = 0; y < yRange; y++) {
+        for(int y = 0; y < yRange; y++) {
 
-            for (int x = 0; x < xRange; x++) {
+            for(int x = 0; x < xRange; x++) {
 
-
+                //x, y
+                //0 - 4, 0 - 6
             }
         }
 
-        scoreManager = new ScoreManager();
-        scoreManager.draw();
         //gameObjects.add(ObjectFactory.getNewBrick(200, 200));
     }
 
     public void run(float delta) {
 
-        //TODO: kill bricks
-        //kill bricks
-        //spawn powers if any
-        //update objects
+        for(GameObject object : gameObjects) {
 
-        for (GameObject object : gameObjects) {
-
-            if (object instanceof Movable) {
+            if(object instanceof Movable) {
 
                 ((Movable) object).move(delta);
             }
-
-            //TODO Check only balls?
-            //Powerup extends ball
-            collisionDetector.checkCollision(gameObjects, object);
         }
+
+        collisionDetector.checkCollision(gameObjects);
     }
 
 
     void keyPressed(int key) {
 
-        if (handleKey(player1, key, P1_UP, P1_DOWN)) {
+        if(handleKey(player1, key, P1_UP, P1_DOWN)) {
 
             return;
         }
 
-        if (handleKey(player2, key, P2_UP, P2_DOWN)) {
+        if(handleKey(player2, key, P2_UP, P2_DOWN)) {
 
             return;
         }
@@ -101,7 +95,7 @@ public class Stage {
 
     private boolean handleKey(Paddle player, int key, int up, int down) {
 
-        if (key == down || key == up) {
+        if(key == down || key == up) {
 
             player.updateDirection(key == up ? -1 : 1);
             return true;
@@ -115,13 +109,11 @@ public class Stage {
         if (key == P1_DOWN || key == P1_UP) {
 
             player1.updateDirection(0);
-            scoreManager.setScore(1, 5);
         }
 
-        if (key == P2_DOWN || key == P2_UP) {
+        if(key == P2_DOWN || key == P2_UP) {
 
             player2.updateDirection(0);
-            scoreManager.setScore(2, 5);
         }
     }
 }
