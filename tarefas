@@ -14,8 +14,3 @@ IDEIAS:
         swap Paddle controls UP=DOWN
         New Balls
         speed up/slow down
-
-DONE: EXPLAIN:
-    - Added a shape to all gameObjects
-    - Polymorphism on constructor to use pictures over shape
-    - Removed the need for overriding getters

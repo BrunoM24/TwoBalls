@@ -1,5 +1,6 @@
 package org.academiadecodigo.twoballs;
 
+import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.twoballs.input.KeyboardManager;
 
 /**
@@ -23,6 +24,7 @@ public class Game {
 
         init();
     }
+
 
     private void init() {
 

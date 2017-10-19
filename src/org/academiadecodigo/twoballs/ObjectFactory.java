@@ -10,28 +10,24 @@ import org.academiadecodigo.twoballs.gameobjects.Paddle;
  */
 public class ObjectFactory {
 
-    public static Ball getNewBall(Rectangle bounds) {
+    public static Ball getNewBall(int x, int y) {
 
-        return new Ball(bounds);
-    }
-    public static Ball getNewBall(Rectangle bounds, int x, int y) {
-
-        return new Ball(bounds, x, y);
+        return new Ball(x, y);
     }
 
-    public static Paddle getLeftPaddle(Rectangle bounds, String color) {
+    public static Paddle getLeftPaddle(String color) {
 
-        return getNewPaddle(bounds, color, Stage.PADDING, bounds.getHeight() / 2);
+        return getNewPaddle(color, Stage.PADDING, GameScreen.getHeight() / 2);
     }
 
-    public static Paddle getRightPaddle(Rectangle bounds, String color) {
+    public static Paddle getRightPaddle(String color) {
 
-        return getNewPaddle(bounds, color, bounds.getWidth() - Stage.PADDING, bounds.getHeight() / 2);
+        return getNewPaddle(color, GameScreen.getWidth() - Stage.PADDING, GameScreen.getHeight() / 2);
     }
 
-    private static Paddle getNewPaddle(Rectangle bounds, String color, int x, int y) {
+    private static Paddle getNewPaddle(String color, int x, int y) {
 
-        return new Paddle(bounds, color, x, y);
+        return new Paddle(color, x, y);
     }
 
     public static Brick getNewBrick(int x, int y) {

@@ -35,14 +35,14 @@ public class Stage {
 
     public void initializeObjects() {
 
-        gameObjects.add(player1 = ObjectFactory.getLeftPaddle(bkgRectangle, "blue"));
-        gameObjects.add(player2 = ObjectFactory.getRightPaddle(bkgRectangle, "red"));
+        gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
+        gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
 
-        int numberOfBalls = 1;
+        int numberOfBalls = 5;
 
         for(int i = 0; i < numberOfBalls; i++) {
 
-            gameObjects.add(ObjectFactory.getNewBall(bkgRectangle));
+            gameObjects.add(ObjectFactory.getNewBall());
         }
 
         //gameObjects.add(ObjectFactory.getNewBrick(200, 200));

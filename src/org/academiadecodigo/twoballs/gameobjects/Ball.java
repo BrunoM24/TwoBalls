@@ -1,8 +1,9 @@
 package org.academiadecodigo.twoballs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.simplegraphics.graphics.Shape;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.twoballs.Game;
+import org.academiadecodigo.twoballs.GameScreen;
 import org.academiadecodigo.twoballs.Stage;
 import org.academiadecodigo.twoballs.gameobjects.move.Direction;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
@@ -13,33 +14,22 @@ import org.academiadecodigo.twoballs.gameobjects.move.Speed;
  */
 public class Ball extends GameObject implements Movable {
 
-    private Rectangle stageBoundaries;
-
     private Speed speed = new Speed();
 
     private Direction direction = new Direction();
 
     private int dx, dy;
 
-    public Ball(Rectangle bounds) {
-
-        this(bounds, (int) (Math.random() * (bounds.getWidth() / 2) + Stage.PADDING * 2), (int) (Math.random() * (bounds.getHeight() / 2) + Stage.PADDING * 2));
-    }
-
-    public Ball(Rectangle backgroundImage, int x, int y) {
+    public Ball(int x, int y) {
 
         shape = new Picture(x, y, "assets/ball.png");
         shape.draw();
 
-        stageBoundaries = backgroundImage;
-
         speed.x = calcSpeed();
         speed.y = calcSpeed();
 
-        direction.x = -1;
-        //TODO Remove this
-        // direction.x = Math.random() > 0.5f ? 1 : -1;
-        //direction.y = Math.random() > 0.5f ? 1 : -1;
+        direction.x = Math.random() > 0.5f ? 1 : -1;
+        direction.y = Math.random() > 0.5f ? 1 : -1;
     }
 
     @Override
@@ -55,13 +45,13 @@ public class Ball extends GameObject implements Movable {
 
     private void checkBoundaries() {
 
-        if(getX() + dx < stageBoundaries.getX() || getX() + getWidth() + dx > stageBoundaries.getWidth() + stageBoundaries.getX()) {
+        if(getX() + dx < GameScreen.getX() || getX() + getWidth() + dx > GameScreen.getWidth() + GameScreen.getX()) {
 
             dx *= -1;
             changeX();
         }
 
-        if(getY() + dy < stageBoundaries.getY() || getY() + getHeight() + dy > stageBoundaries.getHeight() + stageBoundaries.getY()) {
+        if(getY() + dy < GameScreen.getY() || getY() + getHeight() + dy > GameScreen.getHeight() + GameScreen.getY()) {
 
             dy *= -1;
             changeY();
@@ -82,6 +72,6 @@ public class Ball extends GameObject implements Movable {
 
     public int calcSpeed() {
 
-        return (int) ((Math.random() * 3) + 1);
+        return (int) ((Math.random() * 5) + 1);
     }
 }
