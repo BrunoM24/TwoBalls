@@ -30,26 +30,25 @@ public class CollisionDetector {
 
         GameObject object = objsOnTop.get(0);
 
-
         if(!ball.canCollideWith(object)) {
 
             return;
         }
 
         ball.setLastObjectTouched(object);
+
         if(object instanceof Ball) {
 
             collider.ballOnBall(ball, (Ball) object);
-            ((Ball) object).setLastObjectTouched(ball);
+            //((Ball) object).setLastObjectTouched(ball);
         }
         else if(object instanceof Paddle) {
 
-            collider.updateBall(buffer, ball, object);
             collider.ballOnPaddle(ball, (Paddle) object);
         }
         else if(object instanceof Brick) {
 
-            collider.updateBall(buffer, ball, object);
+            //collider.updateBall(buffer, ball, object);
 
             ((Brick) object).damageBrick(0);
             //((Brick) object).damageBrick(ball.getLastPaddleTouched() == null ? 0 : ball.getLastPaddleTouched().getPaddleId());

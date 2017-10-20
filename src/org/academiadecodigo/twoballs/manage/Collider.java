@@ -11,6 +11,13 @@ public class Collider {
 
     void updateBall(int buffer, Ball ball, GameObject object) {
 
+        checkCenterBallPosition(buffer, ball, object);
+
+
+    }
+
+    private void checkCenterBallPosition(int buffer, Ball ball, GameObject object) {    //SEEMS FINE??
+
         int ballCenterX = ball.getX() + ball.getWidth() / 2;
         int ballCenterY = ball.getY() + ball.getHeight() / 2;
 
@@ -21,17 +28,15 @@ public class Collider {
 
             ball.flipY();
             ball.translate(0, ball.getDirectionY() * buffer);
-            //return;
         }
-
-        if(sameXAxis) {
+        else if(sameXAxis) {
 
             ball.flipX();
             ball.translate(ball.getDirectionX() * buffer, 0);
         }
     }
 
-    void ballOnPaddle(Ball ball, Paddle paddle) {
+    void ballOnPaddle(Ball ball, Paddle paddle) {   //WORKS FINE
 
         float ballCenterLine = ball.getY() + (1f / 2f) * ball.getHeight();
         float firstDivision = paddleHeightDivision(1, paddle);
@@ -51,6 +56,8 @@ public class Collider {
 
             ball.getDirection().y = 1;
         }
+
+        ball.flipX();
     }
 
     private float paddleHeightDivision(int divisionNumber, GameObject object) {
@@ -58,10 +65,7 @@ public class Collider {
         return (object.getY() + (divisionNumber / 3f) * object.getHeight());
     }
 
-    public void ballOnBall(Ball ballA, Ball ballB) {
-
-
-        //TODO GOOD WORK EDU
+    public void ballOnBall(Ball ballA, Ball ballB) {        //SEEMS TO BE WORKING FINE?
 
         boolean ballA_TouchingFromTop = (ballA.getY() + ballA.getHeight() >= ballB.getY());// || (ballA.getY() <= ballB.getY() + ballB.getHeight());
         boolean ballA_TouchingFromLeft = (ballA.getX() + ballA.getWidth() >= ballB.getX());// || (ballA.getX() <= ballB.getX() + ballB.getWidth());
