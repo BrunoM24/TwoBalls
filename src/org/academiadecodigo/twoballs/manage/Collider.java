@@ -17,14 +17,14 @@ public class Collider {
         boolean touchedUp = ball.getY() + ball.getHeight() < object.getY();
         boolean touchedDown = ball.getY() + ball.getHeight() < object.getY();
 
-        if(touchedLeft || touchedRight) {
+        if (touchedLeft || touchedRight) {
 
             ball.flipX();
             ball.translate(ball.getDirectionX() * buffer, 0);
             return;
         }
 
-        if(touchedDown || touchedUp) {
+        if (touchedDown || touchedUp) {
 
             ball.flipY();
             ball.translate(0, ball.getDirectionY() * buffer);
@@ -39,15 +39,16 @@ public class Collider {
 
         //boolean touchCenter = (ballCenterLine >= firstDivision && ballCenterLine <= secondDivision);
         boolean touchUp = (ball.getY() + ball.getHeight() >= paddle.getY()) && (ballCenterLine < firstDivision);
-        boolean touchDown = (ball.getY() <= paddle.getY() + paddle.getHeight()) && (ballCenterLine > (paddle.getY() + secondDivision));
+        boolean touchDown = (ball.getY() <= paddle.getY() + paddle.getHeight()) && (ballCenterLine > secondDivision);
 
 
-        if(touchUp && ball.getDirectionY() >= 0) {
+
+        if (touchUp && ball.getDirectionY() >= 0) {
 
             ball.getDirection().y = -1;
         }
 
-        if(touchDown && ball.getDirectionY() <= 0) {
+        if (touchDown && ball.getDirectionY() <= 0) {
 
             ball.getDirection().y = 1;
         }
