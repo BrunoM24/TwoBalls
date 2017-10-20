@@ -25,6 +25,8 @@ public class Ball extends GameObject implements Movable {
 
     private long lastChanged;
 
+    private GameObject lastTouched;
+
     //TODO IF RUBBERBANDING HAPPENS, CHANGE IT HERE
     private int timeToBounce = 300;
 
@@ -44,6 +46,31 @@ public class Ball extends GameObject implements Movable {
 
         direction.x = dirX;
         direction.y = dirY;
+    }
+
+    public void touchedLeft(GameObject gObject) {
+
+        if(lastTouched == gObject) {
+
+            return;
+        }
+        //inverte X
+        flipX(false);
+    }
+
+    public void touchedRight() {
+
+        //inverte X
+    }
+
+    public void touchedDown() {
+
+        //inverte Y
+    }
+
+    public void touchedUp() {
+
+        //inverte Y
     }
 
     @Override
@@ -98,7 +125,7 @@ public class Ball extends GameObject implements Movable {
         }
     }
 
-    private void translate(float x, float y) {
+    public void translate(float x, float y) {
 
         ((Picture) shape).translate(x, y);
         bounds.setLocation(shape.getX(), shape.getY());
