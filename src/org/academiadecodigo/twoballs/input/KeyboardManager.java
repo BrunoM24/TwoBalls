@@ -4,8 +4,6 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.keyboard.VKeyboard;
 import org.academiadecodigo.twoballs.Game;
-import org.academiadecodigo.twoballs.sound.GameSound;
-import org.academiadecodigo.twoballs.sound.SoundManager;
 
 import java.awt.event.KeyEvent;
 
@@ -15,9 +13,17 @@ import java.awt.event.KeyEvent;
 public class KeyboardManager implements KeyboardHandler {
 
     public static final int P1_UP = KeyEvent.VK_W;
-    public static final int P2_UP = KeyEvent.VK_UP;
     public static final int P1_DOWN = KeyEvent.VK_S;
+    public static final int P1_FIRE = KeyEvent.VK_F;
+
+    public static final int P2_UP = KeyEvent.VK_UP;
     public static final int P2_DOWN = KeyEvent.VK_DOWN;
+    public static final int P2_FIRE = KeyEvent.VK_DIVIDE;
+
+    public static final int P3_UP = KeyEvent.VK_I;
+    public static final int P3_DOWN = KeyEvent.VK_K;
+    public static final int P3_LEFT = KeyEvent.VK_J;
+    public static final int P3_RIGHT = KeyEvent.VK_L;
 
     public static final int GAME_PAUSE = KeyEvent.VK_P;
     public static final int GAME_END = KeyEvent.VK_ESCAPE;
@@ -34,17 +40,25 @@ public class KeyboardManager implements KeyboardHandler {
 
         keyboard.listenToKey(P1_DOWN);
         keyboard.listenToKey(P1_UP);
+        keyboard.listenToKey(P1_FIRE);
 
         keyboard.listenToKey(P2_DOWN);
         keyboard.listenToKey(P2_UP);
+        keyboard.listenToKey(P2_FIRE);
 
         keyboard.listenToKey(GAME_PAUSE);
         keyboard.listenToKey(GAME_END);
+
+        keyboard.listenToKey(P3_DOWN);
+        keyboard.listenToKey(P3_UP);
+        keyboard.listenToKey(P3_RIGHT);
+        keyboard.listenToKey(P3_LEFT);
     }
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
+        System.out.println("Pressed " + keyboardEvent.getKey());
         game.keyPressed(keyboardEvent.getKey());
     }
 
@@ -57,5 +71,6 @@ public class KeyboardManager implements KeyboardHandler {
     @Override
     public void keyTyped(KeyboardEvent keyboardEvent) {
 
+        System.out.println("KeyboardManager.keyTyped");
     }
 }

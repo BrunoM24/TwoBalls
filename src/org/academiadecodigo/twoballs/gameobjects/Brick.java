@@ -15,11 +15,6 @@ import java.awt.*;
 public class Brick extends GameObject {
 
     int durability;
-    Ball ball;
-
-    private Picture[] images = new Picture[3];
-
-    int index = 0;
 
     public Brick(int x, int y, int durability) {
 
@@ -33,10 +28,11 @@ public class Brick extends GameObject {
 
         String color = "Gray";
 
-        if (durability == 2) {
+        if(durability == 2) {
 
             color = "Blue";
-        } else if (durability == 1) {
+        }
+        else if(durability == 1) {
 
             color = "Green";
         }
@@ -48,23 +44,34 @@ public class Brick extends GameObject {
 
     public void damageBrick(int paddleId) {
 
-        Canvas.getInstance().hide(shape);
+        if (paddleId == 0) {
 
+            return;
+        }
+
+        Canvas.getInstance().hide(shape);
         durability--;
 
 
-        if (durability <= -1) {
+        if(durability <= -1) {
 
             SoundManager.getInstance().playSound(GameSound.PUF);
-            ScoreManager.instance.addPoints(paddleId, ScoreManager.BRICK_POINTS);
+
+            if(paddleId == 1 || paddleId == 2) {
+
+                ScoreManager.instance.addPoints(paddleId, ScoreManager.BRICK_POINTS);
+            }
+
             kill();
             int particles = (int) (Math.random() * 3) + 3;
-            for (int i = 0; i <= particles; i++) {
+            for(int i = 0; i <= particles; i++) {
+
                 ObjectFactory.spawnParticle(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
             }
             return;
         }
 
+        SoundManager.getInstance().playSound(GameSound.PAKIN);
         shape = changeImage(getX(), getY());
     }
 }

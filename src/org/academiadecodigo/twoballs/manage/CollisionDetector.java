@@ -49,19 +49,20 @@ public class CollisionDetector {
         }
 
         ball.setLastObjectTouched(object);
+        collider.updateBall(ball, object);
+
         if(object instanceof Ball) {
 
             collider.ballOnBall(ball, (Ball) object);
-            ((Ball) object).setLastObjectTouched(ball);
         }
         else if(object instanceof Paddle) {
 
-            collider.updateBall(buffer, ball, object);
             collider.ballOnPaddle(ball, (Paddle) object);
         }
         else if(object instanceof Brick) {
 
-            collider.updateBall(buffer, ball, object);
+            collider.updateBall(ball, object);
+            //((Brick) object).damageBrick(0);
             ((Brick) object).damageBrick(ball.getLastPaddleTouched() == null ? 0 : ball.getLastPaddleTouched().getPaddleId());
         }
     }
@@ -79,7 +80,6 @@ public class CollisionDetector {
 
                 continue;
             }
-
 
             if(!ball.getBounds().intersects(objB.getX() - buffer, objB.getY() - buffer, objB.getWidth() + buffer, objB.getHeight() + buffer)) {
 

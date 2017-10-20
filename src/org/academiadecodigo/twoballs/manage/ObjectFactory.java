@@ -24,11 +24,6 @@ public class ObjectFactory {
         return new Ball(x, y, dx, dy);
     }
 
-    public static Ball getNewBall(int x, int y) {
-
-        return new Ball(x, y);
-    }
-
     public static Paddle getLeftPaddle(String color) {
 
         return getNewPaddle(color, Stage.PADDING, (GameScreen.getHeight() - 52 - Stage.PADDING) / 2, 1);
@@ -56,9 +51,9 @@ public class ObjectFactory {
 
     public static void spawnParticle(int x, int y) {
 
-        int dx = (int)(Math.random() * 3);
-        int dy = (int)(Math.random() * 3);
-        spawn(new Particle(x, y, dx - 1 , dy - 1));
+        int dx = (int) (Math.random() * 3);
+        int dy = (int) (Math.random() * 3);
+        spawn(new Particle(x, y, dx - 1, dy - 1));
     }
 
     public static void removeObject(GameObject object) {

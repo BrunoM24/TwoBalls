@@ -20,13 +20,12 @@ public class SoundManager {
     public SoundManager init() {
 
         instance = this;
-        for(GameSound sound : GameSound.values()) {
+        for (GameSound sound : GameSound.values()) {
 
             try {
 
                 sounds.put(sound, new Sound(sound.getPath()));
-            }
-            catch(IOException e) {
+            } catch (IOException e) {
 
                 sounds.put(sound, null);
                 System.out.println("Sound not found " + sound.getPath());
@@ -38,9 +37,9 @@ public class SoundManager {
 
     public void dispose() {
 
-        for(GameSound sound : sounds.keySet()) {
+        for (GameSound sound : sounds.keySet()) {
 
-            if(sounds.get(sound) == null) {
+            if (sounds.get(sound) == null) {
 
                 continue;
             }
@@ -53,14 +52,14 @@ public class SoundManager {
 
         Sound s = sounds.get(gameSound);
 
-        if(s == null) {
+        if (s == null) {
 
             System.out.println("Sound not found " + gameSound);
             return;
         }
 
 
-        if(s.isPlaying()) {
+        if (s.isPlaying()) {
 
             return;
         }
