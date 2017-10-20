@@ -1,7 +1,8 @@
 package org.academiadecodigo.twoballs;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.academiadecodigo.twoballs.input.KeyboardManager;
+import org.academiadecodigo.twoballs.sound.GameSound;
+import org.academiadecodigo.twoballs.sound.SoundManager;
 
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
@@ -14,27 +15,31 @@ public class Game {
 
     double delta = 0.0f;
 
+    boolean running = true;
+
     private boolean gamePaused = true;
 
     private Stage stage;
 
     private KeyboardManager keyboardManager;
 
+    private SoundManager soundManager;
+
     private PauseText pauseText;
 
+    private int frames;
 
     Game() {
 
         init();
     }
 
-
     private void init() {
 
         int width = 960;
         int height = 544;
 
-        stage = new Stage(width, height);
+        stage = new Stage(this, width, height);
 
         stage.initializeObjects();
 
@@ -42,35 +47,16 @@ public class Game {
 
         pauseText = new PauseText();
 
+        soundManager = new SoundManager().init();
     }
 
-    private int frames;
-    public void start() {
-
+    void start() {
 
         long timer = System.currentTimeMillis();
-        /*
 
-        while(true) {
+        SoundManager.getInstance().playSound(GameSound.BKG_LOOP);
 
-            if((delta = System.currentTimeMillis() - lastTime) > IDEAL_DELTA) {
-
-                delta /= 10;
-
-                run();
-                lastTime = System.currentTimeMillis();
-            }
-
-            if(System.currentTimeMillis() - timer > 1000) {
-
-                timer += 1000;
-                PauseText.fpsText.setText("" + frames);
-                System.out.println("FPS: " + frames + ", " + System.currentTimeMillis() + ", " + delta);
-                frames = 0;
-            }
-        }
-*/
-        while(true) {
+        while(running) {
 
             long now = System.nanoTime();
 
@@ -90,29 +76,27 @@ public class Game {
                 frames = 0;
             }
         }
+
+        soundManager.dispose();
+
+        System.exit(0);
     }
 
     private void run() {
 
-
-
-
         //Executes this 60FPS
         while(delta >= 1) {
-
 
             //run x 60FPS
             if(gamePaused) {
 
                 delta = 0;
-                //TODO SHOW PAUSED TEXT
-
                 pauseText.draw();
+            }
+            else {
 
-            } else {
                 pauseText.delete();
             }
-
 
             if(delta > 3) {
 
@@ -125,13 +109,18 @@ public class Game {
         }
     }
 
-
     public void keyPressed(int key) {
 
         if(key == KeyboardManager.GAME_PAUSE) {
 
             gamePaused = !gamePaused;
 
+            return;
+        }
+
+        if(key == KeyboardManager.GAME_END) {
+
+            running = false;
             return;
         }
 

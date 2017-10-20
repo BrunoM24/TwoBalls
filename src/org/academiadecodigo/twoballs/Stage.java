@@ -35,7 +35,9 @@ public class Stage {
 
     ScoreManager scoreManager;
 
-    public Stage(int width, int height) {
+    private Game game;
+
+    public Stage(Game game, int width, int height) {
 
         //this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
         this.backGround = new Picture(PADDING, PADDING, "assets/background.jpg");
@@ -44,6 +46,8 @@ public class Stage {
 
         scoreManager = new ScoreManager();
         scoreManager.draw();
+
+        this.game = game;
     }
 
     public void initializeObjects() {
