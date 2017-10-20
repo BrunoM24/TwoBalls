@@ -28,11 +28,6 @@ public class Ball extends GameObject implements Movable {
 
     private Paddle lastPaddleTouched;
 
-    public Ball(int x, int y) {
-
-        this(x, y, Math.random() > 0.5f ? 1 : -1, Math.random() > 0.5f ? 1 : -1);
-    }
-
     public Ball(int x, int y, int dirX, int dirY) {
 
         shape = new Picture(x, y, "assets/ball.png");
@@ -152,24 +147,9 @@ public class Ball extends GameObject implements Movable {
     }
 
 
-    public void changeToPaddleColor() {
-        //TODO change image with according color
-    }
-
-
     public Direction getDirection() {
 
         return direction;
-    }
-
-    public int getDirectionX() {
-
-        return direction.x;
-    }
-
-    public int getDirectionY() {
-
-        return direction.y;
     }
 
     public void setLastObjectTouched(GameObject gameObject) {

@@ -78,12 +78,12 @@ public class Collider {
         boolean touchDown = (ball.getY() <= paddle.getY() + paddle.getHeight()) && (ballCenterLine > secondDivision);
 
 
-        if(touchUp && ball.getDirectionY() >= 0) {
+        if(touchUp && ball.getDirection().y >= 0) {
 
             ball.getDirection().y = -1;
         }
 
-        if(touchDown && ball.getDirectionY() <= 0) {
+        if(touchDown && ball.getDirection().y <= 0) {
 
             ball.getDirection().y = 1;
         }
@@ -102,29 +102,29 @@ public class Collider {
         boolean ballA_TouchingFromLeft = (ballA.getX() + ballA.getWidth() >= ballB.getX());// || (ballA.getX() <= ballB.getX() + ballB.getWidth());
 
 
-        if(ballA.getDirectionX() > 0 && ballB.getDirectionX() < 0 && ballA_TouchingFromLeft) {
+        if(ballA.getDirection().x > 0 && ballB.getDirection().x < 0 && ballA_TouchingFromLeft) {
             ballA.flipX();
             ballB.flipX();
         }
 
-        if(ballA.getDirectionX() < 0 && ballB.getDirectionX() < 0 && ballA_TouchingFromLeft) {
+        if(ballA.getDirection().x < 0 && ballB.getDirection().x < 0 && ballA_TouchingFromLeft) {
             ballB.flipX();
         }
 
-        if(ballA.getDirectionX() > 0 && ballB.getDirectionX() > 0 && ballA_TouchingFromLeft) {
+        if(ballA.getDirection().x > 0 && ballB.getDirection().x > 0 && ballA_TouchingFromLeft) {
             ballA.flipX();
         }
 
-        if(ballA.getDirectionY() > 0 && ballB.getDirectionY() < 0 && ballA_TouchingFromTop) {
+        if(ballA.getDirection().y > 0 && ballB.getDirection().y < 0 && ballA_TouchingFromTop) {
             ballA.flipY();
             ballB.flipY();
         }
 
-        if(ballA.getDirectionY() < 0 && ballB.getDirectionY() < 0 && ballA_TouchingFromTop) {
+        if(ballA.getDirection().y < 0 && ballB.getDirection().y < 0 && ballA_TouchingFromTop) {
             ballB.flipY();
         }
 
-        if(ballA.getDirectionY() > 0 && ballB.getDirectionY() > 0 && ballA_TouchingFromTop) {
+        if(ballA.getDirection().y > 0 && ballB.getDirection().y > 0 && ballA_TouchingFromTop) {
             ballA.flipY();
         }
     }
