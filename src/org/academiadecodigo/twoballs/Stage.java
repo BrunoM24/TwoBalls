@@ -34,7 +34,7 @@ public class Stage {
 
     ScoreManager scoreManager;
 
-    Stage(Game game, int width, int height) {
+    Stage(int width, int height) {
 
         //this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
         this.backGround = new Picture(PADDING, PADDING, "assets/background.jpg");
@@ -43,6 +43,8 @@ public class Stage {
 
         scoreManager = new ScoreManager();
         scoreManager.draw();
+
+        new ObjectFactory(this);
     }
 
     void initializeObjects() {
@@ -132,5 +134,10 @@ public class Stage {
 
             player2.updateDirection(0);
         }
+    }
+
+    public void removeObject(GameObject object) {
+
+        gameObjects.remove(object);
     }
 }

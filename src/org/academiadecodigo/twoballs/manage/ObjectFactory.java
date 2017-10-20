@@ -1,5 +1,6 @@
 package org.academiadecodigo.twoballs.manage;
 
+import org.academiadecodigo.twoballs.Game;
 import org.academiadecodigo.twoballs.GameScreen;
 import org.academiadecodigo.twoballs.Stage;
 import org.academiadecodigo.twoballs.gameobjects.*;
@@ -8,6 +9,16 @@ import org.academiadecodigo.twoballs.gameobjects.*;
  * TwoBalls Created by BrunoM24 on 16/10/2017.
  */
 public class ObjectFactory {
+
+    private static ObjectFactory instance;
+
+    private Stage stage;
+
+    public ObjectFactory(Stage stage) {
+
+        instance = this;
+        this.stage = stage;
+    }
 
     public static Ball getNewBall(int x, int y, int dx, int dy) {
 
@@ -41,5 +52,6 @@ public class ObjectFactory {
 
     public static void removeObject(GameObject object) {
 
+        instance.stage.removeObject(object);
     }
 }

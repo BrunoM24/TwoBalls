@@ -39,7 +39,7 @@ public class Game {
         int width = 960;
         int height = 544;
 
-        stage = new Stage(this, width, height);
+        stage = new Stage(width, height);
 
         stage.initializeObjects();
 
