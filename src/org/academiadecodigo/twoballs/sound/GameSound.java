@@ -7,7 +7,17 @@ public enum GameSound {
 
     BOUNCE("bounce"),
     POINTS("points"),
-    BKG_LOOP("bkg_loop");
+    BKG_LOOP("bkg_loop"),
+    GARGALHADA1("gargalhada1"),
+    GARGALHADA2("gargalhada2"),
+    GARGALHADA3("gargalhada3"),
+    DRSH1("drsh1"),
+    DRSH2("drsh2"),
+    DRSH3("drsh3"),
+    DRSH4("drsh4"),
+    DRSH5("drsh5"),
+    DRSH6("drsh6"),
+    PAKIN("pakin");
 
     private String path;
 

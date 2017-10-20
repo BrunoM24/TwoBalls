@@ -4,6 +4,8 @@ import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.manage.ObjectFactory;
 import org.academiadecodigo.twoballs.manage.ScoreManager;
+import org.academiadecodigo.twoballs.sound.GameSound;
+import org.academiadecodigo.twoballs.sound.SoundManager;
 
 import java.awt.*;
 
@@ -48,6 +50,8 @@ public class Brick extends GameObject {
 
         Canvas.getInstance().hide(shape);
 
+        if (durability >= 1)
+        SoundManager.getInstance().playSound(GameSound.PAKIN);
         durability--;
 
 
