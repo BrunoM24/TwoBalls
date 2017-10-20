@@ -63,7 +63,6 @@ public class Stage {
         int brickHeight = 64;
         int brickSpacing = 0;
 
-        /*
         int initialX = (GameScreen.getWidth() - (xRange * (brickWidth + brickSpacing))) / 2;
         for(int y = 0; y < yRange; y++) {
 
@@ -81,7 +80,7 @@ public class Stage {
 
                 gameObjects.add(ObjectFactory.getNewBrick(initialX + x * (brickWidth + brickSpacing), 26 + y * (brickHeight + brickSpacing), dur));
             }
-        }*/
+        }
     }
 
     public void run(float delta) {
