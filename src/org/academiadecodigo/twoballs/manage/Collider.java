@@ -57,4 +57,40 @@ public class Collider {
 
         return (object.getY() + (divisionNumber / 3f) * object.getHeight());
     }
+
+    public void ballOnBall(Ball ballA, Ball ballB) {
+
+
+        //TODO GOOD WORK EDU
+
+        boolean ballA_TouchingFromTop = (ballA.getY() + ballA.getHeight() >= ballB.getY());// || (ballA.getY() <= ballB.getY() + ballB.getHeight());
+        boolean ballA_TouchingFromLeft = (ballA.getX() + ballA.getWidth() >= ballB.getX());// || (ballA.getX() <= ballB.getX() + ballB.getWidth());
+
+
+        if (ballA.getDirectionX() > 0 && ballB.getDirectionX() < 0 && ballA_TouchingFromLeft) {
+            ballA.flipX();
+            ballB.flipX();
+        }
+
+        if (ballA.getDirectionX() < 0 && ballB.getDirectionX() < 0 && ballA_TouchingFromLeft) {
+            ballB.flipX();
+        }
+
+        if (ballA.getDirectionX() > 0 && ballB.getDirectionX() > 0 && ballA_TouchingFromLeft) {
+            ballA.flipX();
+        }
+
+        if (ballA.getDirectionY() > 0 && ballB.getDirectionY() < 0 && ballA_TouchingFromTop) {
+            ballA.flipY();
+            ballB.flipY();
+        }
+
+        if (ballA.getDirectionY() < 0 && ballB.getDirectionY() < 0 && ballA_TouchingFromTop) {
+            ballB.flipY();
+        }
+
+        if (ballA.getDirectionY() > 0 && ballB.getDirectionY() > 0 && ballA_TouchingFromTop) {
+            ballA.flipY();
+        }
+    }
 }
