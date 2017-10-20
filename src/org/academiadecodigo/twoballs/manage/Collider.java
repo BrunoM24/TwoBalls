@@ -67,8 +67,7 @@ public class Collider {
         //TODO GOOD WORK EDU
     }
 
-<<<<<<< Updated upstream
-=======
+
     public void collide(Ball ball, Brick brick) {
 
         boolean touchBottomOfBrick = (ball.getY() <= brick.getY() + brick.getHeight());
@@ -97,7 +96,6 @@ public class Collider {
         }
     }
 
->>>>>>> Stashed changes
     private float paddleHeightDivision(int divisionNumber, GameObject object) {
 
         return (object.getY() + (divisionNumber / 3f) * object.getHeight());
