@@ -26,19 +26,21 @@ public class Collider {
 
         //boolean touchCenter = (ballCenterLine >= firstDivision && ballCenterLine <= secondDivision);
         boolean touchUp = (ball.getY() + ball.getHeight() >= paddle.getY()) && (ballCenterLine < firstDivision);
-        boolean touchDown = (ball.getY() <= paddle.getY() + paddle.getHeight()) && (ballCenterLine > (paddle.getY() + secondDivision));
+        boolean touchDown = (ball.getY() <= paddle.getY() + paddle.getHeight()) && (ballCenterLine > secondDivision);
 
 
         ball.flipX(false);
 
         if (touchUp && ball.getDirectionY() >= 0) {
-
             ball.getDirection().y = -1;
         }
 
         if (touchDown && ball.getDirectionY() <= 0) {
-
             ball.getDirection().y = 1;
+        }
+
+        if (touchDown) {
+            System.out.println("touchdown");
         }
     }
 

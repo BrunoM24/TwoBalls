@@ -2,7 +2,6 @@ package org.academiadecodigo.twoballs;
 
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
@@ -70,13 +69,32 @@ public class Stage {
         }*/
 
         //TODO SPAWN BRICKS
-        int xRange = 7;
-        int yRange = 5;
+        int xRange = 5;
+        int yRange = 8;
         int brickWidth = 32;
         int brickHeight = 64;
         int brickSpacing = 0;//TODO
 
+        int initialX = (GameScreen.getWidth() - (xRange * (brickWidth + brickSpacing))) / 2;
+        for(int y = 0; y < yRange; y++) {
 
+            for(int x = 0; x < xRange; x++) {
+
+                int dur = 0;
+                if(x == 1 || x == 3) {
+
+                    dur = 1;
+                }
+                else if(x == 2) {
+
+                    dur = 2;
+                }
+
+                gameObjects.add(ObjectFactory.getNewBrick(initialX + x * (brickWidth + brickSpacing), 26 + y * (brickHeight + brickSpacing), dur));
+            }
+        }
+
+        /*
         for(int y = 0; y < yRange; y++) {
 
             gameObjects.add(new Brick(400 + brickWidth * y + brickSpacing * y, 58, 0));
@@ -96,7 +114,7 @@ public class Stage {
                 gameObjects.add(new Brick(400 + brickWidth * y + brickSpacing * y, 58 + brickHeight * x + brickSpacing * x, dur));
             }
         }
-
+*/
         //gameObjects.add(ObjectFactory.getNewBrick(200, 200));
     }
 

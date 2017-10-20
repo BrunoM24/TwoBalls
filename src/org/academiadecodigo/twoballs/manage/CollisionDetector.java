@@ -72,8 +72,6 @@ public class CollisionDetector {
                     continue;
                 }
 
-                SoundManager.getInstance().playSound(GameSound.BOUNCE);
-
                 if(objectB instanceof Paddle) {
 
                     //collide((Ball) gameObject, (Paddle) objectB);
