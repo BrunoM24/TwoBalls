@@ -13,7 +13,7 @@ public class Paddle extends GameObject implements Movable {
 
     private int direction = 0;
 
-    private int speed = 4;
+    private int speed = 7;
 
     private int deltaY;
 
