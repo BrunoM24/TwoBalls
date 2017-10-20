@@ -11,20 +11,23 @@ public class Collider {
 
     void updateBall(int buffer, Ball ball, GameObject object) {
 
-        boolean leftSide = ball.getX() + ball.getWidth() - buffer < object.getX() + buffer;
-        boolean rightSide = ball.getX() + buffer > object.getX() + object.getWidth() - buffer;
+        boolean touchedLeft = ball.getX() + ball.getWidth() < object.getX();
+        boolean touchedRight = ball.getX() < object.getX() + object.getWidth();
 
-        boolean topSide = ball.getY() + ball.getHeight() - buffer < object.getY() + buffer;
-        boolean bottomSide = ball.getY() + buffer > object.getY() + object.getHeight() - buffer;
+        boolean touchedUp = ball.getY() + ball.getHeight() < object.getY();
+        boolean touchedDown = ball.getY() + ball.getHeight() < object.getY();
 
-        if(topSide || bottomSide) {
-
-            ball.flipY();
-        }
-
-        if(leftSide || rightSide) {
+        if(touchedLeft || touchedRight) {
 
             ball.flipX();
+            ball.translate(ball.getDirectionX() * buffer, 0);
+            return;
+        }
+
+        if(touchedDown || touchedUp) {
+
+            ball.flipY();
+            ball.translate(0, ball.getDirectionY() * buffer);
         }
     }
 
