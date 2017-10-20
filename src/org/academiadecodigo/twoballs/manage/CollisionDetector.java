@@ -36,20 +36,20 @@ public class CollisionDetector {
         }
 
         ball.setLastObjectTouched(object);
-
-        collider.updateBall(buffer, ball, object);
-
         if(object instanceof Ball) {
 
             collider.ballOnBall(ball, (Ball) object);
+            ((Ball) object).setLastObjectTouched(ball);
         }
         else if(object instanceof Paddle) {
 
+            collider.updateBall(buffer, ball, object);
             collider.ballOnPaddle(ball, (Paddle) object);
         }
         else if(object instanceof Brick) {
 
-            collider.ballOnBrick(ball, (Brick) object);
+            collider.updateBall(buffer, ball, object);
+            ((Brick) object).damageBrick();
         }
     }
 
