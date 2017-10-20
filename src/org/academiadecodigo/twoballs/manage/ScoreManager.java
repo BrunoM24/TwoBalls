@@ -9,10 +9,20 @@ import org.academiadecodigo.twoballs.GameScreen;
  */
 public class ScoreManager {
 
+    public static final int OUT_OF_BOUNDS_POINTS = 50;
+    public static final int BRICKS_POINTS = 5;
+
+    public static ScoreManager instance;
+
     int[] playerScore = new int[3];
 
     Text textScorePlayerOne;
     Text textScorePlayerTwo;
+
+    public ScoreManager() {
+
+        instance = this;
+    }
 
     public void draw() {
 
@@ -48,4 +58,12 @@ public class ScoreManager {
             text.grow(5, 0);
         }
     }
+
+    public void checkScore () {
+
+        System.out.println("player 1 - " + playerScore[1]);
+        System.out.println("player 2 - " + playerScore[2]);
+
+    }
+
 }

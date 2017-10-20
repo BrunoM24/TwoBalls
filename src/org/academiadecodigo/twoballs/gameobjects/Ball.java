@@ -1,11 +1,14 @@
 package org.academiadecodigo.twoballs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.twoballs.Game;
 import org.academiadecodigo.twoballs.GameScreen;
 import org.academiadecodigo.twoballs.gameobjects.move.Direction;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.gameobjects.move.Speed;
+import org.academiadecodigo.twoballs.manage.ScoreManager;
 import org.academiadecodigo.twoballs.sound.GameSound;
+import org.academiadecodigo.twoballs.sound.Sound;
 import org.academiadecodigo.twoballs.sound.SoundManager;
 
 import java.awt.*;
@@ -105,13 +108,23 @@ public class Ball extends GameObject implements Movable {
 
     private void checkBoundaries(float delta) {
 
-        if (getX() + dx * delta < GameScreen.getX() || getX() + getWidth() + dx * delta > GameScreen.getWidth()) {
+        if (getX() + dx * delta < GameScreen.getX()) {
 
-            //DECREASE POINTS
             dx *= -1;
             flipX();
-            SoundManager.getInstance().playSound(GameSound.BOUNCE);
-            setLastObjectTouched(null);
+            ScoreManager.instance.addPoints(2, ScoreManager.OUT_OF_BOUNDS_POINTS);
+            SoundManager.getInstance().playSound(GameSound.POINTS);
+            ScoreManager.instance.checkScore();
+        }
+
+
+        if (getX() + getWidth() + dx * delta > GameScreen.getWidth()) {
+
+            dx *= -1;
+            flipX();
+            ScoreManager.instance.addPoints(1, ScoreManager.OUT_OF_BOUNDS_POINTS);
+            SoundManager.getInstance().playSound(GameSound.POINTS);
+            ScoreManager.instance.checkScore();
         }
 
         if (getY() + dy * delta < GameScreen.getY() || getY() + getHeight() + dy * delta > GameScreen.getHeight()) {
@@ -141,7 +154,7 @@ public class Ball extends GameObject implements Movable {
     }
 
 
-    public void changeToPaddleColor(){
+    public void changeToPaddleColor() {
         //TODO change image with according color
     }
 
@@ -165,7 +178,7 @@ public class Ball extends GameObject implements Movable {
 
         lastGameObjectTouched = gameObject;
 
-        if (gameObject instanceof Paddle){
+        if (gameObject instanceof Paddle) {
             lastPaddleTouched = (Paddle) gameObject;
         }
     }

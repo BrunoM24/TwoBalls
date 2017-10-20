@@ -1,5 +1,6 @@
 package org.academiadecodigo.twoballs.manage;
 
+import org.academiadecodigo.twoballs.GameScreen;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
@@ -66,6 +67,8 @@ public class CollisionDetector {
 
                 continue;
             }
+
+
 
             if(!ball.getBounds().intersects(objB.getX() - buffer, objB.getY() - buffer, objB.getWidth() + buffer, objB.getHeight() + buffer)) {
 
