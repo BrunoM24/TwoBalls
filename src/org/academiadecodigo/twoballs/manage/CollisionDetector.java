@@ -48,9 +48,9 @@ public class CollisionDetector {
         }
         else if(object instanceof Brick) {
 
-            //collider.updateBall(buffer, ball, object);
+            collider.updateBall(buffer, ball, object);
 
-            ((Brick) object).damageBrick(0);
+            //((Brick) object).damageBrick(0);
             //((Brick) object).damageBrick(ball.getLastPaddleTouched() == null ? 0 : ball.getLastPaddleTouched().getPaddleId());
         }
     }

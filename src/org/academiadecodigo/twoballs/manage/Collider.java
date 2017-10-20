@@ -11,9 +11,12 @@ public class Collider {
 
     void updateBall(int buffer, Ball ball, GameObject object) {
 
-        checkCenterBallPosition(buffer, ball, object);
+        //checkCenterBallPosition(buffer, ball, object);
 
+        boolean ballIsUp = ball.getY() - buffer < object.getY() + buffer;
+        boolean ballIsDown = ball.getY() + buffer > object.getY() - buffer;
 
+        System.out.println(ballIsUp + ", " + ballIsDown);
     }
 
     private void checkCenterBallPosition(int buffer, Ball ball, GameObject object) {    //SEEMS FINE??
