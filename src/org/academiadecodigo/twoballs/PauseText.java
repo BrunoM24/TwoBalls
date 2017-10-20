@@ -4,17 +4,20 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
 /**
- * Created by codecadet on 19/10/17.
+ * Created by codecadet on 19/10/17.p
  */
 public class PauseText {
 
     static Text fpsText;
 
     Text pauseText;
+
     Text pauseText2;
+
     boolean alreadyPausedOnce = false;
 
     String paused = " -PAUSED- ";
+
     String pressPToStart = " -Press P To Start- ";
 
     public PauseText() {
@@ -27,7 +30,6 @@ public class PauseText {
         pauseText2.setColor(Color.YELLOW);
         pauseText2.grow(80, 25);
 
-
         fpsText = new Text(GameScreen.getX(), GameScreen.getHeight() - 10, "?");
         fpsText.setColor(Color.WHITE);
         fpsText.draw();
@@ -36,11 +38,12 @@ public class PauseText {
 
     public void draw() {
 
+        if(alreadyPausedOnce) {
 
-        if (alreadyPausedOnce) {
             pauseText2.draw();
             return;
         }
+
         pauseText.draw();
     }
 
@@ -52,7 +55,7 @@ public class PauseText {
     }
 
     public void setAlreadyPausedOnce() {
+
         alreadyPausedOnce = true;
     }
-
 }
