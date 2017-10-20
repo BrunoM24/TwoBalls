@@ -68,6 +68,7 @@ public class Collider {
 
 
         if (ballA.getDirectionX() > 0 && ballB.getDirectionX() < 0 && ballA_TouchingFromLeft) {
+            ballA.flipX();
             ballB.flipX();
         }
 
@@ -76,9 +77,11 @@ public class Collider {
         }
 
         if (ballA.getDirectionX() > 0 && ballB.getDirectionX() > 0 && ballA_TouchingFromLeft) {
+            ballA.flipX();
         }
 
         if (ballA.getDirectionY() > 0 && ballB.getDirectionY() < 0 && ballA_TouchingFromTop) {
+            ballA.flipY();
             ballB.flipY();
         }
 
@@ -87,6 +90,7 @@ public class Collider {
         }
 
         if (ballA.getDirectionY() > 0 && ballB.getDirectionY() > 0 && ballA_TouchingFromTop) {
+            ballA.flipY();
         }
     }
 }
