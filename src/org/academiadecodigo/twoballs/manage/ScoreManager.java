@@ -58,12 +58,4 @@ public class ScoreManager {
             text.grow(5, 0);
         }
     }
-
-    public void checkScore () {
-
-        System.out.println("player 1 - " + playerScore[1]);
-        System.out.println("player 2 - " + playerScore[2]);
-
-    }
-
 }
