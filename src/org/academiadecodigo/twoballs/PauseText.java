@@ -4,7 +4,7 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
 /**
- * Created by codecadet on 19/10/17.
+ * Created by codecadet on 19/10/17.p
  */
 public class PauseText {
 
