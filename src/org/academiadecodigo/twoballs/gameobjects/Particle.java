@@ -13,7 +13,7 @@ public class Particle extends GameObject implements Movable {
 
     private Direction direction = new Direction();
 
-    private float timeToLive = 15.0f;
+    private float timeToLive = (float)((Math.random() * 16) + 15);
 
     public Particle(int x, int y) {
 
@@ -22,7 +22,7 @@ public class Particle extends GameObject implements Movable {
 
     public Particle(int x, int y, int dirX, int dirY) {
 
-        shape = new Picture(x, y, "assets/ball.png");
+        shape = new Picture(x, y, "assets/particleStar.png");
         shape.draw();
         bounds = new Rectangle(x, y, shape.getWidth(), shape.getHeight());
 
@@ -39,5 +39,7 @@ public class Particle extends GameObject implements Movable {
 
             kill();
         }
+
+        ((Picture) shape).translate(direction.x, direction.y);
     }
 }

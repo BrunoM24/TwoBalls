@@ -53,7 +53,7 @@ public class Stage {
 
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
-        //gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 0));
+        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 0));
         gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0));
 
         int xRange = 5;
@@ -140,7 +140,11 @@ public class Stage {
     void keyReleased(int key) {
 
         if(key == P1_DOWN || key == P1_UP) {
-
+            ObjectFactory.spawnParticle(100, 100);
+            ObjectFactory.spawnParticle(100, 100);
+            ObjectFactory.spawnParticle(100, 100);
+            ObjectFactory.spawnParticle(100, 100);
+            ObjectFactory.spawnParticle(100, 100);
             player1.updateDirection(0);
         }
 
@@ -154,5 +158,11 @@ public class Stage {
 
         Canvas.getInstance().hide(object.getShape());
         gameObjects.remove(object);
+    }
+
+    public void spawnObject(GameObject object) {
+
+        //TODO replace with insert
+        gameObjects.add(object);
     }
 }

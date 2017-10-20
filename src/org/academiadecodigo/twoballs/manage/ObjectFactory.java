@@ -2,10 +2,7 @@ package org.academiadecodigo.twoballs.manage;
 
 import org.academiadecodigo.twoballs.GameScreen;
 import org.academiadecodigo.twoballs.Stage;
-import org.academiadecodigo.twoballs.gameobjects.Ball;
-import org.academiadecodigo.twoballs.gameobjects.Brick;
-import org.academiadecodigo.twoballs.gameobjects.GameObject;
-import org.academiadecodigo.twoballs.gameobjects.Paddle;
+import org.academiadecodigo.twoballs.gameobjects.*;
 
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
@@ -50,6 +47,18 @@ public class ObjectFactory {
     public static Brick getNewBrick(int x, int y, int dur) {
 
         return new Brick(x, y, dur);
+    }
+
+    public static void spawn(GameObject object) {
+
+        instance.stage.spawnObject(object);
+    }
+
+    public static void spawnParticle(int x, int y) {
+
+        int dx = (int)(Math.random() * 3);
+        int dy = (int)(Math.random() * 3);
+        spawn(new Particle(x, y, dx - 1 , dy - 1));
     }
 
     public static void removeObject(GameObject object) {
