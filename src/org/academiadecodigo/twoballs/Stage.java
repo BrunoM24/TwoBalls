@@ -37,6 +37,8 @@ public class Stage {
 
     private Paddle player2;
 
+    private Ball controlledBall;
+
     private CollisionDetector collisionDetector = new CollisionDetector();
 
     Stage() {
@@ -54,8 +56,11 @@ public class Stage {
 
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
-        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 0));
-        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0));
+        for(int i = 0; i < 10; i++) {
+
+            gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 1));
+        }
+        //gameObjects.add(controlledBall = ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0));
 
         int xRange = 5;
         int yRange = 8;
@@ -64,15 +69,16 @@ public class Stage {
         int brickSpacing = 0;
 
         int initialX = (GameScreen.getWidth() - (xRange * (brickWidth + brickSpacing))) / 2;
-        for (int y = 0; y < yRange; y++) {
+        for(int y = 0; y < yRange; y++) {
 
-            for (int x = 0; x < xRange; x++) {
+            for(int x = 0; x < xRange; x++) {
 
                 int dur = 0;
-                if (x == 1 || x == 3) {
+                if(x == 1 || x == 3) {
 
                     dur = 1;
-                } else if (x == 2) {
+                }
+                else if(x == 2) {
 
                     dur = 2;
                 }
@@ -85,22 +91,22 @@ public class Stage {
     public void run(float delta) {
 
         //Add objects here
-        if (!gameObjectsToAdd.isEmpty()) {
+        if(!gameObjectsToAdd.isEmpty()) {
 
             gameObjects.addAll(gameObjectsToAdd);
             gameObjectsToAdd.clear();
         }
 
         //Remove objects here
-        if (!gameObjectsToRemove.isEmpty()) {
+        if(!gameObjectsToRemove.isEmpty()) {
 
-            for (GameObject goB : gameObjectsToRemove) {
+            for(GameObject goB : gameObjectsToRemove) {
 
                 Iterator<GameObject> copy = gameObjects.iterator();
-                while (copy.hasNext()) {
+                while(copy.hasNext()) {
 
                     GameObject go = copy.next();
-                    if (go.equals(goB)) {
+                    if(go.equals(goB)) {
 
                         Canvas.getInstance().hide(go.getShape());
                         copy.remove();
@@ -112,18 +118,23 @@ public class Stage {
         }
 
         Iterator<GameObject> copy = gameObjects.iterator();
-        while (copy.hasNext()) {
+        while(copy.hasNext()) {
 
             GameObject object = copy.next();
 
-            if (!object.isDead()) {
+            if(!object.isDead()) {
 
-                if (object instanceof Movable) {
+                if(object instanceof Movable) {
 
+                    if(object.equals(controlledBall)) {
+
+                        collisionDetector.checkCollisions((Ball) object, gameObjects);
+                        continue;
+                    }
                     ((Movable) object).move(delta);
                 }
 
-                if (!(object instanceof Ball)) {
+                if(!(object instanceof Ball)) {
 
                     continue;
                 }
@@ -142,20 +153,29 @@ public class Stage {
 
     void keyPressed(int key) {
 
-        if (handleKey(player1, key, P1_UP, P1_DOWN)) {
+        if(handleKey(player1, key, P1_UP, P1_DOWN)) {
 
             return;
         }
 
-        if (handleKey(player2, key, P2_UP, P2_DOWN)) {
+        if(handleKey(player2, key, P2_UP, P2_DOWN)) {
 
             //TODO Return if more keys
+            return;
+        }
+
+        if(key == P3_DOWN || key == P3_UP || key == P3_LEFT || key == P3_RIGHT) {
+
+            int dx = key == P3_RIGHT ? 1 : (key == P3_LEFT ? -1 : 0);
+            int dy = key == P3_UP ? -1 : (key == P3_DOWN ? 1 : 0);
+            int speed = 5;
+            controlledBall.translate(dx * speed, dy * speed);
         }
     }
 
     private boolean handleKey(Paddle player, int key, int up, int down) {
 
-        if (key == down || key == up) {
+        if(key == down || key == up) {
 
             player.updateDirection(key == up ? -1 : 1);
             return true;
@@ -166,12 +186,12 @@ public class Stage {
 
     void keyReleased(int key) {
 
-        if (key == P1_DOWN || key == P1_UP) {
+        if(key == P1_DOWN || key == P1_UP) {
 
             player1.updateDirection(0);
         }
 
-        if (key == P2_DOWN || key == P2_UP) {
+        if(key == P2_DOWN || key == P2_UP) {
 
             player2.updateDirection(0);
         }

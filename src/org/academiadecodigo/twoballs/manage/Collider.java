@@ -12,23 +12,20 @@ public class Collider {
 
     void updateBall(int buffer, Ball ball, GameObject object) {
 
-        boolean touchedLeft = ball.getX() + ball.getWidth() < object.getX();
-        boolean touchedRight = ball.getX() < object.getX() + object.getWidth();
+        boolean leftSide = ball.getX() + ball.getWidth() - buffer < object.getX() + buffer;
+        boolean rightSide = ball.getX() + buffer > object.getX() + object.getWidth() - buffer;
 
-        boolean touchedUp = ball.getY() + ball.getHeight() < object.getY();
-        boolean touchedDown = ball.getY() + ball.getHeight() < object.getY();
+        boolean topSide = ball.getY() + ball.getHeight() - buffer < object.getY() + buffer;
+        boolean bottomSide = ball.getY() + buffer > object.getY() + object.getHeight() - buffer;
 
-        if (touchedLeft || touchedRight) {
-
-            ball.flipX();
-            ball.translate(ball.getDirectionX() * buffer, 0);
-            return;
-        }
-
-        if (touchedDown || touchedUp) {
+        if(topSide || bottomSide) {
 
             ball.flipY();
-            ball.translate(0, ball.getDirectionY() * buffer);
+        }
+
+        if(leftSide || rightSide) {
+
+            ball.flipX();
         }
     }
 
@@ -43,13 +40,12 @@ public class Collider {
         boolean touchDown = (ball.getY() <= paddle.getY() + paddle.getHeight()) && (ballCenterLine > secondDivision);
 
 
-
-        if (touchUp && ball.getDirectionY() >= 0) {
+        if(touchUp && ball.getDirectionY() >= 0) {
 
             ball.getDirection().y = -1;
         }
 
-        if (touchDown && ball.getDirectionY() <= 0) {
+        if(touchDown && ball.getDirectionY() <= 0) {
 
             ball.getDirection().y = 1;
         }
@@ -71,29 +67,29 @@ public class Collider {
         boolean ballA_TouchingFromLeft = (ballA.getX() + ballA.getWidth() >= ballB.getX());// || (ballA.getX() <= ballB.getX() + ballB.getWidth());
 
 
-        if (ballA.getDirectionX() > 0 && ballB.getDirectionX() < 0 && ballA_TouchingFromLeft) {
+        if(ballA.getDirectionX() > 0 && ballB.getDirectionX() < 0 && ballA_TouchingFromLeft) {
             ballA.flipX();
             ballB.flipX();
         }
 
-        if (ballA.getDirectionX() < 0 && ballB.getDirectionX() < 0 && ballA_TouchingFromLeft) {
+        if(ballA.getDirectionX() < 0 && ballB.getDirectionX() < 0 && ballA_TouchingFromLeft) {
             ballB.flipX();
         }
 
-        if (ballA.getDirectionX() > 0 && ballB.getDirectionX() > 0 && ballA_TouchingFromLeft) {
+        if(ballA.getDirectionX() > 0 && ballB.getDirectionX() > 0 && ballA_TouchingFromLeft) {
             ballA.flipX();
         }
 
-        if (ballA.getDirectionY() > 0 && ballB.getDirectionY() < 0 && ballA_TouchingFromTop) {
+        if(ballA.getDirectionY() > 0 && ballB.getDirectionY() < 0 && ballA_TouchingFromTop) {
             ballA.flipY();
             ballB.flipY();
         }
 
-        if (ballA.getDirectionY() < 0 && ballB.getDirectionY() < 0 && ballA_TouchingFromTop) {
+        if(ballA.getDirectionY() < 0 && ballB.getDirectionY() < 0 && ballA_TouchingFromTop) {
             ballB.flipY();
         }
 
-        if (ballA.getDirectionY() > 0 && ballB.getDirectionY() > 0 && ballA_TouchingFromTop) {
+        if(ballA.getDirectionY() > 0 && ballB.getDirectionY() > 0 && ballA_TouchingFromTop) {
             ballA.flipY();
         }
     }

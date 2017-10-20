@@ -19,6 +19,11 @@ public class KeyboardManager implements KeyboardHandler {
     public static final int P1_DOWN = KeyEvent.VK_S;
     public static final int P2_DOWN = KeyEvent.VK_DOWN;
 
+    public static final int P3_UP = KeyEvent.VK_I;
+    public static final int P3_DOWN = KeyEvent.VK_K;
+    public static final int P3_LEFT = KeyEvent.VK_J;
+    public static final int P3_RIGHT = KeyEvent.VK_L;
+
     public static final int GAME_PAUSE = KeyEvent.VK_P;
     public static final int GAME_END = KeyEvent.VK_ESCAPE;
 
@@ -40,6 +45,11 @@ public class KeyboardManager implements KeyboardHandler {
 
         keyboard.listenToKey(GAME_PAUSE);
         keyboard.listenToKey(GAME_END);
+
+        keyboard.listenToKey(P3_DOWN);
+        keyboard.listenToKey(P3_UP);
+        keyboard.listenToKey(P3_RIGHT);
+        keyboard.listenToKey(P3_LEFT);
     }
 
     @Override
