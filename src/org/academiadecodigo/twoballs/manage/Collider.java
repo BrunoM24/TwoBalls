@@ -11,9 +11,6 @@ public class Collider {
 
     void updateBall(int buffer, Ball ball, GameObject object) {
 
-        //SE O CENTRO ESTIVER NO EIXO DO X
-        //SE O CENTRO ESTIVER NO EIXO DOS Y
-
         int ballCenterX = ball.getX() + ball.getWidth() / 2;
         int ballCenterY = ball.getY() + ball.getHeight() / 2;
 
@@ -23,12 +20,14 @@ public class Collider {
         if(sameYAxis) {
 
             ball.flipY();
-            return;
+            ball.translate(0, ball.getDirectionY() * buffer);
+            //return;
         }
 
         if(sameXAxis) {
 
             ball.flipX();
+            ball.translate(ball.getDirectionX() * buffer, 0);
         }
     }
 

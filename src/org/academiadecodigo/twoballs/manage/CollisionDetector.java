@@ -70,8 +70,6 @@ public class CollisionDetector {
                 continue;
             }
 
-
-
             if(!ball.getBounds().intersects(objB.getX() - buffer, objB.getY() - buffer, objB.getWidth() + buffer, objB.getHeight() + buffer)) {
 
                 continue;
