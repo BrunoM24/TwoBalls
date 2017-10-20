@@ -49,6 +49,11 @@ public class Stage {
         new ObjectFactory(this);
     }
 
+    void test() {
+
+
+    }
+
     void initializeObjects() {
 
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));

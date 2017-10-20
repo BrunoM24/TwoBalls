@@ -42,7 +42,8 @@ public class Game {
 
         stage = new Stage(width, height);
 
-        stage.initializeObjects();
+        //stage.initializeObjects();
+        stage.test();
 
         keyboardManager = new KeyboardManager(this);
 
