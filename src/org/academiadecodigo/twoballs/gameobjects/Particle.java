@@ -3,6 +3,7 @@ package org.academiadecodigo.twoballs.gameobjects;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.gameobjects.move.Direction;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
+import org.academiadecodigo.twoballs.manage.ObjectFactory;
 
 import java.awt.*;
 
@@ -13,7 +14,7 @@ public class Particle extends GameObject implements Movable {
 
     private Direction direction = new Direction();
 
-    private float timeToLive = 15.0f;
+    private float timeToLive = (float)((Math.random() * 16) + 15);
 
     public Particle(int x, int y) {
 
@@ -22,7 +23,7 @@ public class Particle extends GameObject implements Movable {
 
     public Particle(int x, int y, int dirX, int dirY) {
 
-        shape = new Picture(x, y, "assets/ball.png");
+        shape = new Picture(x-10, y-10, "assets/particleStar.png");
         shape.draw();
         bounds = new Rectangle(x, y, shape.getWidth(), shape.getHeight());
 
@@ -38,6 +39,9 @@ public class Particle extends GameObject implements Movable {
         if(timeToLive <= 0) {
 
             kill();
+            ObjectFactory.removeObject(this);
         }
+
+        ((Picture) shape).translate(direction.x, direction.y);
     }
 }
