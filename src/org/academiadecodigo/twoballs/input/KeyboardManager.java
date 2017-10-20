@@ -13,9 +13,12 @@ import java.awt.event.KeyEvent;
 public class KeyboardManager implements KeyboardHandler {
 
     public static final int P1_UP = KeyEvent.VK_W;
-    public static final int P2_UP = KeyEvent.VK_UP;
     public static final int P1_DOWN = KeyEvent.VK_S;
+    public static final int P1_FIRE = KeyEvent.VK_F;
+
+    public static final int P2_UP = KeyEvent.VK_UP;
     public static final int P2_DOWN = KeyEvent.VK_DOWN;
+    public static final int P2_FIRE = KeyEvent.VK_DIVIDE;
 
     public static final int P3_UP = KeyEvent.VK_I;
     public static final int P3_DOWN = KeyEvent.VK_K;
@@ -37,9 +40,11 @@ public class KeyboardManager implements KeyboardHandler {
 
         keyboard.listenToKey(P1_DOWN);
         keyboard.listenToKey(P1_UP);
+        keyboard.listenToKey(P1_FIRE);
 
         keyboard.listenToKey(P2_DOWN);
         keyboard.listenToKey(P2_UP);
+        keyboard.listenToKey(P2_FIRE);
 
         keyboard.listenToKey(GAME_PAUSE);
         keyboard.listenToKey(GAME_END);
@@ -53,6 +58,7 @@ public class KeyboardManager implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
+        System.out.println("Pressed " + keyboardEvent.getKey());
         game.keyPressed(keyboardEvent.getKey());
     }
 
@@ -65,5 +71,6 @@ public class KeyboardManager implements KeyboardHandler {
     @Override
     public void keyTyped(KeyboardEvent keyboardEvent) {
 
+        System.out.println("KeyboardManager.keyTyped");
     }
 }

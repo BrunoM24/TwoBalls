@@ -99,7 +99,7 @@ public class Ball extends GameObject implements Movable {
         bounds.setLocation(shape.getX(), shape.getY());
     }
 
-    private void checkBoundaries(float delta) { // will also check if there is a "goal"
+    private void checkBoundaries(float delta) {
 
         if(getX() + dx * delta < GameScreen.getX()) {
 
