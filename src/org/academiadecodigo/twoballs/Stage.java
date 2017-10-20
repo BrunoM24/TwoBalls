@@ -8,7 +8,6 @@ import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.manage.CollisionDetector;
 import org.academiadecodigo.twoballs.manage.ObjectFactory;
-import org.academiadecodigo.twoballs.manage.OldCollisionDetector;
 import org.academiadecodigo.twoballs.manage.ScoreManager;
 
 import java.util.HashSet;
@@ -34,8 +33,6 @@ public class Stage {
 
     private Paddle player2;
 
-    private OldCollisionDetector oldCollisionDetector = new OldCollisionDetector();
-
     private CollisionDetector collisionDetector = new CollisionDetector();
 
     Stage() {
@@ -53,7 +50,7 @@ public class Stage {
 
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
-        //gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 0));
+        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 0));
         gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0));
 
         int xRange = 5;
