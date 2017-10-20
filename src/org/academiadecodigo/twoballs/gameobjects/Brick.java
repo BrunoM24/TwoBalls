@@ -50,6 +50,10 @@ public class Brick extends GameObject {
 
     public void damageBrick(int paddleId) {
 
+        if (paddleId == 0) {
+            return;
+        }
+
         Canvas.getInstance().hide(shape);
         durability--;
 

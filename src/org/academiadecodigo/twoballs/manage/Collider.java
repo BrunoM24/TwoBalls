@@ -3,6 +3,7 @@ package org.academiadecodigo.twoballs.manage;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
+import org.academiadecodigo.twoballs.sound.SoundManager;
 
 /**
  * Created by miro on 20/10/2017.
@@ -11,15 +12,44 @@ public class Collider {
 
     void updateBall(int buffer, Ball ball, GameObject object) {
 
-        //checkCenterBallPosition(buffer, ball, object);
+        if(checkCenterBallPosition(buffer, ball, object)) {
 
-        boolean ballIsUp = ball.getY() - buffer < object.getY() + buffer;
-        boolean ballIsDown = ball.getY() + buffer > object.getY() - buffer;
+            return;
+        }
+
+        boolean ballIsUp = ball.getY() <= object.getY();
+        boolean ballIsDown = ball.getY() >= object.getY();
+        boolean ballIsLeft = ball.getX() < object.getX();
+        boolean ballIsRight = ball.getX() > object.getX();
 
         System.out.println(ballIsUp + ", " + ballIsDown);
+        if(ballIsDown) {
+
+            ball.getDirection().y = 1;
+            if(ballIsLeft) {
+
+                ball.getDirection().x = -1;
+            }
+            else if(ballIsRight) {
+
+                ball.getDirection().x = 1;
+            }
+        }
+        else if(ballIsUp) {
+
+            ball.getDirection().y = -1;
+            if(ballIsLeft) {
+
+                ball.getDirection().x = -1;
+            }
+            else if(ballIsRight) {
+
+                ball.getDirection().x = 1;
+            }
+        }
     }
 
-    private void checkCenterBallPosition(int buffer, Ball ball, GameObject object) {    //SEEMS FINE??
+    private boolean checkCenterBallPosition(int buffer, Ball ball, GameObject object) {    //SEEMS FINE??
 
         int ballCenterX = ball.getX() + ball.getWidth() / 2;
         int ballCenterY = ball.getY() + ball.getHeight() / 2;
@@ -29,14 +59,16 @@ public class Collider {
 
         if(sameYAxis) {
 
-            ball.flipY();
-            ball.translate(0, ball.getDirectionY() * buffer);
+            ball.flipX();
+            return true;
         }
         else if(sameXAxis) {
 
             ball.flipX();
             ball.translate(ball.getDirectionX() * buffer, 0);
+            return true;
         }
+        return false;
     }
 
     void ballOnPaddle(Ball ball, Paddle paddle) {   //WORKS FINE
@@ -61,6 +93,7 @@ public class Collider {
         }
 
         ball.flipX();
+        SoundManager.getInstance().playSound(SoundManager.getInstance().drsh());
     }
 
     private float paddleHeightDivision(int divisionNumber, GameObject object) {

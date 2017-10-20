@@ -20,12 +20,14 @@ public enum GameSound {
     DRSH6("drsh6"),
     PAKIN("Pakin");
 
+
     private String path;
 
     GameSound(String sound) {
 
         path = "/assets/sound/" + sound + ".wav";
     }
+
 
     public String getPath() {
 
