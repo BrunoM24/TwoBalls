@@ -4,6 +4,8 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.GameScreen;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 
+import java.awt.*;
+
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
  */
@@ -15,15 +17,16 @@ public class Paddle extends GameObject implements Movable {
 
     private int deltaY;
 
-    public Paddle(String paddleColor, int posX, int posY) {
+    public Paddle(String paddleColor, int x, int y) {
 
-        if(posX - 14 > GameScreen.getWidth() / 2) {
+        if(x - 14 > GameScreen.getWidth() / 2) {
 
-            posX -= 4;
+            x -= 4;
         }
 
-        shape = new Picture(posX, posY, "assets/" + paddleColor + "Paddle.png");
+        shape = new Picture(x, y, "assets/" + paddleColor + "Paddle.png");
         shape.draw();
+        bounds = new Rectangle(x, y, shape.getWidth(), shape.getHeight());
     }
 
     public void updateDirection(int newValue) {
@@ -39,13 +42,14 @@ public class Paddle extends GameObject implements Movable {
         checkBoundaries();
 
         ((Picture) shape).translate(0, deltaY * delta);
+        bounds.setLocation(shape.getX(), shape.getY());
     }
 
     private void checkBoundaries() {
 
         if(getY() + deltaY < GameScreen.getY() || getY() + getHeight() + deltaY > GameScreen.getHeight() + GameScreen.getY()) {
 
-            deltaY *= -1;
+            deltaY *= 0;
         }
     }
 }
