@@ -2,9 +2,7 @@ package org.academiadecodigo.twoballs.manage;
 
 import org.academiadecodigo.twoballs.GameScreen;
 import org.academiadecodigo.twoballs.Stage;
-import org.academiadecodigo.twoballs.gameobjects.Ball;
-import org.academiadecodigo.twoballs.gameobjects.Brick;
-import org.academiadecodigo.twoballs.gameobjects.Paddle;
+import org.academiadecodigo.twoballs.gameobjects.*;
 
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
@@ -39,5 +37,9 @@ public class ObjectFactory {
     public static Brick getNewBrick(int x, int y) {
 
         return new Brick(x, y);
+    }
+
+    public static void removeObject(GameObject object) {
+
     }
 }
