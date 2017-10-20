@@ -1,9 +1,9 @@
 TODO:
-    keyboard
-    Powerup extends ball
-
-    FIX:
-        Collision
+    GAME_LOGIC: aumentar a velocidade do paddle
+    COLLISION: bug on touch upper side of brick(flips left)
+    COLLISION: down side of paddle, not flipping Y
+    KEYBOARD: fix keyboard released, locks other player
+    GAME_LOOP: winning conditions
 
 IDEIAS:
     PowerUps
