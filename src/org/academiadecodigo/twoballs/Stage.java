@@ -2,7 +2,6 @@ package org.academiadecodigo.twoballs;
 
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
@@ -25,7 +24,6 @@ public class Stage {
 
     ScoreManager scoreManager;
 
-    //private Rectangle bkgRectangle;
     private Picture backGround;
 
     private Set<GameObject> gameObjects = new HashSet<>();  //elaborate a functional SET list
@@ -38,9 +36,7 @@ public class Stage {
 
     Stage(int width, int height) {
 
-        //this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
         this.backGround = new Picture(PADDING, PADDING, "assets/background.jpg");
-        //bkgRectangle.draw();
         this.backGround.draw();
 
         scoreManager = new ScoreManager();
@@ -59,7 +55,7 @@ public class Stage {
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
         gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 0));
-        //gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0));
+        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0));
 
         /*
         int numberOfBalls = 0;
@@ -173,12 +169,6 @@ public class Stage {
     void keyReleased(int key) {
 
         if(key == P1_DOWN || key == P1_UP) {
-
-            for(GameObject gameObject : gameObjects){
-                if(gameObject instanceof Brick){
-                    ((Brick) gameObject).deleteBrick();
-                }
-            }
 
             player1.updateDirection(0);
         }
