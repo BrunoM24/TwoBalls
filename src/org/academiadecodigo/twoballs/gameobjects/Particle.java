@@ -22,7 +22,7 @@ public class Particle extends GameObject implements Movable {
 
     public Particle(int x, int y, int dirX, int dirY) {
 
-        shape = new Picture(x, y, "assets/particleStar.png");
+        shape = new Picture(x-10, y-10, "assets/particleStar.png");
         shape.draw();
         bounds = new Rectangle(x, y, shape.getWidth(), shape.getHeight());
 

@@ -140,11 +140,13 @@ public class Stage {
     void keyReleased(int key) {
 
         if(key == P1_DOWN || key == P1_UP) {
+
             ObjectFactory.spawnParticle(100, 100);
             ObjectFactory.spawnParticle(100, 100);
             ObjectFactory.spawnParticle(100, 100);
             ObjectFactory.spawnParticle(100, 100);
             ObjectFactory.spawnParticle(100, 100);
+
             player1.updateDirection(0);
         }
 
