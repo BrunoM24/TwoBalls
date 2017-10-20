@@ -65,7 +65,7 @@ public class Stage {
         int yRange = 5;
         int brickWidth = 32;
         int brickHeight = 64;
-        int brickSpacing = 2;
+        int brickSpacing = 1;
 
 
         System.out.println("Hright : " + GameScreen.getHeight() + " Width : " + GameScreen.getWidth());
