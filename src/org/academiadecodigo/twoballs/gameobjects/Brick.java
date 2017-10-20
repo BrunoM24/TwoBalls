@@ -49,7 +49,6 @@ public class Brick extends GameObject {
     public void damageBrick(int paddleId) {
 
         Canvas.getInstance().hide(shape);
-
         durability--;
 
 
@@ -65,6 +64,7 @@ public class Brick extends GameObject {
             return;
         }
 
+        SoundManager.getInstance().playSound(GameSound.PAKIN);
         shape = changeImage(getX(), getY());
     }
 }
