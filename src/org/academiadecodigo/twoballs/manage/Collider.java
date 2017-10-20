@@ -14,8 +14,8 @@ public class Collider {
         //SE O CENTRO ESTIVER NO EIXO DO X
         //SE O CENTRO ESTIVER NO EIXO DOS Y
 
-        int ballCenterX = (ball.getX() + ball.getWidth()) / 2;
-        int ballCenterY = (ball.getY() + ball.getHeight()) / 2;
+        int ballCenterX = ball.getX() + ball.getWidth() / 2;
+        int ballCenterY = ball.getY() + ball.getHeight() / 2;
 
         boolean sameYAxis = ballCenterX > object.getX() && ballCenterX < object.getX() + object.getWidth();
         boolean sameXAxis = ballCenterY > object.getY() && ballCenterY < object.getY() + object.getHeight();

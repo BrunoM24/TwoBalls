@@ -56,9 +56,9 @@ public class ObjectFactory {
 
     public static void spawnParticle(int x, int y) {
 
-        int dx = (int)(Math.random() * 3);
-        int dy = (int)(Math.random() * 3);
-        spawn(new Particle(x, y, dx - 1 , dy - 1));
+        int dx = (int) (Math.random() * 3);
+        int dy = (int) (Math.random() * 3);
+        spawn(new Particle(x, y, dx - 1, dy - 1));
     }
 
     public static void removeObject(GameObject object) {

@@ -4,8 +4,6 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.keyboard.VKeyboard;
 import org.academiadecodigo.twoballs.Game;
-import org.academiadecodigo.twoballs.sound.GameSound;
-import org.academiadecodigo.twoballs.sound.SoundManager;
 
 import java.awt.event.KeyEvent;
 
