@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class Ball extends GameObject implements Movable {
 
-    private final int MIN_SPEED = 3, MAX_SPEED = 4;
+    private final int MIN_SPEED = 3, MAX_SPEED = 5;
 
     private Speed speed = new Speed();
 
