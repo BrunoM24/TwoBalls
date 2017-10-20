@@ -20,6 +20,10 @@ public class Brick extends GameObject {
 
 
     public void deleteBrick() {
-        shape.delete();
+        durability--;
+        if (durability == 0) {
+            shape.delete();
+
+        }
     }
 }

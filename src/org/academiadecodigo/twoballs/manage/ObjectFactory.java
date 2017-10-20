@@ -40,4 +40,6 @@ public class ObjectFactory {
 
         return new Brick(x, y);
     }
+
+
 }

@@ -1,6 +1,7 @@
 package org.academiadecodigo.twoballs;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
@@ -48,8 +49,8 @@ public class Stage {
 
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
-        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2, GameScreen.getHeight() / 2, 1, 0));
-        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2, GameScreen.getHeight() / 2, -1, 0));
+        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, 1, 0));
+        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, -1, 0));
 
         /*
         int numberOfBalls = 0;
@@ -67,17 +68,17 @@ public class Stage {
         int brickSpacing = 2;
 
 
-        System.out.println("Hright : " + GameScreen.getHeight() + " Width : " + GameScreen.getWidth());
+        System.out.println("Height : " + GameScreen.getHeight() + " Width : " + GameScreen.getWidth());
         System.out.println();
 
         for (int y = 0; y < yRange; y++) {
 
-            new Brick(400 + brickWidth * y + brickSpacing * y, 58);
+            gameObjects.add(new Brick(400 + brickWidth * y + brickSpacing * y, 58));
 
 
             for (int x = 0; x < xRange; x++) {
 
-                new Brick(400 + brickWidth * y + brickSpacing * y, 58 + brickHeight * x + brickSpacing * x);
+                gameObjects.add(new Brick(400 + brickWidth * y + brickSpacing * y, 58 + brickHeight * x + brickSpacing * x));
             }
         }
 

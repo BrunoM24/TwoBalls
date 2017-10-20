@@ -87,25 +87,16 @@ public class Collider {
         boolean touchRightSideOfBrick = (ball.getX() <= brick.getX() + brick.getWidth());
         boolean touchLeftSideOfBrick = (ball.getX() + ball.getWidth() >= brick.getX());
 
-        if (touchBottomOfBrick) {
+        if (touchBottomOfBrick || touchTopOfBrick) {
             ball.flipY(true);
             brick.deleteBrick();
         }
 
-        if (touchTopOfBrick) {
-            ball.flipY(true);
-            brick.deleteBrick();
-        }
-
-        if (touchLeftSideOfBrick) {
+        if (touchLeftSideOfBrick || touchRightSideOfBrick) {
             ball.flipX(true);
             brick.deleteBrick();
         }
 
-        if (touchRightSideOfBrick) {
-            ball.flipX(true);
-            brick.deleteBrick();
-        }
     }
 
     private float paddleHeightDivision(int divisionNumber, GameObject object) {
