@@ -66,38 +66,4 @@ public class SoundManager {
 
         s.play(true);
     }
-
-    public GameSound gargalhada() {
-
-        int x = (int) (Math.random() * 3);
-
-        switch (x) {
-            case 0:
-                return GameSound.GARGALHADA1;
-            default:
-                return GameSound.GARGALHADA2;
-
-        }
-
-    }
-
-    public GameSound drsh() {
-        int x = (int) (Math.random() * 5);
-
-        switch (x) {
-            case 0:
-                return GameSound.DRSH6;
-            case 1:
-                return GameSound.DRSH5;
-            case 2:
-                return GameSound.DRSH4;
-            case 3:
-                return GameSound.DRSH3;
-            case 4:
-                return GameSound.DRSH2;
-            default:
-                return GameSound.DRSH1;
-        }
-
-    }
 }

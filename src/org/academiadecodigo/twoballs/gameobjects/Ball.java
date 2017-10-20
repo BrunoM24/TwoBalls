@@ -111,7 +111,7 @@ public class Ball extends GameObject implements Movable {
             dx *= -1;
             flipX();
             ScoreManager.instance.addPoints(2, ScoreManager.OUT_OF_BOUNDS_POINTS);
-            SoundManager.getInstance().playSound(SoundManager.getInstance().gargalhada());
+            SoundManager.getInstance().playSound(GameSound.laugh());
             //ScoreManager.instance.checkScore();
         }
 
@@ -121,7 +121,7 @@ public class Ball extends GameObject implements Movable {
             dx *= -1;
             flipX();
             ScoreManager.instance.addPoints(1, ScoreManager.OUT_OF_BOUNDS_POINTS);
-            SoundManager.getInstance().playSound(SoundManager.getInstance().gargalhada());
+            SoundManager.getInstance().playSound(GameSound.laugh());
             //ScoreManager.instance.checkScore();
         }
 

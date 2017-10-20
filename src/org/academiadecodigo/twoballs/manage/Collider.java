@@ -3,6 +3,7 @@ package org.academiadecodigo.twoballs.manage;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
+import org.academiadecodigo.twoballs.sound.GameSound;
 import org.academiadecodigo.twoballs.sound.SoundManager;
 
 /**
@@ -12,21 +13,21 @@ public class Collider {
 
     void updateBall(Ball ball, GameObject object) {
 
+        //CENTER CHECK
         if(checkCenterBallPosition(ball, object)) {
 
             return;
         }
 
+        //TODO I Think I saw a ball enter a brick from downLeft side
+
+        //DIAGONAL CHECK
         boolean ballIsUp = ball.getY() <= object.getY();
         boolean ballIsDown = ball.getY() >= object.getY();
         boolean ballIsLeft = ball.getX() < object.getX();
         boolean ballIsRight = ball.getX() > object.getX();
 
-        if(ballIsDown) {
-
-            flipBall(ball, ballIsLeft, ballIsRight);
-        }
-        else if(ballIsUp) {
+        if(ballIsDown || ballIsUp) {
 
             flipBall(ball, ballIsLeft, ballIsRight);
         }
@@ -87,8 +88,7 @@ public class Collider {
             ball.getDirection().y = 1;
         }
 
-        ball.flipX();
-        SoundManager.getInstance().playSound(SoundManager.getInstance().drsh());
+        SoundManager.getInstance().playSound(GameSound.drsh());
     }
 
     private float paddleHeightDivision(int divisionNumber, GameObject object) {
