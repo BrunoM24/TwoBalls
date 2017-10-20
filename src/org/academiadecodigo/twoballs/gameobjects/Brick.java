@@ -3,6 +3,7 @@ package org.academiadecodigo.twoballs.gameobjects;
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.manage.ObjectFactory;
+import org.academiadecodigo.twoballs.manage.ScoreManager;
 
 import java.awt.*;
 
@@ -12,6 +13,7 @@ import java.awt.*;
 public class Brick extends GameObject {
 
     int durability;
+    Ball ball;
 
     private Picture[] images = new Picture[3];
 
@@ -37,22 +39,24 @@ public class Brick extends GameObject {
             color = "Green";
         }
 
-        Picture p = new Picture(x, y,"assets/brick" + color + ".png");
+        Picture p = new Picture(x, y, "assets/brick" + color + ".png");
         p.draw();
         return p;
     }
 
-    public void damageBrick() {
+    public void damageBrick(int paddleId) {
 
         Canvas.getInstance().hide(shape);
 
         durability--;
 
+
         if (durability <= -1) {
 
+            ScoreManager.instance.addPoints(paddleId, ScoreManager.BRICK_POINTS);
             kill();
-            int particles = (int)(Math.random() * 3) + 3;
-            for(int i = 0; i <= particles; i++){
+            int particles = (int) (Math.random() * 3) + 3;
+            for (int i = 0; i <= particles; i++) {
                 ObjectFactory.spawnParticle(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
             }
             return;

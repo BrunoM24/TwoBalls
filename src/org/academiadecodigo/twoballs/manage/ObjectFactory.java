@@ -31,17 +31,17 @@ public class ObjectFactory {
 
     public static Paddle getLeftPaddle(String color) {
 
-        return getNewPaddle(color, Stage.PADDING, (GameScreen.getHeight() - 52 - Stage.PADDING) / 2);
+        return getNewPaddle(color, Stage.PADDING, (GameScreen.getHeight() - 52 - Stage.PADDING) / 2, 1);
     }
 
     public static Paddle getRightPaddle(String color) {
 
-        return getNewPaddle(color, GameScreen.getWidth() - Stage.PADDING, (GameScreen.getHeight() - 52 - Stage.PADDING) / 2);
+        return getNewPaddle(color, GameScreen.getWidth() - Stage.PADDING, (GameScreen.getHeight() - 52 - Stage.PADDING) / 2, 2);
     }
 
-    private static Paddle getNewPaddle(String color, int x, int y) {
+    private static Paddle getNewPaddle(String color, int x, int y, int scoreId) {
 
-        return new Paddle(color, x, y);
+        return new Paddle(color, x, y, scoreId);
     }
 
     public static Brick getNewBrick(int x, int y, int dur) {

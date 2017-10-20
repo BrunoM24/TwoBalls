@@ -50,7 +50,7 @@ public class CollisionDetector {
         else if(object instanceof Brick) {
 
             collider.updateBall(buffer, ball, object);
-            ((Brick) object).damageBrick();
+            ((Brick) object).damageBrick(ball.getLastPaddleTouched().getPaddleId());
         }
     }
 

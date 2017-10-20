@@ -106,7 +106,7 @@ public class Ball extends GameObject implements Movable {
         bounds.setLocation(shape.getX(), shape.getY());
     }
 
-    private void checkBoundaries(float delta) {
+    private void checkBoundaries(float delta) { // will also check if there is a "goal"
 
         if (getX() + dx * delta < GameScreen.getX()) {
 
@@ -125,6 +125,7 @@ public class Ball extends GameObject implements Movable {
             ScoreManager.instance.addPoints(1, ScoreManager.OUT_OF_BOUNDS_POINTS);
             SoundManager.getInstance().playSound(GameSound.POINTS);
             ScoreManager.instance.checkScore();
+            System.out.println(getLastPaddleTouched().getPaddleId());
         }
 
         if (getY() + dy * delta < GameScreen.getY() || getY() + getHeight() + dy * delta > GameScreen.getHeight()) {

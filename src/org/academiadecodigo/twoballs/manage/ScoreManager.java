@@ -9,8 +9,8 @@ import org.academiadecodigo.twoballs.GameScreen;
  */
 public class ScoreManager {
 
-    public static final int OUT_OF_BOUNDS_POINTS = 50;
-    public static final int BRICKS_POINTS = 5;
+    public static final int OUT_OF_BOUNDS_POINTS = 0;
+    public static final int BRICK_POINTS = 5;
 
     public static ScoreManager instance;
 

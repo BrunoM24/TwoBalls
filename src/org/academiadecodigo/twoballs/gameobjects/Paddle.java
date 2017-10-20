@@ -17,7 +17,9 @@ public class Paddle extends GameObject implements Movable {
 
     private int deltaY;
 
-    public Paddle(String paddleColor, int x, int y) {
+    private int paddleId;
+
+    public Paddle(String paddleColor, int x, int y, int paddleId) {
 
         if(x - 14 > GameScreen.getWidth() / 2) {
 
@@ -51,5 +53,9 @@ public class Paddle extends GameObject implements Movable {
 
             deltaY *= 0;
         }
+    }
+
+    public int getPaddleId() {
+        return paddleId;
     }
 }
