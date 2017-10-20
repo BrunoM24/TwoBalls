@@ -1,5 +1,6 @@
 package org.academiadecodigo.twoballs.gameobjects;
 
+import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.awt.*;
@@ -52,6 +53,7 @@ public class Brick extends GameObject {
             return;
         }
 
+        Canvas.getInstance().hide(shape);
         shape = images[durability];
         shape.draw();
     }
