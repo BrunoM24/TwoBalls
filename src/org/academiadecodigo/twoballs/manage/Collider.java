@@ -10,9 +10,9 @@ import org.academiadecodigo.twoballs.sound.SoundManager;
  */
 public class Collider {
 
-    void updateBall(int buffer, Ball ball, GameObject object) {
+    void updateBall(Ball ball, GameObject object) {
 
-        if(checkCenterBallPosition(buffer, ball, object)) {
+        if(checkCenterBallPosition(ball, object)) {
 
             return;
         }
@@ -22,34 +22,30 @@ public class Collider {
         boolean ballIsLeft = ball.getX() < object.getX();
         boolean ballIsRight = ball.getX() > object.getX();
 
-        System.out.println(ballIsUp + ", " + ballIsDown);
         if(ballIsDown) {
 
-            ball.getDirection().y = 1;
-            if(ballIsLeft) {
-
-                ball.getDirection().x = -1;
-            }
-            else if(ballIsRight) {
-
-                ball.getDirection().x = 1;
-            }
+            flipBall(ball, ballIsLeft, ballIsRight);
         }
         else if(ballIsUp) {
 
-            ball.getDirection().y = -1;
-            if(ballIsLeft) {
-
-                ball.getDirection().x = -1;
-            }
-            else if(ballIsRight) {
-
-                ball.getDirection().x = 1;
-            }
+            flipBall(ball, ballIsLeft, ballIsRight);
         }
     }
 
-    private boolean checkCenterBallPosition(int buffer, Ball ball, GameObject object) {    //SEEMS FINE??
+    private void flipBall(Ball ball, boolean ballIsLeft, boolean ballIsRight) {
+
+        ball.getDirection().y = -1;
+        if(ballIsLeft) {
+
+            ball.getDirection().x = -1;
+        }
+        else if(ballIsRight) {
+
+            ball.getDirection().x = 1;
+        }
+    }
+
+    private boolean checkCenterBallPosition(Ball ball, GameObject object) {    //SEEMS FINE??
 
         int ballCenterX = ball.getX() + ball.getWidth() / 2;
         int ballCenterY = ball.getY() + ball.getHeight() / 2;
@@ -59,13 +55,12 @@ public class Collider {
 
         if(sameYAxis) {
 
-            ball.flipX();
+            ball.flipY();
             return true;
         }
         else if(sameXAxis) {
 
             ball.flipX();
-            ball.translate(ball.getDirectionX() * buffer, 0);
             return true;
         }
         return false;

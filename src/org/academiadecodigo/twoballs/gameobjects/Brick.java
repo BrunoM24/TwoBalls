@@ -16,12 +16,6 @@ public class Brick extends GameObject {
 
     int durability;
 
-    Ball ball;
-
-    int index = 0;
-
-    private Picture[] images = new Picture[3];
-
     public Brick(int x, int y, int durability) {
 
         this.durability = durability;
@@ -51,6 +45,7 @@ public class Brick extends GameObject {
     public void damageBrick(int paddleId) {
 
         if (paddleId == 0) {
+
             return;
         }
 
