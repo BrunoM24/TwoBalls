@@ -5,6 +5,8 @@ import org.academiadecodigo.twoballs.GameScreen;
 import org.academiadecodigo.twoballs.gameobjects.move.Direction;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.gameobjects.move.Speed;
+import org.academiadecodigo.twoballs.sound.GameSound;
+import org.academiadecodigo.twoballs.sound.SoundManager;
 
 import java.awt.*;
 
@@ -104,16 +106,19 @@ public class Ball extends GameObject implements Movable {
 
     private void checkBoundaries(float delta) {
 
-        if(getX() + dx * delta < GameScreen.getX() || getX() + getWidth() + dx * delta > GameScreen.getWidth() + GameScreen.getX()) {
+        if(getX() + dx * delta < GameScreen.getX() || getX() + getWidth() + dx * delta > GameScreen.getWidth()) {
 
+            //DECREASE POINTS
             dx *= -1;
             flipX(true);
+            SoundManager.getInstance().playSound(GameSound.BOUNCE);
         }
 
-        if(getY() + dy * delta < GameScreen.getY() || getY() + getHeight() + dy * delta > GameScreen.getHeight() + GameScreen.getY()) {
+        if(getY() + dy * delta < GameScreen.getY() || getY() + getHeight() + dy * delta > GameScreen.getHeight()) {
 
             dy *= -1;
             flipY(true);
+            SoundManager.getInstance().playSound(GameSound.BOUNCE);
         }
     }
 
