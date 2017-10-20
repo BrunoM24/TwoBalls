@@ -7,7 +7,8 @@ public enum GameSound {
 
     BOUNCE("bounce"),
     POINTS("points"),
-    BKG_LOOP("bkg_loop");
+    BKG_LOOP("bkg_loop"),
+    PUF("puf");
 
     private String path;
 

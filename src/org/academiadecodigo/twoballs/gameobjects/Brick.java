@@ -4,6 +4,8 @@ import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.manage.ObjectFactory;
 import org.academiadecodigo.twoballs.manage.ScoreManager;
+import org.academiadecodigo.twoballs.sound.GameSound;
+import org.academiadecodigo.twoballs.sound.SoundManager;
 
 import java.awt.*;
 
@@ -53,6 +55,7 @@ public class Brick extends GameObject {
 
         if (durability <= -1) {
 
+            SoundManager.getInstance().playSound(GameSound.PUF);
             ScoreManager.instance.addPoints(paddleId, ScoreManager.BRICK_POINTS);
             kill();
             int particles = (int) (Math.random() * 3) + 3;
