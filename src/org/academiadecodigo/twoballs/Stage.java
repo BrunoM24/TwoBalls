@@ -2,12 +2,13 @@ package org.academiadecodigo.twoballs;
 
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.manage.CollisionDetector;
-import org.academiadecodigo.twoballs.manage.OldCollisionDetector;
 import org.academiadecodigo.twoballs.manage.ObjectFactory;
+import org.academiadecodigo.twoballs.manage.OldCollisionDetector;
 import org.academiadecodigo.twoballs.manage.ScoreManager;
 
 import java.util.HashSet;
@@ -55,6 +56,7 @@ public class Stage {
         gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, 1, 0));
         gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, -1, 0));
 
+        /*
         int xRange = 5;
         int yRange = 8;
         int brickWidth = 32;
@@ -79,6 +81,7 @@ public class Stage {
                 gameObjects.add(ObjectFactory.getNewBrick(initialX + x * (brickWidth + brickSpacing), 26 + y * (brickHeight + brickSpacing), dur));
             }
         }
+        */
     }
 
     public void run(float delta) {
@@ -95,7 +98,12 @@ public class Stage {
                     ((Movable) object).move(delta);
                 }
 
-                collisionDetector.checkCollisions(object, gameObjects);
+                if(!(object instanceof Ball)) {
+
+                    continue;
+                }
+
+                collisionDetector.checkCollisions((Ball) object, gameObjects);
                 continue;
             }
 

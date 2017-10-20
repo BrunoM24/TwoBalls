@@ -4,8 +4,6 @@ import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
-import org.academiadecodigo.twoballs.sound.GameSound;
-import org.academiadecodigo.twoballs.sound.SoundManager;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -18,7 +16,7 @@ import java.util.Set;
  */
 public class OldCollisionDetector {
 
-    private Collider collider = new Collider();
+    private OldCollider oldCollider = new OldCollider();
 
     private List<Rectangle> shapesOnTop(Set<GameObject> gameObjects, GameObject a) {
 
@@ -75,15 +73,15 @@ public class OldCollisionDetector {
                 if(objectB instanceof Paddle) {
 
                     //collide((Ball) gameObject, (Paddle) objectB);
-                    collider.collide((Ball) gameObject, (Paddle) objectB);
+                    oldCollider.collide((Ball) gameObject, (Paddle) objectB);
                 }
                 else if(objectB instanceof Ball) {
 
-                    collider.collide((Ball) gameObject, (Ball) objectB);
+                    oldCollider.collide((Ball) gameObject, (Ball) objectB);
                 }
                 else if(objectB instanceof Brick) {
 
-                    collider.collide((Ball) gameObject, (Brick) objectB );
+                    oldCollider.collide((Ball) gameObject, (Brick) objectB );
                 }
             }
         }

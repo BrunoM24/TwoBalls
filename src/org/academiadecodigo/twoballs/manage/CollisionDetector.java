@@ -3,7 +3,6 @@ package org.academiadecodigo.twoballs.manage;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
@@ -13,46 +12,50 @@ import java.util.Set;
  */
 public class CollisionDetector {
 
-    public void checkCollisions(GameObject objA, Set<GameObject> gameObjects) {
+    int buffer = 2;
+    private Collider collider = new Collider();
 
-        ArrayList<Rectangle> objsOnTop = objectsOnTop(objA, gameObjects);
+    public void checkCollisions(Ball ball, Set<GameObject> gameObjects) {
+
+        ArrayList<GameObject> objsOnTop = objectsOnTop(ball, gameObjects);
 
         if(objsOnTop.isEmpty()) {
 
             return;
         }
 
+        for(GameObject object : objsOnTop) {
+
+            //Bola vira pra tras
+            if(object instanceof Ball) {
+
+                collider.ballOnBall(ball, (Ball) object);
+            }
+        }
     }
 
-    private ArrayList<Rectangle> objectsOnTop(GameObject object, Set<GameObject> gameObjects) {
+    private ArrayList<GameObject> objectsOnTop(Ball ball, Set<GameObject> gameObjects) {
 
-        ArrayList<Rectangle> rects = new ArrayList<>();
+        ArrayList<GameObject> objects = new ArrayList<>();
 
         Iterator<GameObject> iterator = gameObjects.iterator();
         while(iterator.hasNext()) {
 
             GameObject objB = iterator.next();
 
-            if(!(object instanceof Ball)) {
+            if(objB.equals(ball)) {
 
                 continue;
             }
 
-            if(objB.equals(object)) {
+            if(!ball.getBounds().intersects(objB.getX() - buffer, objB.getY() - buffer, objB.getWidth() + buffer, objB.getHeight() + buffer)) {
 
                 continue;
             }
 
-
-            int buffer = 2;
-            if(!object.getBounds().intersects(objB.getX() - buffer, objB.getY() - buffer, objB.getWidth() + buffer, objB.getHeight() + buffer)) {
-
-                continue;
-            }
-
-            rects.add(objB.getBounds());
+            objects.add(objB);
         }
 
-        return rects;
+        return objects;
     }
 }
