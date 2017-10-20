@@ -11,11 +11,11 @@ public class Game {
 
     private static final double IDEAL_DELTA = 1000000000.0 / 60.0;
 
-    long lastTime = System.nanoTime();
+    private long lastTime = System.nanoTime();
 
-    double delta = 0.0f;
+    private double delta = 0.0f;
 
-    boolean running = true;
+    private boolean running = true;
 
     private boolean gamePaused = true;
 
@@ -29,6 +29,7 @@ public class Game {
 
     private int frames;
 
+
     Game() {
 
         init();
@@ -39,9 +40,10 @@ public class Game {
         int width = 960;
         int height = 544;
 
-        stage = new Stage(this, width, height);
+        stage = new Stage(width, height);
 
         stage.initializeObjects();
+       // stage.test();
 
         keyboardManager = new KeyboardManager(this);
 
