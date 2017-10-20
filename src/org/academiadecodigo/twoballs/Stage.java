@@ -54,8 +54,14 @@ public class Stage {
 
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
-        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 0));
-        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0));
+
+        for(int i = 0; i < 10; i++) {
+
+            gameObjects.add(ObjectFactory.getNewBall(10, 10));
+        }
+
+        //gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 0));
+        //gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0));
 
         int xRange = 5;
         int yRange = 8;

@@ -17,7 +17,7 @@ public class Collider {
         boolean touchedUp = ball.getY() + ball.getHeight() - buffer < object.getY() + buffer;
         boolean touchedDown = ball.getY() + buffer < object.getY() + object.getHeight() - buffer;
 
-        if(touchedLeft || touchedRight) {
+        if(touchedLeft || touchedRight && !(touchedUp || touchedDown)) {
 
             ball.flipX();
             ball.translate(ball.getDirectionX() * buffer, 0);
