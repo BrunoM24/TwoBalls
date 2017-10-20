@@ -4,12 +4,23 @@ import org.academiadecodigo.twoballs.GameScreen;
 import org.academiadecodigo.twoballs.Stage;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.Brick;
+import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 
 /**
  * TwoBalls Created by BrunoM24 on 16/10/2017.
  */
 public class ObjectFactory {
+
+    private static ObjectFactory instance;
+
+    private Stage stage;
+
+    public ObjectFactory(Stage stage) {
+
+        instance = this;
+        this.stage = stage;
+    }
 
     public static Ball getNewBall(int x, int y, int dx, int dy) {
 
@@ -36,8 +47,13 @@ public class ObjectFactory {
         return new Paddle(color, x, y);
     }
 
-    public static Brick getNewBrick(int x, int y) {
+    public static Brick getNewBrick(int x, int y, int dur) {
 
-        return new Brick(x, y);
+        return new Brick(x, y, dur);
+    }
+
+    public static void removeObject(GameObject object) {
+
+        instance.stage.removeObject(object);
     }
 }

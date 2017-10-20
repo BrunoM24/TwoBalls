@@ -9,8 +9,11 @@ import java.awt.*;
  */
 public abstract class GameObject {
 
-    protected Rectangle bounds;
-    protected Shape shape;
+    Rectangle bounds;
+
+    Shape shape;
+
+    private boolean dead;
 
     public int getX() {
 
@@ -32,6 +35,7 @@ public abstract class GameObject {
         return (int) bounds.getHeight();
     }
 
+    @Deprecated
     public Shape getShape() {
 
         return shape;
@@ -46,5 +50,15 @@ public abstract class GameObject {
     public String toString() {
 
         return getClass().getSimpleName() + ": {x=" + getX() + ", y=" + getY() + ", w=" + getWidth() + ", h=" + getHeight() + "}";
+    }
+
+    public boolean isDead() {
+
+        return dead;
+    }
+
+    public void kill() {
+
+        this.dead = true;
     }
 }

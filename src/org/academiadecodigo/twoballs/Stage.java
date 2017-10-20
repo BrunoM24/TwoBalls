@@ -1,8 +1,8 @@
 package org.academiadecodigo.twoballs;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.academiadecodigo.twoballs.gameobjects.Ball;
+import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
@@ -11,6 +11,7 @@ import org.academiadecodigo.twoballs.manage.ObjectFactory;
 import org.academiadecodigo.twoballs.manage.ScoreManager;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import static org.academiadecodigo.twoballs.input.KeyboardManager.*;
@@ -21,6 +22,8 @@ import static org.academiadecodigo.twoballs.input.KeyboardManager.*;
 public class Stage {
 
     public static final int PADDING = 10;
+
+    ScoreManager scoreManager;
 
     //private Rectangle bkgRectangle;
     private Picture backGround;
@@ -33,9 +36,7 @@ public class Stage {
 
     private CollisionDetector collisionDetector = new CollisionDetector();
 
-    ScoreManager scoreManager;
-
-    public Stage(int width, int height) {
+    Stage(int width, int height) {
 
         //this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
         this.backGround = new Picture(PADDING, PADDING, "assets/background.jpg");
@@ -44,14 +45,21 @@ public class Stage {
 
         scoreManager = new ScoreManager();
         scoreManager.draw();
+
+        new ObjectFactory(this);
     }
 
-    public void initializeObjects() {
+    void test() {
+
+
+    }
+
+    void initializeObjects() {
 
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
-        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2, GameScreen.getHeight() / 2, 1, 0));
-        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2, GameScreen.getHeight() / 2, -1, 0));
+        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, 1, 0));
+        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, -1, 0));
 
         /*
         int numberOfBalls = 0;
@@ -62,15 +70,30 @@ public class Stage {
         }*/
 
         //TODO SPAWN BRICKS
-        int xRange = 5;
-        int yRange = 7;
+        int xRange = 7;
+        int yRange = 5;
+        int brickWidth = 32;
+        int brickHeight = 64;
+        int brickSpacing = 0;//TODO
+
 
         for(int y = 0; y < yRange; y++) {
 
+            gameObjects.add(new Brick(400 + brickWidth * y + brickSpacing * y, 58, 0));
+
+            int dur = 0;
+            if(y == 1 || y == 3) {
+
+                dur = 1;
+            }
+            else if(y == 2) {
+
+                dur = 2;
+            }
+
             for(int x = 0; x < xRange; x++) {
 
-                //x, y
-                //0 - 4, 0 - 6
+                gameObjects.add(new Brick(400 + brickWidth * y + brickSpacing * y, 58 + brickHeight * x + brickSpacing * x, dur));
             }
         }
 
@@ -79,12 +102,25 @@ public class Stage {
 
     public void run(float delta) {
 
-        for(GameObject object : gameObjects) {
+        //gameObjects: WHo died?
+        //remove him
+        Iterator<GameObject> copy = gameObjects.iterator();
+        while(copy.hasNext()) {
 
-            if(object instanceof Movable) {
+            GameObject object = copy.next();
 
-                ((Movable) object).move(delta);
+            if(!object.isDead()) {
+
+                if(object instanceof Movable) {
+
+                    ((Movable) object).move(delta);
+                }
+
+                continue;
             }
+
+            copy.remove();
+            removeObject(object);
         }
 
         collisionDetector.checkCollision(gameObjects);
@@ -100,7 +136,7 @@ public class Stage {
 
         if(handleKey(player2, key, P2_UP, P2_DOWN)) {
 
-            return;
+            //TODO Return if more keys
         }
     }
 
@@ -126,5 +162,16 @@ public class Stage {
 
             player2.updateDirection(0);
         }
+    }
+
+    public void removeObject(GameObject object) {
+
+        Canvas.getInstance().hide(object.getShape());
+        gameObjects.remove(object);
+    }
+
+    public Set<GameObject> getGameObjects() {
+
+        return gameObjects;
     }
 }
