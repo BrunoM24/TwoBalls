@@ -34,9 +34,7 @@ public class Stage {
 
     ScoreManager scoreManager;
 
-    private Game game;
-
-    public Stage(Game game, int width, int height) {
+    Stage(Game game, int width, int height) {
 
         //this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
         this.backGround = new Picture(PADDING, PADDING, "assets/background.jpg");
@@ -45,11 +43,9 @@ public class Stage {
 
         scoreManager = new ScoreManager();
         scoreManager.draw();
-
-        this.game = game;
     }
 
-    public void initializeObjects() {
+    void initializeObjects() {
 
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
@@ -71,9 +67,6 @@ public class Stage {
         int brickHeight = 64;
         int brickSpacing = 1;
 
-
-        System.out.println("Hright : " + GameScreen.getHeight() + " Width : " + GameScreen.getWidth());
-        System.out.println();
 
         for(int y = 0; y < yRange; y++) {
 

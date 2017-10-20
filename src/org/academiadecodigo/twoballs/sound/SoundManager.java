@@ -59,6 +59,12 @@ public class SoundManager {
             return;
         }
 
-        sounds.get(gameSound).play(true);
+
+        if(s.isPlaying()) {
+
+            return;
+        }
+
+        s.play(true);
     }
 }
