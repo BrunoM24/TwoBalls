@@ -27,6 +27,10 @@ public class Stage {
 
     private Picture backGround;
 
+    private Set<GameObject> gameObjectsToAdd = new HashSet<>();
+
+    private Set<GameObject> gameObjectsToRemove = new HashSet<>();
+
     private Set<GameObject> gameObjects = new HashSet<>();
 
     private Paddle player1;
@@ -81,6 +85,20 @@ public class Stage {
     }
 
     public void run(float delta) {
+
+        //Add objects here
+        if(!gameObjectsToAdd.isEmpty()) {
+
+            gameObjects.addAll(gameObjectsToAdd);
+            gameObjectsToAdd.clear();
+        }
+
+        //Remove objects here
+        if(!gameObjectsToRemove.isEmpty()) {
+
+            gameObjects.addAll(gameObjectsToRemove);
+            gameObjectsToRemove.clear();
+        }
 
         Iterator<GameObject> copy = gameObjects.iterator();
         while(copy.hasNext()) {
@@ -155,12 +173,11 @@ public class Stage {
     public void removeObject(GameObject object) {
 
         Canvas.getInstance().hide(object.getShape());
-        gameObjects.remove(object);
+        gameObjectsToRemove.add(object);
     }
 
     public void spawnObject(GameObject object) {
 
-        //TODO replace with insert
-        gameObjects.add(object);
+        gameObjectsToAdd.add(object);
     }
 }
