@@ -3,6 +3,8 @@ package org.academiadecodigo.twoballs.manage;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
+import org.academiadecodigo.twoballs.sound.GameSound;
+import org.academiadecodigo.twoballs.sound.SoundManager;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -34,32 +36,6 @@ public class CollisionDetector {
             }
 
             shapes.add(b.getBounds());
-            /*
-            int buffer = 2;
-            int x = a.getX();
-            int rightX = x + a.getWidth();
-            int y = a.getY();
-            int rightY = y + a.getHeight();
-
-            if(!a.getBounds().intersects(b.getBounds())) {
-
-                continue;
-            }
-
-            boolean topLeftSameX = x + buffer >= b.getX() - buffer && x - buffer <= b.getX() + b.getWidth() + buffer;
-            boolean topLeftSameY = y + buffer >= b.getY() - buffer && y - buffer <= b.getY() + b.getHeight() + buffer;
-
-            boolean bottomRightSameX = rightX + buffer >= b.getX() - buffer && rightX <= b.getX() + b.getWidth();
-            boolean bottomRightSameY = rightY + buffer >= b.getY() - buffer && rightY <= b.getY() + b.getHeight();
-
-            //System.out.println("A: " + (topLeftSameX && topLeftSameY));
-            //System.out.println("B: " + (bottomRightSameX && bottomRightSameY));
-
-            if((topLeftSameX && topLeftSameY) || (bottomRightSameX && bottomRightSameY)) {
-
-                shapes.add(b.getBounds());
-            }
-            */
         }
 
         return shapes;
@@ -94,6 +70,8 @@ public class CollisionDetector {
 
                     continue;
                 }
+
+                SoundManager.getInstance().playSound(GameSound.BOUNCE);
 
                 if(objectB instanceof Paddle) {
 

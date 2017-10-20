@@ -9,8 +9,8 @@ import java.awt.*;
  */
 public abstract class GameObject {
 
-    protected Rectangle bounds;
-    protected Shape shape;
+    Rectangle bounds;
+    Shape shape;
 
     public int getX() {
 
@@ -32,6 +32,7 @@ public abstract class GameObject {
         return (int) bounds.getHeight();
     }
 
+    @Deprecated
     public Shape getShape() {
 
         return shape;
