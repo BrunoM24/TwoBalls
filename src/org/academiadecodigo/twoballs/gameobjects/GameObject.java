@@ -1,6 +1,7 @@
 package org.academiadecodigo.twoballs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Shape;
+import org.academiadecodigo.twoballs.manage.ObjectFactory;
 
 import java.awt.*;
 

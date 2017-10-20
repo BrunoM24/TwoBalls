@@ -64,16 +64,15 @@ public class Stage {
         int brickSpacing = 0;
 
         int initialX = (GameScreen.getWidth() - (xRange * (brickWidth + brickSpacing))) / 2;
-        for(int y = 0; y < yRange; y++) {
+        for (int y = 0; y < yRange; y++) {
 
-            for(int x = 0; x < xRange; x++) {
+            for (int x = 0; x < xRange; x++) {
 
                 int dur = 0;
-                if(x == 1 || x == 3) {
+                if (x == 1 || x == 3) {
 
                     dur = 1;
-                }
-                else if(x == 2) {
+                } else if (x == 2) {
 
                     dur = 2;
                 }
@@ -86,32 +85,46 @@ public class Stage {
     public void run(float delta) {
 
         //Add objects here
-        if(!gameObjectsToAdd.isEmpty()) {
+        if (!gameObjectsToAdd.isEmpty()) {
 
             gameObjects.addAll(gameObjectsToAdd);
             gameObjectsToAdd.clear();
         }
 
         //Remove objects here
-        if(!gameObjectsToRemove.isEmpty()) {
+        if (!gameObjectsToRemove.isEmpty()) {
 
-            gameObjects.addAll(gameObjectsToRemove);
+            Iterator<GameObject> copy = gameObjects.iterator();
+            while (copy.hasNext()) {
+
+                GameObject go = copy.next();
+                for (GameObject goB : gameObjectsToRemove) {
+
+                    if (go.equals(goB)) {
+
+                        Canvas.getInstance().hide(go.getShape());
+                        gameObjects.remove(go);
+                        //TODO remove from the gameObjects
+                    }
+                }
+            }
+
             gameObjectsToRemove.clear();
         }
 
         Iterator<GameObject> copy = gameObjects.iterator();
-        while(copy.hasNext()) {
+        while (copy.hasNext()) {
 
             GameObject object = copy.next();
 
-            if(!object.isDead()) {
+            if (!object.isDead()) {
 
-                if(object instanceof Movable) {
+                if (object instanceof Movable) {
 
                     ((Movable) object).move(delta);
                 }
 
-                if(!(object instanceof Ball)) {
+                if (!(object instanceof Ball)) {
 
                     continue;
                 }
@@ -130,12 +143,12 @@ public class Stage {
 
     void keyPressed(int key) {
 
-        if(handleKey(player1, key, P1_UP, P1_DOWN)) {
+        if (handleKey(player1, key, P1_UP, P1_DOWN)) {
 
             return;
         }
 
-        if(handleKey(player2, key, P2_UP, P2_DOWN)) {
+        if (handleKey(player2, key, P2_UP, P2_DOWN)) {
 
             //TODO Return if more keys
         }
@@ -143,7 +156,7 @@ public class Stage {
 
     private boolean handleKey(Paddle player, int key, int up, int down) {
 
-        if(key == down || key == up) {
+        if (key == down || key == up) {
 
             player.updateDirection(key == up ? -1 : 1);
             return true;
@@ -154,16 +167,12 @@ public class Stage {
 
     void keyReleased(int key) {
 
-        if(key == P1_DOWN || key == P1_UP) {
-            ObjectFactory.spawnParticle(100, 100);
-            ObjectFactory.spawnParticle(100, 100);
-            ObjectFactory.spawnParticle(100, 100);
-            ObjectFactory.spawnParticle(100, 100);
-            ObjectFactory.spawnParticle(100, 100);
+        if (key == P1_DOWN || key == P1_UP) {
+
             player1.updateDirection(0);
         }
 
-        if(key == P2_DOWN || key == P2_UP) {
+        if (key == P2_DOWN || key == P2_UP) {
 
             player2.updateDirection(0);
         }
@@ -171,7 +180,6 @@ public class Stage {
 
     public void removeObject(GameObject object) {
 
-        Canvas.getInstance().hide(object.getShape());
         gameObjectsToRemove.add(object);
     }
 
