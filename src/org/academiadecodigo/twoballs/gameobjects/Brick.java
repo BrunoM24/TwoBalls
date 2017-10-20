@@ -14,47 +14,45 @@ public class Brick extends GameObject {
 
     private Picture[] images = new Picture[3];
 
+    int index = 0;
+
     public Brick(int x, int y, int durability) {
 
         this.durability = durability;
-        initializeImgs(x, y);
 
-        shape = images[durability];
-        shape.draw();
+        shape = changeImage(x, y);
         bounds = new Rectangle(x, y, shape.getWidth(), shape.getHeight());
     }
 
-    private void initializeImgs(int x, int y) {
+    private Picture changeImage(int x, int y) {
 
-        for(int n = 0; n < images.length; n++) {
+        String color = "Gray";
 
-            String color = "Gray";
+        if (durability == 2) {
 
-            if(durability == 2) {
+            color = "Blue";
+        } else if (durability == 1) {
 
-                color = "Blue";
-            }
-            else if(durability == 1) {
-
-                color = "Green";
-            }
-
-            images[n] = new Picture(x, y, "assets/brick" + color + ".png");
+            color = "Green";
         }
+
+        Picture p = new Picture(x, y,"assets/brick" + color + ".png");
+        p.draw();
+        return p;
     }
 
     public void deleteBrick() {
 
+        Canvas.getInstance().hide(shape);
+
         durability--;
 
-        if(durability <= -1) {
+        if (durability <= -1) {
 
             kill();
             return;
         }
 
-        Canvas.getInstance().hide(shape);
-        shape = images[durability];
-        shape.draw();
+        shape = changeImage(getX(), getY());
     }
 }
