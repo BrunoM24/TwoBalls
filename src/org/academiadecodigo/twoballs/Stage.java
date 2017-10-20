@@ -1,7 +1,6 @@
 package org.academiadecodigo.twoballs;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.twoballs.gameobjects.Brick;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
@@ -21,7 +20,8 @@ public class Stage {
 
     public static final int PADDING = 10;
 
-    private Rectangle bkgRectangle;
+    //private Rectangle bkgRectangle;
+    private Picture backGround;
 
     private Set<GameObject> gameObjects = new HashSet<>();  //elaborate a functional SET list
 
@@ -35,9 +35,10 @@ public class Stage {
 
     public Stage(int width, int height) {
 
-        this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
-
-        bkgRectangle.draw();
+        //this.bkgRectangle = new Rectangle(PADDING, PADDING, width, height);
+        this.backGround = new Picture(PADDING, PADDING, "assets/background.jpg");
+        //bkgRectangle.draw();
+        this.backGround.draw();
 
         scoreManager = new ScoreManager();
         scoreManager.draw();
@@ -47,13 +48,16 @@ public class Stage {
 
         gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
         gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
+        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2, GameScreen.getHeight() / 2, 1, 0));
+        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2, GameScreen.getHeight() / 2, -1, 0));
 
-        int numberOfBalls = 3;
+        /*
+        int numberOfBalls = 0;
 
         for(int i = 1; i <= numberOfBalls; i++) {
 
-            gameObjects.add(ObjectFactory.getNewBall(150, 150));
-        }
+            gameObjects.add(ObjectFactory.getNewBall(250, 250, -1, -1));
+        }*/
 
         //TODO SPAWN BRICKS
         int xRange = 7;
@@ -66,15 +70,14 @@ public class Stage {
         System.out.println("Hright : " + GameScreen.getHeight() + " Width : " + GameScreen.getWidth());
         System.out.println();
 
-        for(int y = 0; y < yRange; y++) {
+        for (int y = 0; y < yRange; y++) {
 
-            new Brick (400+brickWidth*y+brickSpacing*y, 58);
+            new Brick(400 + brickWidth * y + brickSpacing * y, 58);
 
 
+            for (int x = 0; x < xRange; x++) {
 
-            for(int x = 0; x < xRange; x++) {
-
-               new Brick (400+brickWidth*y+brickSpacing*y, 58+brickHeight*x+brickSpacing*x );
+                new Brick(400 + brickWidth * y + brickSpacing * y, 58 + brickHeight * x + brickSpacing * x);
             }
         }
 
@@ -83,9 +86,9 @@ public class Stage {
 
     public void run(float delta) {
 
-        for(GameObject object : gameObjects) {
+        for (GameObject object : gameObjects) {
 
-            if(object instanceof Movable) {
+            if (object instanceof Movable) {
 
                 ((Movable) object).move(delta);
             }
@@ -97,12 +100,12 @@ public class Stage {
 
     void keyPressed(int key) {
 
-        if(handleKey(player1, key, P1_UP, P1_DOWN)) {
+        if (handleKey(player1, key, P1_UP, P1_DOWN)) {
 
             return;
         }
 
-        if(handleKey(player2, key, P2_UP, P2_DOWN)) {
+        if (handleKey(player2, key, P2_UP, P2_DOWN)) {
 
             return;
         }
@@ -110,7 +113,7 @@ public class Stage {
 
     private boolean handleKey(Paddle player, int key, int up, int down) {
 
-        if(key == down || key == up) {
+        if (key == down || key == up) {
 
             player.updateDirection(key == up ? -1 : 1);
             return true;
@@ -121,12 +124,12 @@ public class Stage {
 
     void keyReleased(int key) {
 
-        if(key == P1_DOWN || key == P1_UP) {
+        if (key == P1_DOWN || key == P1_UP) {
 
             player1.updateDirection(0);
         }
 
-        if(key == P2_DOWN || key == P2_UP) {
+        if (key == P2_DOWN || key == P2_UP) {
 
             player2.updateDirection(0);
         }

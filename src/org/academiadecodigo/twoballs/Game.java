@@ -1,5 +1,6 @@
 package org.academiadecodigo.twoballs;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.academiadecodigo.twoballs.input.KeyboardManager;
 
 /**
@@ -43,8 +44,32 @@ public class Game {
 
     }
 
+    private int frames;
     public void start() {
 
+
+        long timer = System.currentTimeMillis();
+        /*
+
+        while(true) {
+
+            if((delta = System.currentTimeMillis() - lastTime) > IDEAL_DELTA) {
+
+                delta /= 10;
+
+                run();
+                lastTime = System.currentTimeMillis();
+            }
+
+            if(System.currentTimeMillis() - timer > 1000) {
+
+                timer += 1000;
+                PauseText.fpsText.setText("" + frames);
+                System.out.println("FPS: " + frames + ", " + System.currentTimeMillis() + ", " + delta);
+                frames = 0;
+            }
+        }
+*/
         while(true) {
 
             long now = System.nanoTime();
@@ -56,6 +81,14 @@ public class Game {
 
             //sets the new time
             lastTime = now;
+
+            if(System.currentTimeMillis() - timer > 1000) {
+
+                timer += 1000;
+                PauseText.fpsText.setText("" + frames);
+                //System.out.println("FPS: " + frames + ", " + System.currentTimeMillis() + ", " + delta);
+                frames = 0;
+            }
         }
     }
 
@@ -88,6 +121,7 @@ public class Game {
 
             stage.run((float) delta);
             delta--;
+            frames++;
         }
     }
 

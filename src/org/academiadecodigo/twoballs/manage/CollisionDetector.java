@@ -1,11 +1,11 @@
 package org.academiadecodigo.twoballs.manage;
 
-import org.academiadecodigo.simplegraphics.graphics.Shape;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,9 +18,9 @@ public class CollisionDetector {
 
     private Collider collider = new Collider();
 
-    private List<Shape> shapesOnTop(Set<GameObject> gameObjects, GameObject a) {
+    private List<Rectangle> shapesOnTop(Set<GameObject> gameObjects, GameObject a) {
 
-        List<Shape> shapes = new ArrayList<>();
+        List<Rectangle> shapes = new ArrayList<>();
 
         for(GameObject b : gameObjects) {
 
@@ -29,11 +29,23 @@ public class CollisionDetector {
                 continue;
             }
 
+            if(!a.getBounds().intersects(b.getBounds())) {
+
+                continue;
+            }
+
+            shapes.add(b.getBounds());
+            /*
             int buffer = 2;
             int x = a.getX();
             int rightX = x + a.getWidth();
             int y = a.getY();
             int rightY = y + a.getHeight();
+
+            if(!a.getBounds().intersects(b.getBounds())) {
+
+                continue;
+            }
 
             boolean topLeftSameX = x + buffer >= b.getX() - buffer && x - buffer <= b.getX() + b.getWidth() + buffer;
             boolean topLeftSameY = y + buffer >= b.getY() - buffer && y - buffer <= b.getY() + b.getHeight() + buffer;
@@ -46,8 +58,9 @@ public class CollisionDetector {
 
             if((topLeftSameX && topLeftSameY) || (bottomRightSameX && bottomRightSameY)) {
 
-                shapes.add(b.getShape());
+                shapes.add(b.getBounds());
             }
+            */
         }
 
         return shapes;
@@ -66,20 +79,26 @@ public class CollisionDetector {
                 continue;
             }
 
-            List<Shape> shapes = shapesOnTop(objSet, gameObject);
+            List<Rectangle> shapes = shapesOnTop(objSet, gameObject);
 
             Iterator<GameObject> innerIterator = objSet.iterator();
             while(innerIterator.hasNext()) {
 
                 GameObject objectB = innerIterator.next();
 
-                if(!shapes.contains(objectB.getShape())) {
+                if(objectB.equals(gameObject)) {
+
+                    continue;
+                }
+
+                if(!shapes.contains(objectB.getBounds())) {
 
                     continue;
                 }
 
                 if(objectB instanceof Paddle) {
 
+                    //collide((Ball) gameObject, (Paddle) objectB);
                     collider.collide((Ball) gameObject, (Paddle) objectB);
                 }
                 else if(objectB instanceof Ball) {
@@ -92,5 +111,22 @@ public class CollisionDetector {
                 }
             }
         }
+    }
+
+    private void collide(Ball ball, Paddle paddle) {
+
+        //System.out.println(ball + "_____" + paddle);
+
+        //if on the left side of the paddle
+        int buffer = 2;
+        int x = ball.getX();
+        int rightX = x + ball.getWidth();
+        int y = ball.getY();
+        int rightY = y + ball.getHeight();
+
+        ball.flipX(false);
+        //ball move a little to the left
+        ball.move(1.0f);
+        //then update its position
     }
 }
