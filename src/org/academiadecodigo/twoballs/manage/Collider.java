@@ -20,6 +20,7 @@ public class Collider {
         }
 
         //TODO I Think I saw a ball enter a brick from downLeft side
+        //TODO I SAW a ball enter in a U shape and then ghost through it
 
         //DIAGONAL CHECK
         boolean ballIsUp = ball.getY() <= object.getY();
