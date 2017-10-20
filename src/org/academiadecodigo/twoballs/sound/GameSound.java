@@ -11,7 +11,6 @@ public enum GameSound {
     PUF("puf"),
     GARGALHADA1("gargalhada1"),
     GARGALHADA2("gargalhada2"),
-    GARGALHADA3("gargalhada3"),
     DRSH1("drsh1"),
     DRSH2("drsh2"),
     DRSH3("drsh3"),
@@ -20,12 +19,14 @@ public enum GameSound {
     DRSH6("drsh6"),
     PAKIN("pakin");
 
+
     private String path;
 
     GameSound(String sound) {
 
         path = "/assets/sound/" + sound + ".wav";
     }
+
 
     public String getPath() {
 

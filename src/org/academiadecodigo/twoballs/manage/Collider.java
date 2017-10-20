@@ -3,6 +3,7 @@ package org.academiadecodigo.twoballs.manage;
 import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
+import org.academiadecodigo.twoballs.sound.SoundManager;
 
 /**
  * Created by miro on 20/10/2017.
@@ -52,6 +53,8 @@ public class Collider {
 
             ball.getDirection().y = 1;
         }
+        SoundManager.getInstance().playSound(SoundManager.getInstance().drsh());
+
     }
 
     private float paddleHeightDivision(int divisionNumber, GameObject object) {
