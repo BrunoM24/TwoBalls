@@ -39,10 +39,6 @@ public class Collider {
             ball.getDirection().y = 1;
         }
 
-
-        if (touchDown) {
-            System.out.println("touchdown");
-        }
     }
 
 
