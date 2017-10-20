@@ -47,9 +47,9 @@ public class ObjectFactory {
         return new Paddle(color, x, y);
     }
 
-    public static Brick getNewBrick(int x, int y) {
+    public static Brick getNewBrick(int x, int y, int dur) {
 
-        return new Brick(x, y);
+        return new Brick(x, y, dur);
     }
 
     public static void removeObject(GameObject object) {

@@ -1,5 +1,6 @@
 package org.academiadecodigo.twoballs;
 
+import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
@@ -10,6 +11,7 @@ import org.academiadecodigo.twoballs.manage.ObjectFactory;
 import org.academiadecodigo.twoballs.manage.ScoreManager;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import static org.academiadecodigo.twoballs.input.KeyboardManager.*;
@@ -67,17 +69,26 @@ public class Stage {
         int yRange = 5;
         int brickWidth = 32;
         int brickHeight = 64;
-        int brickSpacing = 2;
+        int brickSpacing = 0;//TODO
 
 
         for(int y = 0; y < yRange; y++) {
 
-            gameObjects.add(new Brick(400 + brickWidth * y + brickSpacing * y, 58));
+            gameObjects.add(new Brick(400 + brickWidth * y + brickSpacing * y, 58, 0));
 
+            int dur = 0;
+            if(y == 1 || y == 3) {
+
+                dur = 1;
+            }
+            else if(y == 2) {
+
+                dur = 2;
+            }
 
             for(int x = 0; x < xRange; x++) {
 
-                gameObjects.add(new Brick(400 + brickWidth * y + brickSpacing * y, 58 + brickHeight * x + brickSpacing * x));
+                gameObjects.add(new Brick(400 + brickWidth * y + brickSpacing * y, 58 + brickHeight * x + brickSpacing * x, dur));
             }
         }
 
@@ -86,12 +97,25 @@ public class Stage {
 
     public void run(float delta) {
 
-        for(GameObject object : gameObjects) {
+        //gameObjects: WHo died?
+        //remove him
+        Iterator<GameObject> copy = gameObjects.iterator();
+        while(copy.hasNext()) {
 
-            if(object instanceof Movable) {
+            GameObject object = copy.next();
 
-                ((Movable) object).move(delta);
+            if(!object.isDead()) {
+
+                if(object instanceof Movable) {
+
+                    ((Movable) object).move(delta);
+                }
+
+                continue;
             }
+
+            copy.remove();
+            removeObject(object);
         }
 
         collisionDetector.checkCollision(gameObjects);
@@ -107,7 +131,7 @@ public class Stage {
 
         if(handleKey(player2, key, P2_UP, P2_DOWN)) {
 
-            return;
+            //TODO Return if more keys
         }
     }
 
@@ -137,6 +161,12 @@ public class Stage {
 
     public void removeObject(GameObject object) {
 
+        Canvas.getInstance().hide(object.getShape());
         gameObjects.remove(object);
+    }
+
+    public Set<GameObject> getGameObjects() {
+
+        return gameObjects;
     }
 }

@@ -10,7 +10,10 @@ import java.awt.*;
 public abstract class GameObject {
 
     Rectangle bounds;
+
     Shape shape;
+
+    private boolean dead;
 
     public int getX() {
 
@@ -47,5 +50,15 @@ public abstract class GameObject {
     public String toString() {
 
         return getClass().getSimpleName() + ": {x=" + getX() + ", y=" + getY() + ", w=" + getWidth() + ", h=" + getHeight() + "}";
+    }
+
+    public boolean isDead() {
+
+        return dead;
+    }
+
+    public void kill() {
+
+        this.dead = true;
     }
 }
