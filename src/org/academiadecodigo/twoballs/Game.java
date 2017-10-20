@@ -27,7 +27,7 @@ public class Game {
 
     private PauseText pauseText;
 
-    private int frames;
+    int frames;
 
 
     Game() {
@@ -37,13 +37,12 @@ public class Game {
 
     private void init() {
 
-        int width = 960;
-        int height = 544;
+        //int width = 960;
+        //int height = 544;
 
-        stage = new Stage(width, height);
+        stage = new Stage();
 
         stage.initializeObjects();
-       // stage.test();
 
         keyboardManager = new KeyboardManager(this);
 

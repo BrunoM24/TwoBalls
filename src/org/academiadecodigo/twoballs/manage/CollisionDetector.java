@@ -4,105 +4,77 @@ import org.academiadecodigo.twoballs.gameobjects.Ball;
 import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
-import org.academiadecodigo.twoballs.sound.GameSound;
-import org.academiadecodigo.twoballs.sound.SoundManager;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 /**
- * Created by codecadet on 18/10/17.
+ * Created by miro on 20/10/2017.
  */
 public class CollisionDetector {
 
+    int buffer = 2;
+
     private Collider collider = new Collider();
 
-    private List<Rectangle> shapesOnTop(Set<GameObject> gameObjects, GameObject a) {
+    public void checkCollisions(Ball ball, Set<GameObject> gameObjects) {
 
-        List<Rectangle> shapes = new ArrayList<>();
+        ArrayList<GameObject> objsOnTop = objectsOnTop(ball, gameObjects);
 
-        for(GameObject b : gameObjects) {
+        if(objsOnTop.isEmpty()) {
 
-            if(a.equals(b)) {
-
-                continue;
-            }
-
-            if(!a.getBounds().intersects(b.getBounds())) {
-
-                continue;
-            }
-
-            shapes.add(b.getBounds());
+            return;
         }
 
-        return shapes;
+        GameObject object = objsOnTop.get(0);
+
+
+        if(!ball.canCollideWith(object)) {
+
+            return;
+        }
+
+        ball.setLastObjectTouched(object);
+
+        collider.updateBall(buffer, ball, object);
+
+        if(object instanceof Ball) {
+
+            collider.ballOnBall(ball, (Ball) object);
+        }
+        else if(object instanceof Paddle) {
+
+            collider.ballOnPaddle(ball, (Paddle) object);
+        }
+        else if(object instanceof Brick) {
+
+            collider.ballOnBrick(ball, (Brick) object);
+        }
     }
 
+    private ArrayList<GameObject> objectsOnTop(Ball ball, Set<GameObject> gameObjects) {
 
-    public void checkCollision(Set<GameObject> objSet) {
+        ArrayList<GameObject> objects = new ArrayList<>();
 
-        Iterator<GameObject> iterator = objSet.iterator();
+        Iterator<GameObject> iterator = gameObjects.iterator();
         while(iterator.hasNext()) {
 
-            GameObject gameObject = iterator.next();
+            GameObject objB = iterator.next();
 
-            if(!(gameObject instanceof Ball)) {
+            if(objB.equals(ball)) {
 
                 continue;
             }
 
-            List<Rectangle> shapes = shapesOnTop(objSet, gameObject);
+            if(!ball.getBounds().intersects(objB.getX() - buffer, objB.getY() - buffer, objB.getWidth() + buffer, objB.getHeight() + buffer)) {
 
-            Iterator<GameObject> innerIterator = objSet.iterator();
-            while(innerIterator.hasNext()) {
-
-                GameObject objectB = innerIterator.next();
-
-                if(objectB.equals(gameObject)) {
-
-                    continue;
-                }
-
-                if(!shapes.contains(objectB.getBounds())) {
-
-                    continue;
-                }
-
-                if(objectB instanceof Paddle) {
-
-                    //collide((Ball) gameObject, (Paddle) objectB);
-                    collider.collide((Ball) gameObject, (Paddle) objectB);
-                }
-                else if(objectB instanceof Ball) {
-
-                    collider.collide((Ball) gameObject, (Ball) objectB);
-                }
-                else if(objectB instanceof Brick) {
-
-                    collider.collide((Ball) gameObject, (Brick) objectB );
-                }
+                continue;
             }
+
+            objects.add(objB);
         }
-    }
 
-    private void collide(Ball ball, Paddle paddle) {
-
-        //System.out.println(ball + "_____" + paddle);
-
-        //if on the left side of the paddle
-        int buffer = 2;
-        int x = ball.getX();
-        int rightX = x + ball.getWidth();
-        int y = ball.getY();
-        int rightY = y + ball.getHeight();
-
-        ball.flipX(false);
-        //ball move a little to the left
-        ball.move(1.0f);
-        //then update its position
+        return objects;
     }
 }

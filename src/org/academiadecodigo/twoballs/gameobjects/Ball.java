@@ -23,10 +23,9 @@ public class Ball extends GameObject implements Movable {
 
     private int dx, dy;
 
-    private long lastChanged;
+    private GameObject lastGameObjectTouched;
 
-    //TODO IF RUBBERBANDING HAPPENS, CHANGE IT HERE
-    private int timeToBounce = 300;
+    private Paddle lastPaddleTouched;
 
     public Ball(int x, int y) {
 
@@ -61,44 +60,44 @@ public class Ball extends GameObject implements Movable {
 
     private void keepInScreen() {
 
-        if(getX() <= 0) {
+        if (getX() <= 0) {
 
             translate(getX() * -1, 0);
-            if(direction.x < 0) {
+            if (direction.x < 0) {
 
-                flipX(true);
+                flipX();
             }
         }
 
-        if(getY() <= 0) {
+        if (getY() <= 0) {
 
             translate(0, getY() * -1);
-            if(direction.y < 0) {
+            if (direction.y < 0) {
 
-                flipY(true);
+                flipY();
             }
         }
 
-        if(getX() + getWidth() > GameScreen.getWidth()) {
+        if (getX() + getWidth() > GameScreen.getWidth()) {
 
             translate(-1, 0);
-            if(direction.x > 0) {
+            if (direction.x > 0) {
 
-                flipX(true);
+                flipX();
             }
         }
 
-        if(getY() + getHeight() > GameScreen.getHeight()) {
+        if (getY() + getHeight() > GameScreen.getHeight()) {
 
             translate(0, -1);
-            if(direction.y > 0) {
+            if (direction.y > 0) {
 
-                flipY(true);
+                flipY();
             }
         }
     }
 
-    private void translate(float x, float y) {
+    public void translate(float x, float y) {
 
         ((Picture) shape).translate(x, y);
         bounds.setLocation(shape.getX(), shape.getY());
@@ -106,39 +105,31 @@ public class Ball extends GameObject implements Movable {
 
     private void checkBoundaries(float delta) {
 
-        if(getX() + dx * delta < GameScreen.getX() || getX() + getWidth() + dx * delta > GameScreen.getWidth()) {
+        if (getX() + dx * delta < GameScreen.getX() || getX() + getWidth() + dx * delta > GameScreen.getWidth()) {
 
             //DECREASE POINTS
             dx *= -1;
-            flipX(true);
+            flipX();
             SoundManager.getInstance().playSound(GameSound.BOUNCE);
+            setLastObjectTouched(null);
         }
 
-        if(getY() + dy * delta < GameScreen.getY() || getY() + getHeight() + dy * delta > GameScreen.getHeight()) {
+        if (getY() + dy * delta < GameScreen.getY() || getY() + getHeight() + dy * delta > GameScreen.getHeight()) {
 
             dy *= -1;
-            flipY(true);
+            flipY();
             SoundManager.getInstance().playSound(GameSound.BOUNCE);
+            setLastObjectTouched(null);
         }
     }
 
-    public void flipX(boolean force) {
-
-        if(!canBounce() && !force) {
-
-            return;
-        }
+    public void flipX() {
 
         direction.x *= -1;
         speed.x = calcSpeed();
     }
 
-    public void flipY(boolean force) {
-
-        if(!canBounce() && !force) {
-
-            return;
-        }
+    public void flipY() {
 
         direction.y *= -1;
         speed.y = calcSpeed();
@@ -150,15 +141,8 @@ public class Ball extends GameObject implements Movable {
     }
 
 
-    private boolean canBounce() {
-
-        if(System.currentTimeMillis() - lastChanged < timeToBounce) {
-
-            return false;
-        }
-
-        lastChanged = System.currentTimeMillis();
-        return true;
+    public void changeToPaddleColor(){
+        //TODO change image with according color
     }
 
 
@@ -175,5 +159,23 @@ public class Ball extends GameObject implements Movable {
     public int getDirectionY() {
 
         return direction.y;
+    }
+
+    public void setLastObjectTouched(GameObject gameObject) {
+
+        lastGameObjectTouched = gameObject;
+
+        if (gameObject instanceof Paddle){
+            lastPaddleTouched = (Paddle) gameObject;
+        }
+    }
+
+    public GameObject getLastGameObjectTouched() {
+        return lastGameObjectTouched;
+    }
+
+    public boolean canCollideWith(GameObject object) {
+
+        return lastGameObjectTouched != object;
     }
 }
