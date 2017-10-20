@@ -37,7 +37,7 @@ public class CollisionDetector {
 
         ball.setLastObjectTouched(object);
 
-        collider.updateBall(buffer, ball, object);
+        collider.updateBall(buffer * 3, ball, object);
 
         if(object instanceof Ball) {
 
