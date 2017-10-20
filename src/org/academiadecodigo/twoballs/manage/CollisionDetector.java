@@ -1,7 +1,9 @@
 package org.academiadecodigo.twoballs.manage;
 
 import org.academiadecodigo.twoballs.gameobjects.Ball;
+import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
+import org.academiadecodigo.twoballs.gameobjects.Paddle;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,6 +15,7 @@ import java.util.Set;
 public class CollisionDetector {
 
     int buffer = 2;
+
     private Collider collider = new Collider();
 
     public void checkCollisions(Ball ball, Set<GameObject> gameObjects) {
@@ -24,13 +27,29 @@ public class CollisionDetector {
             return;
         }
 
-        for(GameObject object : objsOnTop) {
+        GameObject object = objsOnTop.get(0);
 
-            //Bola vira pra tras
-            if(object instanceof Ball) {
 
-                collider.ballOnBall(ball, (Ball) object);
-            }
+        if(!ball.canCollideWith(object)) {
+
+            return;
+        }
+
+        ball.setLastObjectTouched(object);
+
+        collider.updateBall(buffer, ball, object);
+
+        if(object instanceof Ball) {
+
+            collider.ballOnBall(ball, (Ball) object);
+        }
+        else if(object instanceof Paddle) {
+
+            collider.ballOnPaddle(ball, (Paddle) object);
+        }
+        else if(object instanceof Brick) {
+
+            collider.ballOnBrick(ball, (Brick) object);
         }
     }
 

@@ -98,7 +98,7 @@ public class OldCollisionDetector {
         int y = ball.getY();
         int rightY = y + ball.getHeight();
 
-        ball.flipX(false);
+        ball.flipX();
         //ball move a little to the left
         ball.move(1.0f);
         //then update its position

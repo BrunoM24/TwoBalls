@@ -29,7 +29,7 @@ public class OldCollider {
         boolean touchDown = (ball.getY() <= paddle.getY() + paddle.getHeight()) && (ballCenterLine > (paddle.getY() + secondDivision));
 
 
-        ball.flipX(false);
+        ball.flipX();
 
         if (touchUp && ball.getDirectionY() >= 0) {
 
@@ -52,29 +52,29 @@ public class OldCollider {
 
 
         if (ballA.getDirectionX() > 0 && ballB.getDirectionX() < 0 && ballA_TouchingFromLeft) {
-            ballA.flipX(true);
-            ballB.flipX(true);
+            ballA.flipX();
+            ballB.flipX();
         }
 
         if (ballA.getDirectionX() < 0 && ballB.getDirectionX() < 0 && ballA_TouchingFromLeft) {
-            ballB.flipX(true);
+            ballB.flipX();
         }
 
         if (ballA.getDirectionX() > 0 && ballB.getDirectionX() > 0 && ballA_TouchingFromLeft) {
-            ballA.flipX(true);
+            ballA.flipX();
         }
 
         if (ballA.getDirectionY() > 0 && ballB.getDirectionY() < 0 && ballA_TouchingFromTop) {
-            ballA.flipY(true);
-            ballB.flipY(true);
+            ballA.flipY();
+            ballB.flipY();
         }
 
         if (ballA.getDirectionY() < 0 && ballB.getDirectionY() < 0 && ballA_TouchingFromTop) {
-            ballB.flipY(true);
+            ballB.flipY();
         }
 
         if (ballA.getDirectionY() > 0 && ballB.getDirectionY() > 0 && ballA_TouchingFromTop) {
-            ballA.flipY(true);
+            ballA.flipY();
         }
 
     }
@@ -88,12 +88,12 @@ public class OldCollider {
         boolean touchLeftSideOfBrick = (ball.getX() + ball.getWidth() >= brick.getX());
 
         if (touchBottomOfBrick || touchTopOfBrick) {
-            ball.flipY(true);
+            ball.flipY();
             brick.deleteBrick();
         }
 
         if (touchLeftSideOfBrick || touchRightSideOfBrick) {
-            ball.flipX(true);
+            ball.flipX();
             brick.deleteBrick();
         }
 

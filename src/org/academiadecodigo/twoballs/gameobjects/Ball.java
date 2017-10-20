@@ -23,14 +23,9 @@ public class Ball extends GameObject implements Movable {
 
     private int dx, dy;
 
-    private long lastChanged;
-
     private GameObject lastGameObjectTouched;
 
     private Paddle lastPaddleTouched;
-
-    //TODO IF RUBBERBANDING HAPPENS, CHANGE IT HERE
-    private int timeToBounce = 300;
 
     public Ball(int x, int y) {
 
@@ -70,7 +65,7 @@ public class Ball extends GameObject implements Movable {
             translate(getX() * -1, 0);
             if (direction.x < 0) {
 
-                flipX(true);
+                flipX();
             }
         }
 
@@ -79,7 +74,7 @@ public class Ball extends GameObject implements Movable {
             translate(0, getY() * -1);
             if (direction.y < 0) {
 
-                flipY(true);
+                flipY();
             }
         }
 
@@ -88,7 +83,7 @@ public class Ball extends GameObject implements Movable {
             translate(-1, 0);
             if (direction.x > 0) {
 
-                flipX(true);
+                flipX();
             }
         }
 
@@ -97,7 +92,7 @@ public class Ball extends GameObject implements Movable {
             translate(0, -1);
             if (direction.y > 0) {
 
-                flipY(true);
+                flipY();
             }
         }
     }
@@ -114,35 +109,27 @@ public class Ball extends GameObject implements Movable {
 
             //DECREASE POINTS
             dx *= -1;
-            flipX(true);
+            flipX();
             SoundManager.getInstance().playSound(GameSound.BOUNCE);
+            setLastObjectTouched(null);
         }
 
         if (getY() + dy * delta < GameScreen.getY() || getY() + getHeight() + dy * delta > GameScreen.getHeight()) {
 
             dy *= -1;
-            flipY(true);
+            flipY();
             SoundManager.getInstance().playSound(GameSound.BOUNCE);
+            setLastObjectTouched(null);
         }
     }
 
-    public void flipX(boolean force) {
-
-        if (!canBounce() && !force) {
-
-            return;
-        }
+    public void flipX() {
 
         direction.x *= -1;
         speed.x = calcSpeed();
     }
 
-    public void flipY(boolean force) {
-
-        if (!canBounce() && !force) {
-
-            return;
-        }
+    public void flipY() {
 
         direction.y *= -1;
         speed.y = calcSpeed();
@@ -151,18 +138,6 @@ public class Ball extends GameObject implements Movable {
     public int calcSpeed() {
 
         return (int) ((Math.random() * MAX_SPEED) + MIN_SPEED);
-    }
-
-
-    private boolean canBounce() {
-
-        if (System.currentTimeMillis() - lastChanged < timeToBounce) {
-
-            return false;
-        }
-
-        lastChanged = System.currentTimeMillis();
-        return true;
     }
 
 
@@ -197,5 +172,10 @@ public class Ball extends GameObject implements Movable {
 
     public GameObject getLastGameObjectTouched() {
         return lastGameObjectTouched;
+    }
+
+    public boolean canCollideWith(GameObject object) {
+
+        return lastGameObjectTouched != object;
     }
 }
