@@ -1,18 +1,16 @@
 package org.academiadecodigo.twoballs.gameobjects;
 
-import org.academiadecodigo.simplegraphics.graphics.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.gameobjects.move.Direction;
-import org.academiadecodigo.twoballs.gameobjects.move.Speed;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
+import org.academiadecodigo.twoballs.gameobjects.move.Speed;
 
-
+import java.awt.*;
 
 /**
  * Created by codecadet on 20/10/2017.
  */
 public class PowerUp extends GameObject implements Movable {
-
 
     private Speed speed = new Speed();
 
@@ -22,40 +20,39 @@ public class PowerUp extends GameObject implements Movable {
 
     private float dYY;
 
-    private int count=0;
+    private int count = 0;
 
 
     public PowerUp() {
 
         shape = new Picture(100, 100, "assets/ball.png");
         shape.draw();
-        bounds = new java.awt.Rectangle(100, 100, shape.getWidth(), shape.getHeight());
+        bounds = new Rectangle(100, 100, shape.getWidth(), shape.getHeight());
 
         speed.x = 1;
         speed.y = 1;
 
-        direction.x = 1;
+        direction.x = -1;
         //direction.y = 0;
     }
 
 
     public void move(float delta) {
 
-        System.out.println((float) Math.sin(count*3.14/6));
+        //System.out.println((float) Math.sin(count * 3.14 / 6));
 
-        dYY= (float) Math.sin(count*3.14/20);
+        dYY = (float) Math.sin(count * 3.14 / 20);
 
         dx = direction.x * speed.x;
-        dy = 6*dYY * speed.y;
+        dy = 6 * dYY * speed.y;
 
         count++;
 
-
         translate(dx * delta, dy * delta);
-        bounds.setLocation(shape.getX(), shape.getY());
-
 
         // keepInScreen();
+        //TODO if pUp is out of bounds, remove it
+
     }
 
 
@@ -66,7 +63,5 @@ public class PowerUp extends GameObject implements Movable {
     }
 
 
-//TODO PLAYER CATCHES POWERUPS AND FEELS IT; CHECK BOUNDERIES AND DISAPPEARS
-
-
+    //TODO PLAYER CATCHES POWERUPS AND FEELS IT; CHECK BOUNDERIES AND DISAPPEARS
 }

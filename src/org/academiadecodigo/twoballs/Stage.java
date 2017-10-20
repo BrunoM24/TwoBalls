@@ -60,8 +60,6 @@ public class Stage {
 
         gameObjects.add(new PowerUp());
 
-
-
         int xRange = 5;
         int yRange = 8;
         int brickWidth = 32;
@@ -128,12 +126,12 @@ public class Stage {
                     ((Movable) object).move(delta);
                 }
 
-                if (!(object instanceof Ball)) {
+                if (!(object instanceof Ball) && !(object instanceof PowerUp)) {
 
                     continue;
                 }
 
-                collisionDetector.checkCollisions((Ball) object, gameObjects);
+                collisionDetector.checkCollisions(object, gameObjects);
                 continue;
             }
 

@@ -1,10 +1,6 @@
 package org.academiadecodigo.twoballs.manage;
 
-import org.academiadecodigo.twoballs.GameScreen;
-import org.academiadecodigo.twoballs.gameobjects.Ball;
-import org.academiadecodigo.twoballs.gameobjects.Brick;
-import org.academiadecodigo.twoballs.gameobjects.GameObject;
-import org.academiadecodigo.twoballs.gameobjects.Paddle;
+import org.academiadecodigo.twoballs.gameobjects.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,7 +15,7 @@ public class CollisionDetector {
 
     private Collider collider = new Collider();
 
-    public void checkCollisions(Ball ball, Set<GameObject> gameObjects) {
+    public void checkCollisions(GameObject ball, Set<GameObject> gameObjects) {
 
         ArrayList<GameObject> objsOnTop = objectsOnTop(ball, gameObjects);
 
@@ -30,6 +26,22 @@ public class CollisionDetector {
 
         GameObject object = objsOnTop.get(0);
 
+        if(ball instanceof Ball) {
+
+            checkBallCollision((Ball) ball, object);
+        }
+        else if(ball instanceof PowerUp) {
+
+            checkPowerUpCollision((PowerUp) ball, (Paddle) object);
+        }
+    }
+
+    private void checkPowerUpCollision(PowerUp pUp, Paddle paddle) {
+
+        System.out.println(pUp + " is touching " + paddle);
+    }
+
+    private void checkBallCollision(Ball ball, GameObject object) {
 
         if(!ball.canCollideWith(object)) {
 
@@ -50,11 +62,11 @@ public class CollisionDetector {
         else if(object instanceof Brick) {
 
             collider.updateBall(buffer, ball, object);
-            ((Brick) object).damageBrick(ball.getLastPaddleTouched().getPaddleId());
+            ((Brick) object).damageBrick(ball.getLastPaddleTouched() == null ? 0 : ball.getLastPaddleTouched().getPaddleId());
         }
     }
 
-    private ArrayList<GameObject> objectsOnTop(Ball ball, Set<GameObject> gameObjects) {
+    private ArrayList<GameObject> objectsOnTop(GameObject ball, Set<GameObject> gameObjects) {
 
         ArrayList<GameObject> objects = new ArrayList<>();
 
@@ -67,7 +79,6 @@ public class CollisionDetector {
 
                 continue;
             }
-
 
 
             if(!ball.getBounds().intersects(objB.getX() - buffer, objB.getY() - buffer, objB.getWidth() + buffer, objB.getHeight() + buffer)) {
