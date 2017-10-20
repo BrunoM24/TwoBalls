@@ -29,6 +29,8 @@ public class Paddle extends GameObject implements Movable {
         shape = new Picture(x, y, "assets/" + paddleColor + "Paddle.png");
         shape.draw();
         bounds = new Rectangle(x, y, shape.getWidth(), shape.getHeight());
+
+        this.paddleId = paddleId;
     }
 
     public void updateDirection(int newValue) {

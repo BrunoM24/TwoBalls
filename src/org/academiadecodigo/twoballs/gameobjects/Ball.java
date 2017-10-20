@@ -125,7 +125,6 @@ public class Ball extends GameObject implements Movable {
             ScoreManager.instance.addPoints(1, ScoreManager.OUT_OF_BOUNDS_POINTS);
             SoundManager.getInstance().playSound(GameSound.POINTS);
             ScoreManager.instance.checkScore();
-            System.out.println(getLastPaddleTouched().getPaddleId());
         }
 
         if (getY() + dy * delta < GameScreen.getY() || getY() + getHeight() + dy * delta > GameScreen.getHeight()) {
