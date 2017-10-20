@@ -41,7 +41,7 @@ public class Brick extends GameObject {
         return p;
     }
 
-    public void deleteBrick() {
+    public void damageBrick() {
 
         Canvas.getInstance().hide(shape);
 

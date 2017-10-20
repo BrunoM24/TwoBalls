@@ -89,12 +89,12 @@ public class OldCollider {
 
         if (touchBottomOfBrick || touchTopOfBrick) {
             ball.flipY();
-            brick.deleteBrick();
+            brick.damageBrick();
         }
 
         if (touchLeftSideOfBrick || touchRightSideOfBrick) {
             ball.flipX();
-            brick.deleteBrick();
+            brick.damageBrick();
         }
 
     }
