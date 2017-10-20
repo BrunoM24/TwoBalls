@@ -29,6 +29,12 @@ public class Collider {
         boolean touchDown = (ball.getY() <= paddle.getY() + paddle.getHeight()) && (ballCenterLine > secondDivision);
 
 
+        ball.setLastObjectTouched(paddle);
+
+        //System.out.println(ball.getLastGameObjectTouched());
+        //TODO ball color (image) according to last paddle touched. Maybe better
+
+
         ball.flipX(false);
 
         if (touchUp && ball.getDirectionY() >= 0) {
