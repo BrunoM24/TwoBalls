@@ -94,17 +94,16 @@ public class Stage {
         //Remove objects here
         if (!gameObjectsToRemove.isEmpty()) {
 
-            Iterator<GameObject> copy = gameObjects.iterator();
-            while (copy.hasNext()) {
+            for (GameObject goB : gameObjectsToRemove) {
 
-                GameObject go = copy.next();
-                for (GameObject goB : gameObjectsToRemove) {
+                Iterator<GameObject> copy = gameObjects.iterator();
+                while (copy.hasNext()) {
 
+                    GameObject go = copy.next();
                     if (go.equals(goB)) {
 
                         Canvas.getInstance().hide(go.getShape());
-                        gameObjects.remove(go);
-                        //TODO remove from the gameObjects
+                        copy.remove();
                     }
                 }
             }
