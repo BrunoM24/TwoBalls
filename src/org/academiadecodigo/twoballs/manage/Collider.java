@@ -1,6 +1,7 @@
 package org.academiadecodigo.twoballs.manage;
 
 import org.academiadecodigo.twoballs.gameobjects.Ball;
+import org.academiadecodigo.twoballs.gameobjects.Brick;
 import org.academiadecodigo.twoballs.gameobjects.GameObject;
 import org.academiadecodigo.twoballs.gameobjects.Paddle;
 
@@ -78,6 +79,25 @@ public class Collider {
 
     }
 
+
+    public void collide(Ball ball, Brick brick) {
+
+        boolean touchBottomOfBrick = (ball.getY() <= brick.getY() + brick.getHeight());
+        boolean touchTopOfBrick = (ball.getY() + ball.getHeight() >= brick.getY());
+        boolean touchRightSideOfBrick = (ball.getX() <= brick.getX() + brick.getWidth());
+        boolean touchLeftSideOfBrick = (ball.getX() + ball.getWidth() >= brick.getX());
+
+        if (touchBottomOfBrick || touchTopOfBrick) {
+            ball.flipY(true);
+            brick.deleteBrick();
+        }
+
+        if (touchLeftSideOfBrick || touchRightSideOfBrick) {
+            ball.flipX(true);
+            brick.deleteBrick();
+        }
+
+    }
 
     private float paddleHeightDivision(int divisionNumber, GameObject object) {
 

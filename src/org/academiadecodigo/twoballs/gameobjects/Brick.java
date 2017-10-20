@@ -17,4 +17,13 @@ public class Brick extends GameObject {
         shape.draw();
         bounds = new Rectangle(x, y, shape.getWidth(), shape.getHeight());
     }
+
+
+    public void deleteBrick() {
+        durability--;
+        if (durability == 0) {
+            shape.delete();
+
+        }
+    }
 }
