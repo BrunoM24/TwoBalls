@@ -25,7 +25,9 @@ public class Ball extends GameObject implements Movable {
 
     private long lastChanged;
 
-    private GameObject lastTouched;
+    private GameObject lastGameObjectTouched;
+
+    private Paddle lastPaddleTouched;
 
     //TODO IF RUBBERBANDING HAPPENS, CHANGE IT HERE
     private int timeToBounce = 300;
@@ -48,31 +50,6 @@ public class Ball extends GameObject implements Movable {
         direction.y = dirY;
     }
 
-    public void touchedLeft(GameObject gObject) {
-
-        if(lastTouched == gObject) {
-
-            return;
-        }
-        //inverte X
-        flipX(false);
-    }
-
-    public void touchedRight() {
-
-        //inverte X
-    }
-
-    public void touchedDown() {
-
-        //inverte Y
-    }
-
-    public void touchedUp() {
-
-        //inverte Y
-    }
-
     @Override
     public void move(float delta) {
 
@@ -88,37 +65,37 @@ public class Ball extends GameObject implements Movable {
 
     private void keepInScreen() {
 
-        if(getX() <= 0) {
+        if (getX() <= 0) {
 
             translate(getX() * -1, 0);
-            if(direction.x < 0) {
+            if (direction.x < 0) {
 
                 flipX(true);
             }
         }
 
-        if(getY() <= 0) {
+        if (getY() <= 0) {
 
             translate(0, getY() * -1);
-            if(direction.y < 0) {
+            if (direction.y < 0) {
 
                 flipY(true);
             }
         }
 
-        if(getX() + getWidth() > GameScreen.getWidth()) {
+        if (getX() + getWidth() > GameScreen.getWidth()) {
 
             translate(-1, 0);
-            if(direction.x > 0) {
+            if (direction.x > 0) {
 
                 flipX(true);
             }
         }
 
-        if(getY() + getHeight() > GameScreen.getHeight()) {
+        if (getY() + getHeight() > GameScreen.getHeight()) {
 
             translate(0, -1);
-            if(direction.y > 0) {
+            if (direction.y > 0) {
 
                 flipY(true);
             }
@@ -133,7 +110,7 @@ public class Ball extends GameObject implements Movable {
 
     private void checkBoundaries(float delta) {
 
-        if(getX() + dx * delta < GameScreen.getX() || getX() + getWidth() + dx * delta > GameScreen.getWidth()) {
+        if (getX() + dx * delta < GameScreen.getX() || getX() + getWidth() + dx * delta > GameScreen.getWidth()) {
 
             //DECREASE POINTS
             dx *= -1;
@@ -141,7 +118,7 @@ public class Ball extends GameObject implements Movable {
             SoundManager.getInstance().playSound(GameSound.BOUNCE);
         }
 
-        if(getY() + dy * delta < GameScreen.getY() || getY() + getHeight() + dy * delta > GameScreen.getHeight()) {
+        if (getY() + dy * delta < GameScreen.getY() || getY() + getHeight() + dy * delta > GameScreen.getHeight()) {
 
             dy *= -1;
             flipY(true);
@@ -151,7 +128,7 @@ public class Ball extends GameObject implements Movable {
 
     public void flipX(boolean force) {
 
-        if(!canBounce() && !force) {
+        if (!canBounce() && !force) {
 
             return;
         }
@@ -162,7 +139,7 @@ public class Ball extends GameObject implements Movable {
 
     public void flipY(boolean force) {
 
-        if(!canBounce() && !force) {
+        if (!canBounce() && !force) {
 
             return;
         }
@@ -179,13 +156,18 @@ public class Ball extends GameObject implements Movable {
 
     private boolean canBounce() {
 
-        if(System.currentTimeMillis() - lastChanged < timeToBounce) {
+        if (System.currentTimeMillis() - lastChanged < timeToBounce) {
 
             return false;
         }
 
         lastChanged = System.currentTimeMillis();
         return true;
+    }
+
+
+    public void changeToPaddleColor(){
+        //TODO change image with according color
     }
 
 
@@ -202,5 +184,18 @@ public class Ball extends GameObject implements Movable {
     public int getDirectionY() {
 
         return direction.y;
+    }
+
+    public void setLastObjectTouched(GameObject gameObject) {
+
+        lastGameObjectTouched = gameObject;
+
+        if (gameObject instanceof Paddle){
+            lastPaddleTouched = (Paddle) gameObject;
+        }
+    }
+
+    public GameObject getLastGameObjectTouched() {
+        return lastGameObjectTouched;
     }
 }
