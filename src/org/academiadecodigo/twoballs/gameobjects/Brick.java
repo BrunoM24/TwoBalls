@@ -2,6 +2,7 @@ package org.academiadecodigo.twoballs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.twoballs.manage.ObjectFactory;
 
 import java.awt.*;
 
@@ -50,6 +51,12 @@ public class Brick extends GameObject {
         if (durability <= -1) {
 
             kill();
+            int particles = (int)(Math.random() * 3) + 3;
+            //ObjectFactory.spawnParticle(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
+            for(int i = 0; i <= particles; i++){
+                System.out.println(i);
+                ObjectFactory.spawnParticle(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
+            }
             return;
         }
 
