@@ -17,7 +17,7 @@ public class PauseText {
         pauseText.setColor(Color.YELLOW);
         pauseText.grow(80,25);
 
-        fpsText = new Text(GameScreen.getX(), GameScreen.getHeight() - 25, "60");
+        fpsText = new Text(GameScreen.getX(), GameScreen.getHeight() - 10, "?");
         fpsText.setColor(Color.WHITE);
         fpsText.draw();
     }

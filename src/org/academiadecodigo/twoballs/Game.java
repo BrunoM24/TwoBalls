@@ -1,5 +1,6 @@
 package org.academiadecodigo.twoballs;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.academiadecodigo.twoballs.input.KeyboardManager;
 
 /**
@@ -7,13 +8,11 @@ import org.academiadecodigo.twoballs.input.KeyboardManager;
  */
 public class Game {
 
-    private static final float IDEAL_TIMED_DELTA = 15;
+    private static final double IDEAL_DELTA = 1000000000.0 / 60.0;
 
-    long lastTime = System.currentTimeMillis();
+    long lastTime = System.nanoTime();
 
     double delta = 0.0f;
-
-    int frames = 0;
 
     private boolean gamePaused = true;
 
@@ -28,6 +27,7 @@ public class Game {
 
         init();
     }
+
 
     private void init() {
 
@@ -44,19 +44,43 @@ public class Game {
 
     }
 
+    private int frames;
     public void start() {
 
+
         long timer = System.currentTimeMillis();
+        /*
 
         while(true) {
 
-            if((delta = System.currentTimeMillis() - lastTime) > IDEAL_TIMED_DELTA) {
+            if((delta = System.currentTimeMillis() - lastTime) > IDEAL_DELTA) {
 
                 delta /= 10;
 
                 run();
                 lastTime = System.currentTimeMillis();
             }
+
+            if(System.currentTimeMillis() - timer > 1000) {
+
+                timer += 1000;
+                PauseText.fpsText.setText("" + frames);
+                System.out.println("FPS: " + frames + ", " + System.currentTimeMillis() + ", " + delta);
+                frames = 0;
+            }
+        }
+*/
+        while(true) {
+
+            long now = System.nanoTime();
+
+            //divide the current delta by the IDEAL FPS (60)
+            delta += (now - lastTime) / IDEAL_DELTA;
+
+            run();
+
+            //sets the new time
+            lastTime = now;
 
             if(System.currentTimeMillis() - timer > 1000) {
 
@@ -70,25 +94,37 @@ public class Game {
 
     private void run() {
 
-        //oldRun x 60FPS
-        if(gamePaused) {
 
-            delta = 0;
-            //TODO SHOW PAUSED TEXT
 
-            pauseText.draw();
+
+        //Executes this 60FPS
+        while(delta >= 1) {
+
+
+            //run x 60FPS
+            if(gamePaused) {
+
+                delta = 0;
+                //TODO SHOW PAUSED TEXT
+
+                pauseText.draw();
+
+            } else {
+                pauseText.delete();
+            }
+
+
+            if(delta > 3) {
+
+                delta = 3;
+            }
+
+            stage.run((float) delta);
+            delta--;
+            frames++;
         }
-        else {
-
-            pauseText.delete();
-        }
-
-
-
-        stage.run((float) delta);
-
-        frames++;
     }
+
 
     public void keyPressed(int key) {
 
