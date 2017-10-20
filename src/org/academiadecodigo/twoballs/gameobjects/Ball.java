@@ -191,4 +191,8 @@ public class Ball extends GameObject implements Movable {
 
         return lastGameObjectTouched != object;
     }
+
+    public Paddle getLastPaddleTouched() {
+        return lastPaddleTouched;
+    }
 }
