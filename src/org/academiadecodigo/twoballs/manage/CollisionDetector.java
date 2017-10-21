@@ -81,7 +81,7 @@ public class CollisionDetector {
 
         if(object instanceof Ball) {
 
-            collider.ballOnBall(ball, (Ball) object);
+            //collider.ballOnBall(ball, (Ball) object);
         }
         else if(object instanceof Paddle) {
 
@@ -91,6 +91,7 @@ public class CollisionDetector {
 
             //((Brick) object).damageBrick(0);
             ((Brick) object).damageBrick(ball.getLastPaddleTouched() == null ? 0 : ball.getLastPaddleTouched().getPaddleId());
+
         }
     }
 

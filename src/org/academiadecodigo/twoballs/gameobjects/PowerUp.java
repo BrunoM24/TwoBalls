@@ -27,12 +27,15 @@ public class PowerUp extends GameObject implements Movable {
 
     private int count = 0;
 
+    private boolean isNearBorder;
+
     private PowerupType powerupType;
+
 
     public PowerUp(int x, int y, int dirX) {
 
-        //this(x, y, PowerupType.random(), dirX);
-        this(x, y, PowerupType.FREEZE_OTHER, dirX);
+        this(x, y, PowerupType.random(), dirX);
+        //this(x, y, PowerupType.FREEZE_OTHER, dirX);
     }
 
     public PowerUp(int x, int y, PowerupType pwType, int dirX) {
@@ -46,33 +49,44 @@ public class PowerUp extends GameObject implements Movable {
         shape.draw();
         bounds = new Rectangle(x, y, shape.getWidth(), shape.getHeight());
 
-        speed.x = 1;
+        speed.x = 3;
         speed.y = 1;
 
         direction.x = dirX;
+        direction.y = 1;
 
         this.powerupType = pwType;
-    }
 
+        if (y <= Stage.PADDING + 20 || y >= GameScreen.getHeight() - 150) {
+
+            isNearBorder = true;
+        } else {
+
+            isNearBorder = false;
+        }
+
+    }
 
     public void move(float delta) {
 
-        //System.out.println((float) Math.sin(count * 3.14 / 6));
-
-        dYY = (float) Math.sin(count * 3.14 / 20);
+        if (!isNearBorder){
+            dYY = (float) Math.sin(count * 3.14 / 20) * 8;
+        }
 
         dx = direction.x * speed.x;
-        dy = 6 * dYY * speed.y;
+        dy = dYY * speed.y;
 
         count++;
 
         translate(dx * delta, dy * delta);
 
-        if(getX() <= Stage.PADDING || getX() + getWidth() >= GameScreen.getWidth() + Stage.PADDING) {
+        if (getX() <= Stage.PADDING || getX() + getWidth() + Stage.PADDING >= GameScreen.getWidth() + Stage.PADDING) {
 
             Spawn.removeObject(this);
+
         }
     }
+
 
     public PowerupType getPowerUp() {
 

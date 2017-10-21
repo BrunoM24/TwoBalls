@@ -65,11 +65,6 @@ public class Stage {
         player1 = Spawn.newLeftPaddle("blue");
         player2 = Spawn.newRightPaddle("red");
 
-        for(int i = 0; i < 10; i++) {
-
-            Spawn.newBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, 1, 1);
-        }
-        //Spawn.newPowerUp(100, 100, 1);
         Spawn.newBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0);
         Spawn.newBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 0);
 
@@ -110,7 +105,6 @@ public class Stage {
         if(brickCounter == 0) {
 
             running = false;
-            System.out.println("stop game");
             titleText.updateText(PauseText.PLAYER_WIN.replace("X" , scoreManager.getWinner()+""));
             return;
             //spawnBricks(5, 8, 32, 64, 0);
