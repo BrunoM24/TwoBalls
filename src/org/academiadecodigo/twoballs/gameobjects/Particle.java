@@ -44,7 +44,12 @@ public class Particle extends GameObject implements Movable {
 
         timeToLive -= delta;
 
-        if(timeToLive <= 0) {
+        if (delta <= 0) {
+
+            return;
+        }
+
+        if (timeToLive <= 0) {
 
             kill();
             Spawn.removeObject(this);

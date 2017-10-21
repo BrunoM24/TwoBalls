@@ -23,7 +23,7 @@ public class Game {
 
     private SoundManager soundManager;
 
-    private PauseText pauseText;
+    private PauseText titleText;
 
     private int frames;
 
@@ -43,7 +43,7 @@ public class Game {
 
         new KeyboardManager(this);
 
-        pauseText = new PauseText();
+        titleText = new PauseText();
 
         soundManager = new SoundManager().init();
     }
@@ -52,9 +52,7 @@ public class Game {
 
         long timer = System.currentTimeMillis();
 
-        SoundManager.playSound(GameSound.BKG_LOOP);
-
-        while(stage.isRunning()) {
+        while(stage.isRunning() && running) {
 
             long now = System.nanoTime();
 
@@ -75,7 +73,10 @@ public class Game {
             }
         }
 
-        //TODO Player X wins
+        while(running) {
+
+            titleText.updateText(PauseText.PLAYER_WIN);
+        }
 
         soundManager.dispose();
 
@@ -91,11 +92,11 @@ public class Game {
             if(gamePaused) {
 
                 delta = 0;
-                pauseText.draw();
+                titleText.draw();
             }
             else {
 
-                pauseText.delete();
+                titleText.delete();
             }
 
             if(delta > 3) {

@@ -19,6 +19,11 @@ public class Spawn {
         this.stage = stage;
     }
 
+    public static void newPowerUp(int x, int y, int dirX) {
+
+        spawn(new PowerUp(x, y, dirX));
+    }
+
     public static void newBall(int x, int y, int dx, int dy) {
 
         spawn(new Ball(x, y, dx, dy));
