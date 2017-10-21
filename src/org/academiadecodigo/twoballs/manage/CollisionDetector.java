@@ -41,7 +41,7 @@ public class CollisionDetector {
 
             checkBallCollision((Ball) ball, object);
         }
-        else if(ball instanceof PowerUp) {
+        else if(ball instanceof PowerUp && object instanceof Paddle) {
 
             checkPowerUpCollision((PowerUp) ball, (Paddle) object);
         }
