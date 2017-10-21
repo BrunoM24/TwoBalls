@@ -11,7 +11,6 @@ public enum GameSound {
     PUF("puf"),
     LAUGH_1("Gargalhada1"),
     LAUGH_2("Gargalhada2"),
-    GARGALHADA3("Gargalhada3"),
     DRSH1("drsh1"),
     DRSH2("drsh2"),
     DRSH3("drsh3"),
@@ -25,7 +24,7 @@ public enum GameSound {
 
     GameSound(String sound) {
 
-        path = "/assets/sound/" + sound + ".wav";
+        path = "/sound/" + sound + ".wav";
     }
 
 
@@ -51,7 +50,7 @@ public enum GameSound {
 
     public static GameSound laugh() {
 
-        int x = (int) (Math.random() * 3);
+        int x = (int) (Math.random() * 2);
 
         switch (x) {
             case 0:
