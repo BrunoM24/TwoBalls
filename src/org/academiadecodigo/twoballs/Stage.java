@@ -63,7 +63,7 @@ public class Stage {
 
         for(int i = 0; i < 10; i++) {
 
-            Spawn.newBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 1);
+            //Spawn.newBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 1);
         }
         Spawn.newPowerUp(100, 100, 1);
         Spawn.newBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0);
