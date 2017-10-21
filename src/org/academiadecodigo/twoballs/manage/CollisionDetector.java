@@ -81,7 +81,7 @@ public class CollisionDetector {
 
         if(object instanceof Ball) {
 
-            collider.ballOnBall(ball, (Ball) object);
+            //collider.ballOnBall(ball, (Ball) object);
         }
         else if(object instanceof Paddle) {
 
