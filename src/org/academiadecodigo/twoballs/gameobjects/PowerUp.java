@@ -1,9 +1,13 @@
 package org.academiadecodigo.twoballs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.twoballs.GameScreen;
+import org.academiadecodigo.twoballs.Stage;
 import org.academiadecodigo.twoballs.gameobjects.move.Direction;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.gameobjects.move.Speed;
+import org.academiadecodigo.twoballs.manage.ObjectFactory;
+import org.academiadecodigo.twoballs.sound.GameSound;
 
 import java.awt.*;
 
@@ -11,6 +15,8 @@ import java.awt.*;
  * Created by codecadet on 20/10/2017.
  */
 public class PowerUp extends GameObject implements Movable {
+
+    public static final int FREEZE_TIME = 3;
 
     private Speed speed = new Speed();
 
@@ -22,18 +28,31 @@ public class PowerUp extends GameObject implements Movable {
 
     private int count = 0;
 
+    private PowerupType powerupType;
 
-    public PowerUp() {
+    public PowerUp(int x, int y, int dirX) {
 
-        shape = new Picture(100, 100, "assets/ball.png");
+        //this(x, y, PowerupType.random(), dirX);
+        this(x, y, PowerupType.FREEZE_OTHER, dirX);
+    }
+
+    public PowerUp(int x, int y, PowerupType pwType, int dirX) {
+
+        init(x, y, pwType, dirX);
+    }
+
+    private void init(int x, int y, PowerupType pwType, int dirX) {
+
+        shape = new Picture(x, y, "powerups/" + pwType.image());
         shape.draw();
-        bounds = new Rectangle(100, 100, shape.getWidth(), shape.getHeight());
+        bounds = new Rectangle(x, y, shape.getWidth(), shape.getHeight());
 
         speed.x = 1;
         speed.y = 1;
 
-        direction.x = -1;
-        //direction.y = 0;
+        direction.x = dirX;
+
+        this.powerupType = pwType;
     }
 
 
@@ -50,18 +69,14 @@ public class PowerUp extends GameObject implements Movable {
 
         translate(dx * delta, dy * delta);
 
-        // keepInScreen();
-        //TODO if pUp is out of bounds, remove it
+        if(getX() <= Stage.PADDING || getX() + getWidth() >= GameScreen.getWidth() + Stage.PADDING) {
 
+            ObjectFactory.removeObject(this);
+        }
     }
 
+    public PowerupType getPowerUp() {
 
-    public void translate(float x, float y) {
-
-        ((Picture) shape).translate(x, y);
-        bounds.setLocation(shape.getX(), shape.getY());
+        return powerupType;
     }
-
-
-    //TODO PLAYER CATCHES POWERUPS AND FEELS IT; CHECK BOUNDERIES AND DISAPPEARS
 }

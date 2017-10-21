@@ -6,9 +6,9 @@ package org.academiadecodigo.twoballs.gameobjects.move;
 
 public class Speed {
 
-    public int x;
+    public float x;
 
-    public int y;
+    public float y;
 
     public Speed() {
 

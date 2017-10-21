@@ -1,6 +1,9 @@
 package org.academiadecodigo.twoballs.manage;
 
+import org.academiadecodigo.twoballs.Stage;
 import org.academiadecodigo.twoballs.gameobjects.*;
+import org.academiadecodigo.twoballs.sound.GameSound;
+import org.academiadecodigo.twoballs.sound.SoundManager;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,6 +17,13 @@ public class CollisionDetector {
     int buffer = 2;
 
     private Collider collider = new Collider();
+
+    private Stage stage;
+
+    public CollisionDetector(Stage stage) {
+
+        this.stage = stage;
+    }
 
     public void checkCollisions(GameObject ball, Set<GameObject> gameObjects) {
 
@@ -38,7 +48,17 @@ public class CollisionDetector {
 
     private void checkPowerUpCollision(PowerUp pUp, Paddle paddle) {
 
-        System.out.println(pUp + " is touching " + paddle);
+        pUp.getPowerUp().collided(paddle.getPaddleId());
+
+        stage.pUpCollideWith(pUp, paddle);
+
+        if(pUp.getPowerUp().isGood()) {
+
+            //TODO REplace SOUNDS
+            SoundManager.playSound(GameSound.POINTS);
+        }
+
+        ObjectFactory.removeObject(pUp);
     }
 
     private void checkBallCollision(Ball ball, GameObject object) {

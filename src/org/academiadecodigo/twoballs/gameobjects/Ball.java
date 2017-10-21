@@ -16,13 +16,17 @@ import java.awt.*;
  */
 public class Ball extends GameObject implements Movable {
 
-    private final int MIN_SPEED = 3, MAX_SPEED = 3;
+    private static final int leftSideStartX = GameScreen.getWidth() / 2 - 200;
+
+    private static final int rightSideStartX = GameScreen.getWidth() / 2 + 200;
+
+    private static final int startHeight = GameScreen.getHeight() / 2;
 
     private Speed speed = new Speed();
 
     private Direction direction = new Direction();
 
-    private int dx, dy;
+    private float diffX, diffY;
 
     private GameObject lastGameObjectTouched;
 
@@ -30,12 +34,13 @@ public class Ball extends GameObject implements Movable {
 
     public Ball(int x, int y, int dirX, int dirY) {
 
-        shape = new Picture(x, y, "assets/ball.png");
+        shape = new Picture(x, y, "ball.png");
         shape.draw();
+
         bounds = new Rectangle(x, y, shape.getWidth(), shape.getHeight());
 
-        speed.x = calcSpeed();
-        speed.y = calcSpeed();
+        speed.x = calcSpeed(speed.x);
+        speed.y = calcSpeed(speed.y);
 
         direction.x = dirX;
         direction.y = dirY;
@@ -44,12 +49,12 @@ public class Ball extends GameObject implements Movable {
     @Override
     public void move(float delta) {
 
-        dx = direction.x * speed.x;
-        dy = direction.y * speed.y;
+        diffX = direction.x * speed.x;
+        diffY = direction.y * speed.y;
 
         checkBoundaries(delta);
 
-        translate(dx * delta, dy * delta);
+        translate(diffX * delta, diffY * delta);
 
         keepInScreen();
     }
@@ -93,57 +98,72 @@ public class Ball extends GameObject implements Movable {
         }
     }
 
-    public void translate(float x, float y) {
-
-        ((Picture) shape).translate(x, y);
-        bounds.setLocation(shape.getX(), shape.getY());
-    }
-
     private void checkBoundaries(float delta) {
 
-        if(getX() + dx * delta < GameScreen.getX()) {
+        if(getX() + diffX * delta < GameScreen.getX()) {
 
-            dx *= -1;
-            flipX();
-            ScoreManager.instance.addPoints(2, ScoreManager.OUT_OF_BOUNDS_POINTS);
-            SoundManager.getInstance().playSound(GameSound.laugh());
-            //ScoreManager.instance.checkScore();
+            resetBall(true, 2);
         }
 
 
-        if(getX() + getWidth() + dx * delta > GameScreen.getWidth()) {
+        if(getX() + getWidth() + diffX * delta > GameScreen.getWidth()) {
 
-            dx *= -1;
-            flipX();
-            ScoreManager.instance.addPoints(1, ScoreManager.OUT_OF_BOUNDS_POINTS);
-            SoundManager.getInstance().playSound(GameSound.laugh());
-            //ScoreManager.instance.checkScore();
+            resetBall(false, 1);
         }
 
-        if(getY() + dy * delta < GameScreen.getY() || getY() + getHeight() + dy * delta > GameScreen.getHeight()) {
+        if(getY() + diffY * delta < GameScreen.getY() || getY() + getHeight() + diffY * delta > GameScreen.getHeight()) {
 
-            dy *= -1;
+            diffY *= -1;
             flipY();
-            SoundManager.getInstance().playSound(GameSound.BOUNCE);
+            SoundManager.playSound(GameSound.BOUNCE);
             setLastObjectTouched(null);
         }
+    }
+
+    private void resetBall(boolean left, int playerId) {
+
+        diffX *= -1;
+
+        flipX();
+
+        ScoreManager.addPoints(playerId, ScoreManager.OUT_OF_BOUNDS_POINTS);
+
+        SoundManager.playSound(GameSound.laugh());
+
+        speed.x = calcSpeed(0);
+        speed.y = calcSpeed(0);
+
+        direction.y = 0;
+
+        direction.x = left ? -1 : 1;
+
+        setLastObjectTouched(null);
+
+        translate((left ? leftSideStartX : rightSideStartX) - getX(), startHeight - getY());
     }
 
     public void flipX() {
 
         direction.x *= -1;
-        speed.x = calcSpeed();
+        speed.x = calcSpeed(speed.x);
     }
 
     public void flipY() {
 
         direction.y *= -1;
-        speed.y = calcSpeed();
+        speed.y = calcSpeed(speed.y);
     }
 
-    public int calcSpeed() {
+    private float calcSpeed(float speed) {
 
-        return (int) ((Math.random() * MAX_SPEED) + MIN_SPEED);
+        if(speed == 0) {
+
+            int MAX_SPEED = 3;
+            int MIN_SPEED = 3;
+            return (float) ((Math.random() * MAX_SPEED) + MIN_SPEED);
+        }
+
+        return speed + 0.1f;
     }
 
 

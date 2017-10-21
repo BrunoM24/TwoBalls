@@ -89,7 +89,7 @@ public class Collider {
             ball.getDirection().y = 1;
         }
 
-        SoundManager.getInstance().playSound(GameSound.drsh());
+        SoundManager.playSound(GameSound.drsh());
     }
 
     private float paddleHeightDivision(int divisionNumber, GameObject object) {

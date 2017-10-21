@@ -37,7 +37,7 @@ public class Brick extends GameObject {
             color = "Green";
         }
 
-        Picture p = new Picture(x, y, "assets/brick" + color + ".png");
+        Picture p = new Picture(x, y, "brick" + color + ".png");
         p.draw();
         return p;
     }
@@ -55,11 +55,11 @@ public class Brick extends GameObject {
 
         if(durability <= -1) {
 
-            SoundManager.getInstance().playSound(GameSound.PUF);
+            SoundManager.playSound(GameSound.PUF);
 
             if(paddleId == 1 || paddleId == 2) {
 
-                ScoreManager.instance.addPoints(paddleId, ScoreManager.BRICK_POINTS);
+                ScoreManager.addPoints(paddleId, ScoreManager.BRICK_POINTS);
             }
 
             kill();
@@ -71,7 +71,7 @@ public class Brick extends GameObject {
             return;
         }
 
-        SoundManager.getInstance().playSound(GameSound.PAKIN);
+        SoundManager.playSound(GameSound.PAKIN);
         shape = changeImage(getX(), getY());
     }
 }

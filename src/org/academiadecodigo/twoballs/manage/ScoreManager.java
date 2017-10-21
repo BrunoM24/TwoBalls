@@ -10,18 +10,25 @@ import org.academiadecodigo.twoballs.GameScreen;
 public class ScoreManager {
 
     public static final int OUT_OF_BOUNDS_POINTS = 50;
+
     public static final int BRICK_POINTS = 5;
 
-    public static ScoreManager instance;
+    private static ScoreManager instance;
 
-    int[] playerScore = new int[3];
+    private int[] playerScore = new int[3];
 
-    Text textScorePlayerOne;
-    Text textScorePlayerTwo;
+    private Text textScorePlayerOne;
+
+    private Text textScorePlayerTwo;
 
     public ScoreManager() {
 
         instance = this;
+    }
+
+    public static void addPoints(int player, int points) {
+
+        instance.incrementScore(player, points);
     }
 
     public void draw() {
@@ -39,13 +46,12 @@ public class ScoreManager {
         textScorePlayerTwo.draw();
     }
 
-
-    public void addPoints(int player, int points) {
+    private void incrementScore(int player, int points) {
 
         playerScore[player] += points;
         Text text = textScorePlayerTwo;
 
-        if (player == 1) {
+        if(player == 1) {
 
             text = textScorePlayerOne;
         }
@@ -53,7 +59,7 @@ public class ScoreManager {
         int textSize = text.getText().length();
         text.setText(Integer.toString(playerScore[player]));
 
-        if (textSize != text.getText().length()) {
+        if(textSize != text.getText().length()) {
 
             text.grow(5, 0);
         }

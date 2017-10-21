@@ -55,9 +55,9 @@ public class Game {
 
         long timer = System.currentTimeMillis();
 
-        SoundManager.getInstance().playSound(GameSound.BKG_LOOP);
+        SoundManager.playSound(GameSound.BKG_LOOP);
 
-        while(running) {
+        while(stage.isRunning()) {
 
             long now = System.nanoTime();
 
@@ -77,6 +77,8 @@ public class Game {
                 frames = 0;
             }
         }
+
+        //TODO Player X wins
 
         soundManager.dispose();
 

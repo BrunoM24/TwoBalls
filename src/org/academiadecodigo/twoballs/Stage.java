@@ -38,13 +38,17 @@ public class Stage {
 
     private Paddle player2;
 
+    private boolean running = true;
+
     //private Ball controlledBall;
 
-    private CollisionDetector collisionDetector = new CollisionDetector();
+    private CollisionDetector collisionDetector;
 
     Stage() {
 
-        this.backGround = new Picture(PADDING, PADDING, "assets/background.jpg");
+        collisionDetector = new CollisionDetector(this);
+
+        this.backGround = new Picture(PADDING, PADDING, "background.jpg");
         this.backGround.draw();
 
         scoreManager = new ScoreManager();
@@ -62,9 +66,9 @@ public class Stage {
 
             //gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 1));
         }
-        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0));
+        //gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0));
 
-        gameObjects.add(new PowerUp());
+        gameObjects.add(new PowerUp(100, 100));
 
         int xRange = 5;
         int yRange = 8;
@@ -138,7 +142,7 @@ public class Stage {
                     ((Movable) object).move(delta);
                 }
 
-                if (!(object instanceof Ball) && !(object instanceof PowerUp)) {
+                if(!(object instanceof Ball) && !(object instanceof PowerUp)) {
 
                     continue;
                 }
@@ -152,6 +156,10 @@ public class Stage {
         }
 
         //oldCollisionDetector.checkCollision(gameObjects);
+        //if(running) {
+
+        //running = false;
+        //}
     }
 
 
@@ -209,5 +217,31 @@ public class Stage {
     public void spawnObject(GameObject object) {
 
         gameObjectsToAdd.add(object);
+    }
+
+    public boolean isRunning() {
+
+        return running;
+    }
+
+    public void pUpCollideWith(PowerUp pUp, Paddle paddle) {
+
+        switch(pUp.getPowerUp()) {
+
+            case FREEZE:
+                paddle.freeze(PowerUp.FREEZE_TIME);
+                break;
+            case FREEZE_OTHER:{
+
+                Paddle playerToFreeze = player1;
+                if(paddle.equals(player1)) {
+
+                    playerToFreeze = player2;
+                }
+
+                playerToFreeze.freeze(PowerUp.FREEZE_TIME);
+            }
+                break;
+        }
     }
 }

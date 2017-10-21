@@ -19,6 +19,8 @@ public class Paddle extends GameObject implements Movable {
 
     private int paddleId;
 
+    private float freezeTimer;
+
     public Paddle(String paddleColor, int x, int y, int paddleId) {
 
         if(x - 14 > GameScreen.getWidth() / 2) {
@@ -26,7 +28,7 @@ public class Paddle extends GameObject implements Movable {
             x -= 4;
         }
 
-        shape = new Picture(x, y, "assets/" + paddleColor + "Paddle.png");
+        shape = new Picture(x, y, paddleColor + "Paddle.png");
         shape.draw();
         bounds = new Rectangle(x, y, shape.getWidth(), shape.getHeight());
 
@@ -40,6 +42,12 @@ public class Paddle extends GameObject implements Movable {
 
     @Override
     public void move(float delta) {
+
+        if(freezeTimer > 0) {
+
+            freezeTimer -= delta;
+            delta = 0;
+        }
 
         deltaY = direction * speed;
 
@@ -58,6 +66,17 @@ public class Paddle extends GameObject implements Movable {
     }
 
     public int getPaddleId() {
+
         return paddleId;
+    }
+
+    /**
+     * Freeze this paddle for X seconds
+     *
+     * @param time in seconds
+     */
+    public void freeze(int time) {
+
+        freezeTimer = time * 60;
     }
 }

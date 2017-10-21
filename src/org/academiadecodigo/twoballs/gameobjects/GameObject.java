@@ -1,6 +1,7 @@
 package org.academiadecodigo.twoballs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Shape;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.manage.ObjectFactory;
 
 import java.awt.*;
@@ -36,7 +37,6 @@ public abstract class GameObject {
         return (int) bounds.getHeight();
     }
 
-    @Deprecated
     public Shape getShape() {
 
         return shape;
@@ -58,8 +58,15 @@ public abstract class GameObject {
         return dead;
     }
 
-    public void kill() {
+    void kill() {
 
         this.dead = true;
+    }
+
+
+    public void translate(float x, float y) {
+
+        ((Picture) shape).translate(x, y);
+        bounds.setLocation(shape.getX(), shape.getY());
     }
 }
