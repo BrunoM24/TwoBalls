@@ -3,7 +3,6 @@ package org.academiadecodigo.twoballs.manage;
 import org.academiadecodigo.twoballs.Stage;
 import org.academiadecodigo.twoballs.gameobjects.*;
 import org.academiadecodigo.twoballs.sound.GameSound;
-import org.academiadecodigo.twoballs.sound.Sound;
 import org.academiadecodigo.twoballs.sound.SoundManager;
 
 import java.util.ArrayList;
@@ -68,6 +67,11 @@ public class CollisionDetector {
     private void checkBallCollision(Ball ball, GameObject object) {
 
         if(!ball.canCollideWith(object)) {
+
+            return;
+        }
+
+        if(object instanceof PowerUp) {
 
             return;
         }

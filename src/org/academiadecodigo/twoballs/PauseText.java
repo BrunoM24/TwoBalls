@@ -14,7 +14,7 @@ public class PauseText {
 
     //Text pauseText2;
 
-    static final String PLAYER_WIN = " -Press P To Start- ";
+    static final String PLAYER_WIN = " -Player X Win- ";
 
     static Text fpsText;
 
