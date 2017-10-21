@@ -7,11 +7,9 @@ public enum GameSound {
 
     BOUNCE("bounce"),
     POINTS("points"),
-    BKG_LOOP("bkg_loop"),
     PUF("puf"),
     LAUGH_1("Gargalhada1"),
     LAUGH_2("Gargalhada2"),
-    GARGALHADA3("Gargalhada3"),
     DRSH1("drsh1"),
     DRSH2("drsh2"),
     DRSH3("drsh3"),

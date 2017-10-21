@@ -21,7 +21,7 @@ public class Stage {
 
     public static final int PADDING = 10;
 
-    ScoreManager scoreManager;
+    private ScoreManager scoreManager;
 
     private Picture backGround;
 
@@ -65,7 +65,7 @@ public class Stage {
 
             Spawn.newBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 1);
         }
-        gameObjects.add(new PowerUp(100, 100, -1));//TODO TESTING
+        Spawn.newPowerUp(100, 100, 1);
         Spawn.newBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0);
         Spawn.newBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 0);
 
@@ -100,6 +100,7 @@ public class Stage {
 
         if(brickCounter == 0) {
 
+            running = false;
             spawnBricks(5, 8, 32, 64, 0);
         }
 
@@ -141,11 +142,6 @@ public class Stage {
             copy.remove();
             removeObject(object);
         }
-
-        //if(running) {
-
-        //running = false;
-        //}
     }
 
     private void cleanDeadObjects() {

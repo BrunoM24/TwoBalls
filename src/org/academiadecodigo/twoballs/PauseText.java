@@ -8,21 +8,23 @@ import org.academiadecodigo.simplegraphics.graphics.Text;
  */
 public class PauseText {
 
+    static final String paused = " -PAUSED- ";
+
+    static final String pressPToStart = " -Press P To Start- ";
+
+    //Text pauseText2;
+
+    static final String PLAYER_WIN = " -Press P To Start- ";
+
     static Text fpsText;
 
     Text pauseText;
 
-    //Text pauseText2;
+    private boolean alreadyPausedOnce = false;
 
-    boolean alreadyPausedOnce = false;
+    private Color defaultColor = Color.DARK_GRAY;
 
-    String paused = " -PAUSED- ";
-
-    String pressPToStart = " -Press P To Start- ";
-
-    Color defaultColor = Color.DARK_GRAY;
-
-    public PauseText() {
+    PauseText() {
 
         pauseText = new Text(470, 272, pressPToStart);
         pauseText.setColor(defaultColor);
@@ -38,8 +40,18 @@ public class PauseText {
         fpsText.draw();
     }
 
+    void updateText(String text) {
 
-    public void draw() {
+        if(pauseText.getText().equals(text)) {
+
+            return;
+        }
+
+        pauseText.setText(text);
+        pauseText.draw();
+    }
+
+    void draw() {
 
         if(alreadyPausedOnce) {
 
@@ -55,14 +67,14 @@ public class PauseText {
         pauseText.draw();
     }
 
-    public void delete() {
+    void delete() {
 
         pauseText.delete();
         setAlreadyPausedOnce();
         //pauseText2.delete();
     }
 
-    public void setAlreadyPausedOnce() {
+    private void setAlreadyPausedOnce() {
 
         alreadyPausedOnce = true;
     }
