@@ -2,14 +2,11 @@ package org.academiadecodigo.twoballs;
 
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.academiadecodigo.twoballs.gameobjects.Ball;
-import org.academiadecodigo.twoballs.gameobjects.GameObject;
-import org.academiadecodigo.twoballs.gameobjects.Paddle;
-import org.academiadecodigo.twoballs.gameobjects.PowerUp;
+import org.academiadecodigo.twoballs.gameobjects.*;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.manage.CollisionDetector;
-import org.academiadecodigo.twoballs.manage.ObjectFactory;
 import org.academiadecodigo.twoballs.manage.ScoreManager;
+import org.academiadecodigo.twoballs.manage.Spawn;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -44,6 +41,8 @@ public class Stage {
 
     private CollisionDetector collisionDetector;
 
+    private int brickCounter;
+
     Stage() {
 
         collisionDetector = new CollisionDetector(this);
@@ -54,27 +53,27 @@ public class Stage {
         scoreManager = new ScoreManager();
         scoreManager.draw();
 
-        new ObjectFactory(this);
+        new Spawn(this);
     }
 
     void initializeObjects() {
 
-        gameObjects.add(player1 = ObjectFactory.getLeftPaddle("blue"));
-        gameObjects.add(player2 = ObjectFactory.getRightPaddle("red"));
+        player1 = Spawn.newLeftPaddle("blue");
+        player2 = Spawn.newRightPaddle("red");
 
         for(int i = 0; i < 10; i++) {
 
-            //gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 1));
+            Spawn.newBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 1);
         }
         gameObjects.add(new PowerUp(100, 100, -1));//TODO TESTING
-        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0));
-        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 0));
+        Spawn.newBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0);
+        Spawn.newBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 0);
 
-        int xRange = 5;
-        int yRange = 8;
-        int brickWidth = 32;
-        int brickHeight = 64;
-        int brickSpacing = 0;
+        spawnBricks(5, 8, 32, 64, 0);
+    }
+
+    private void spawnBricks(int xRange, int yRange, int brickWidth, int brickHeight, int brickSpacing) {
+        //TODO Read from file by colors (RGB)
 
         int initialX = (GameScreen.getWidth() - (xRange * (brickWidth + brickSpacing))) / 2;
         for(int y = 0; y < yRange; y++) {
@@ -91,12 +90,18 @@ public class Stage {
                     dur = 2;
                 }
 
-                gameObjects.add(ObjectFactory.getNewBrick(initialX + x * (brickWidth + brickSpacing), 26 + y * (brickHeight + brickSpacing), dur));
+                brickCounter++;
+                Spawn.newBrick(initialX + x * (brickWidth + brickSpacing), 26 + y * (brickHeight + brickSpacing), dur);
             }
         }
     }
 
-    public void run(float delta) {
+    void run(float delta) {
+
+        if(brickCounter == 0) {
+
+            spawnBricks(5, 8, 32, 64, 0);
+        }
 
         //Add objects here
         if(!gameObjectsToAdd.isEmpty()) {
@@ -105,25 +110,7 @@ public class Stage {
             gameObjectsToAdd.clear();
         }
 
-        //Remove objects here
-        if(!gameObjectsToRemove.isEmpty()) {
-
-            for(GameObject goB : gameObjectsToRemove) {
-
-                Iterator<GameObject> copy = gameObjects.iterator();
-                while(copy.hasNext()) {
-
-                    GameObject go = copy.next();
-                    if(go.equals(goB)) {
-
-                        Canvas.getInstance().hide(go.getShape());
-                        copy.remove();
-                    }
-                }
-            }
-
-            gameObjectsToRemove.clear();
-        }
+        cleanDeadObjects();
 
         Iterator<GameObject> copy = gameObjects.iterator();
         while(copy.hasNext()) {
@@ -155,13 +142,34 @@ public class Stage {
             removeObject(object);
         }
 
-        //oldCollisionDetector.checkCollision(gameObjects);
         //if(running) {
 
         //running = false;
         //}
     }
 
+    private void cleanDeadObjects() {
+
+        //Remove objects here
+        if(!gameObjectsToRemove.isEmpty()) {
+
+            for(GameObject goB : gameObjectsToRemove) {
+
+                Iterator<GameObject> copy = gameObjects.iterator();
+                while(copy.hasNext()) {
+
+                    GameObject go = copy.next();
+                    if(go.equals(goB)) {
+
+                        Canvas.getInstance().hide(go.getShape());
+                        copy.remove();
+                    }
+                }
+            }
+
+            gameObjectsToRemove.clear();
+        }
+    }
 
     void keyPressed(int key) {
 
@@ -172,7 +180,6 @@ public class Stage {
 
         if(handleKey(player2, key, P2_UP, P2_DOWN)) {
 
-            //TODO Return if more keys
             return;
         }
 
@@ -182,6 +189,7 @@ public class Stage {
             int dy = key == P3_UP ? -1 : (key == P3_DOWN ? 1 : 0);
             int speed = 5;
             //controlledBall.translate(dx * speed, dy * speed);
+            //TODO Return if more keys
         }
     }
 
@@ -211,6 +219,12 @@ public class Stage {
 
     public void removeObject(GameObject object) {
 
+        //brickCounter of bricks
+        if(object instanceof Brick) {
+
+            brickCounter--;
+        }
+
         gameObjectsToRemove.add(object);
     }
 
@@ -219,7 +233,7 @@ public class Stage {
         gameObjectsToAdd.add(object);
     }
 
-    public boolean isRunning() {
+    boolean isRunning() {
 
         return running;
     }
@@ -231,7 +245,7 @@ public class Stage {
             case FREEZE:
                 paddle.freeze(PowerUp.FREEZE_TIME);
                 break;
-            case FREEZE_OTHER:{
+            case FREEZE_OTHER: {
 
                 Paddle playerToFreeze = player1;
                 if(paddle.equals(player1)) {
@@ -241,7 +255,7 @@ public class Stage {
 
                 playerToFreeze.freeze(PowerUp.FREEZE_TIME);
             }
-                break;
+            break;
         }
     }
 }

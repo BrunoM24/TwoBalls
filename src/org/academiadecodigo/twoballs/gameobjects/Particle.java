@@ -3,7 +3,7 @@ package org.academiadecodigo.twoballs.gameobjects;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.gameobjects.move.Direction;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
-import org.academiadecodigo.twoballs.manage.ObjectFactory;
+import org.academiadecodigo.twoballs.manage.Spawn;
 
 import java.awt.*;
 
@@ -47,7 +47,7 @@ public class Particle extends GameObject implements Movable {
         if(timeToLive <= 0) {
 
             kill();
-            ObjectFactory.removeObject(this);
+            Spawn.removeObject(this);
         }
 
         ((Picture) shape).translate(direction.x, direction.y);

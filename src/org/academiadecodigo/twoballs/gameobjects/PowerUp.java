@@ -6,8 +6,7 @@ import org.academiadecodigo.twoballs.Stage;
 import org.academiadecodigo.twoballs.gameobjects.move.Direction;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 import org.academiadecodigo.twoballs.gameobjects.move.Speed;
-import org.academiadecodigo.twoballs.manage.ObjectFactory;
-import org.academiadecodigo.twoballs.sound.GameSound;
+import org.academiadecodigo.twoballs.manage.Spawn;
 
 import java.awt.*;
 
@@ -71,7 +70,7 @@ public class PowerUp extends GameObject implements Movable {
 
         if(getX() <= Stage.PADDING || getX() + getWidth() >= GameScreen.getWidth() + Stage.PADDING) {
 
-            ObjectFactory.removeObject(this);
+            Spawn.removeObject(this);
         }
     }
 

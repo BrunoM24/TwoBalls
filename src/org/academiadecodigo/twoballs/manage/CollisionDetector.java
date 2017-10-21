@@ -58,7 +58,7 @@ public class CollisionDetector {
             SoundManager.playSound(GameSound.POINTS);
         }
 
-        ObjectFactory.removeObject(pUp);
+        Spawn.removeObject(pUp);
     }
 
     private void checkBallCollision(Ball ball, GameObject object) {

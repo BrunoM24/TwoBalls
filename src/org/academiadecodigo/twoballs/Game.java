@@ -21,14 +21,11 @@ public class Game {
 
     private Stage stage;
 
-    private KeyboardManager keyboardManager;
-
     private SoundManager soundManager;
 
     private PauseText pauseText;
 
-    int frames;
-
+    private int frames;
 
     Game() {
 
@@ -44,7 +41,7 @@ public class Game {
 
         stage.initializeObjects();
 
-        keyboardManager = new KeyboardManager(this);
+        new KeyboardManager(this);
 
         pauseText = new PauseText();
 

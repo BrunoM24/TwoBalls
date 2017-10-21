@@ -2,7 +2,7 @@ package org.academiadecodigo.twoballs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.academiadecodigo.twoballs.manage.ObjectFactory;
+import org.academiadecodigo.twoballs.manage.Spawn;
 import org.academiadecodigo.twoballs.manage.ScoreManager;
 import org.academiadecodigo.twoballs.sound.GameSound;
 import org.academiadecodigo.twoballs.sound.SoundManager;
@@ -66,7 +66,7 @@ public class Brick extends GameObject {
             int particles = (int) (Math.random() * 3) + 3;
             for(int i = 0; i <= particles; i++) {
 
-                ObjectFactory.spawnParticle(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
+                Spawn.spawnParticle(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
             }
             return;
         }
