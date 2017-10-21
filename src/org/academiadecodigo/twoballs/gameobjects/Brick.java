@@ -68,6 +68,8 @@ public class Brick extends GameObject {
 
                 Spawn.spawnParticle(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
             }
+
+            Spawn.newPowerUp(this.getX(),this.getY(),1);
             return;
         }
 
