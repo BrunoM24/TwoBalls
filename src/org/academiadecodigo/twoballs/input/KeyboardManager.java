@@ -58,7 +58,6 @@ public class KeyboardManager implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
-        System.out.println("Pressed " + keyboardEvent.getKey());
         game.keyPressed(keyboardEvent.getKey());
     }
 

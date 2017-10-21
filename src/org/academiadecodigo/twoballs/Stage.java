@@ -38,7 +38,7 @@ public class Stage {
 
     private Paddle player2;
 
-    private Ball controlledBall;
+    //private Ball controlledBall;
 
     private CollisionDetector collisionDetector = new CollisionDetector();
 
@@ -60,9 +60,9 @@ public class Stage {
 
         for(int i = 0; i < 10; i++) {
 
-            gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 1));
+            //gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 + 200, GameScreen.getHeight() / 2, 1, 1));
         }
-        //gameObjects.add(controlledBall = ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0));
+        gameObjects.add(ObjectFactory.getNewBall(GameScreen.getWidth() / 2 - 200, GameScreen.getHeight() / 2, -1, 0));
 
         gameObjects.add(new PowerUp());
 
@@ -130,11 +130,11 @@ public class Stage {
 
                 if(object instanceof Movable) {
 
-                    if(object.equals(controlledBall)) {
+                    /*if(object.equals(controlledBall)) {
 
                         collisionDetector.checkCollisions((Ball) object, gameObjects);
                         continue;
-                    }
+                    }*/
                     ((Movable) object).move(delta);
                 }
 
@@ -173,7 +173,7 @@ public class Stage {
             int dx = key == P3_RIGHT ? 1 : (key == P3_LEFT ? -1 : 0);
             int dy = key == P3_UP ? -1 : (key == P3_DOWN ? 1 : 0);
             int speed = 5;
-            controlledBall.translate(dx * speed, dy * speed);
+            //controlledBall.translate(dx * speed, dy * speed);
         }
     }
 
