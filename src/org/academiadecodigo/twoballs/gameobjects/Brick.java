@@ -2,6 +2,8 @@ package org.academiadecodigo.twoballs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.twoballs.GameScreen;
+import org.academiadecodigo.twoballs.Stage;
 import org.academiadecodigo.twoballs.manage.Spawn;
 import org.academiadecodigo.twoballs.manage.ScoreManager;
 import org.academiadecodigo.twoballs.sound.GameSound;
@@ -28,11 +30,10 @@ public class Brick extends GameObject {
 
         String color = "Gray";
 
-        if(durability == 2) {
+        if (durability == 2) {
 
             color = "Blue";
-        }
-        else if(durability == 1) {
+        } else if (durability == 1) {
 
             color = "Green";
         }
@@ -53,27 +54,33 @@ public class Brick extends GameObject {
         durability--;
 
 
-        if(durability <= -1) {
+        if (durability <= -1) {
 
             SoundManager.playSound(GameSound.PUF);
 
-            if(paddleId == 1 || paddleId == 2) {
+            if (paddleId == 1 || paddleId == 2) {
 
                 ScoreManager.addPoints(paddleId, ScoreManager.BRICK_POINTS);
             }
 
             kill();
             int particles = (int) (Math.random() * 3) + 3;
-            for(int i = 0; i <= particles; i++) {
+            for (int i = 0; i <= particles; i++) {
 
                 Spawn.spawnParticle(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
             }
 
-            Spawn.newPowerUp(this.getX(),this.getY(),1);
+            if ((int) (Math.random() * 10) < 2) {
+
+                Spawn.newPowerUp(this.getX(), this.getY(), paddleId == 1 ? -1 : 1);
+
+            }
+
             return;
         }
 
         SoundManager.playSound(GameSound.PAKIN);
         shape = changeImage(getX(), getY());
     }
+
 }

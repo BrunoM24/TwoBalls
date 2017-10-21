@@ -87,6 +87,7 @@ public class CollisionDetector {
 
             //((Brick) object).damageBrick(0);
             ((Brick) object).damageBrick(ball.getLastPaddleTouched() == null ? 0 : ball.getLastPaddleTouched().getPaddleId());
+
         }
     }
 
