@@ -73,13 +73,9 @@ public class Game {
             }
         }
 
-        while(running) {
-
-            titleText.updateText(PauseText.PLAYER_WIN);
-        }
-
         soundManager.dispose();
 
+        System.out.println("game end");
         System.exit(0);
     }
 

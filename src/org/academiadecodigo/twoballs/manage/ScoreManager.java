@@ -64,4 +64,8 @@ public class ScoreManager {
             text.grow(5, 0);
         }
     }
+
+    public int getWinner(){
+        return playerScore[1] > playerScore[2] ? 1 : 2;
+    }
 }
