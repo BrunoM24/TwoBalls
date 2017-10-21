@@ -37,13 +37,11 @@ public class Game {
         //int width = 960;
         //int height = 544;
 
-        stage = new Stage();
+        stage = new Stage((titleText = new PauseText()));
 
         stage.initializeObjects();
 
         new KeyboardManager(this);
-
-        titleText = new PauseText();
 
         soundManager = new SoundManager().init();
     }

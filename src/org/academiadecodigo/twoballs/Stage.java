@@ -31,6 +31,8 @@ public class Stage {
 
     private Set<GameObject> gameObjects = new HashSet<>();
 
+    private PauseText titleText;
+
     private Paddle player1;
 
     private Paddle player2;
@@ -43,7 +45,7 @@ public class Stage {
 
     private int brickCounter;
 
-    Stage() {
+    Stage(PauseText pauseText) {
 
         collisionDetector = new CollisionDetector(this);
 
@@ -54,6 +56,8 @@ public class Stage {
         scoreManager.draw();
 
         new Spawn(this);
+
+        this.titleText = pauseText;
     }
 
     void initializeObjects() {
@@ -98,10 +102,16 @@ public class Stage {
 
     void run(float delta) {
 
+        if(titleText == null) {
+
+            return;
+        }
+
         if(brickCounter == 0) {
 
             running = false;
             System.out.println("stop game");
+            titleText.updateText(PauseText.PLAYER_WIN.replace("X" , scoreManager.getWinner()+""));
             return;
             //spawnBricks(5, 8, 32, 64, 0);
         }
