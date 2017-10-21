@@ -70,7 +70,7 @@ public class Brick extends GameObject {
                 Spawn.spawnParticle(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
             }
 
-            if ((int) (Math.random() * 10) <= 2) {
+            if ((int) (Math.random() * 10) >=0) {
 
                 Spawn.newPowerUp(this.getX(), this.getY() + this.getHeight() / 2, paddleId == 1 ? -1 : 1);
 

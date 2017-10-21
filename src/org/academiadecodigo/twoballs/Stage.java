@@ -105,7 +105,6 @@ public class Stage {
         if(brickCounter == 0) {
 
             running = false;
-            System.out.println("stop game");
             titleText.updateText(PauseText.PLAYER_WIN.replace("X" , scoreManager.getWinner()+""));
             return;
             //spawnBricks(5, 8, 32, 64, 0);

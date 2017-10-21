@@ -73,7 +73,6 @@ public class Game {
 
         soundManager.dispose();
 
-        System.out.println("game end");
         System.exit(0);
     }
 
