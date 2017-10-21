@@ -14,16 +14,24 @@ public class Particle extends GameObject implements Movable {
 
     private Direction direction = new Direction();
 
-    private float timeToLive = (float)((Math.random() * 16) + 15);
+    private float timeToLive = (float) ((Math.random() * 16) + 15);
 
     public Particle(int x, int y) {
 
-        this(x, y, Math.random() > 0.5f ? 1 : -1, Math.random() > 0.5f ? 1 : -1);
+        int dirX = 0;
+        int dirY = 0;
+        //TODO Bruno, replace this
+        init(x, y, dirX, dirY);
     }
 
     public Particle(int x, int y, int dirX, int dirY) {
 
-        shape = new Picture(x-10, y-10, "assets/particleStar.png");
+        init(x, y, dirX, dirY);
+    }
+
+    private void init(int x, int y, int dirX, int dirY) {
+
+        shape = new Picture(x - 10, y - 10, "assets/particleStar.png");
         shape.draw();
         bounds = new Rectangle(x, y, shape.getWidth(), shape.getHeight());
 
