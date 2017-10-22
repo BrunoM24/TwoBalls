@@ -11,7 +11,46 @@ import org.academiadecodigo.twoballs.sound.SoundManager;
  */
 public class Collider {
 
-    void updateBall(Ball ball, GameObject object) {
+    void updateBall(int buffer, Ball ball, GameObject object) {
+
+        //CENTER CHECK
+        if(checkCenterBallPosition(ball, object)) {
+
+            return;
+        }
+
+        boolean ballIsRight = ball.getX() + buffer >= object.getX() + object.getWidth() - buffer;
+        boolean ballIsLeft = ball.getX() + ball.getWidth() - buffer <= object.getX() + buffer;
+
+        if(ballIsRight || ballIsLeft) {
+
+            ball.flipX();
+            return;
+        }
+
+        boolean ballIsUp = ball.getY() + ball.getHeight() - buffer <= object.getY() + buffer;
+        boolean ballIsDown = ball.getY() + buffer >= object.getY() + object.getHeight() - buffer;
+
+        if(ballIsDown || ballIsUp) {
+
+            ball.flipY();
+            return;
+        }
+
+        System.out.println("Last resort");
+        //DIAGONAL CHECK
+        ballIsUp = ball.getY() <= object.getY();
+        ballIsDown = ball.getY() >= object.getY();
+        ballIsLeft = ball.getX() < object.getX();
+        ballIsRight = ball.getX() > object.getX();
+
+        if(ballIsDown || ballIsUp) {
+
+            flipBall(ball, ballIsLeft, ballIsRight);
+        }
+    }
+
+    void oldUpdateBall(Ball ball, GameObject object) {
 
         //CENTER CHECK
         if(checkCenterBallPosition(ball, object)) {
