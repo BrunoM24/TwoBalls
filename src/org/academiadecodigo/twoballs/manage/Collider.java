@@ -6,12 +6,58 @@ import org.academiadecodigo.twoballs.gameobjects.Paddle;
 import org.academiadecodigo.twoballs.sound.GameSound;
 import org.academiadecodigo.twoballs.sound.SoundManager;
 
+import java.awt.geom.Rectangle2D;
+
 /**
  * Created by miro on 20/10/2017.
  */
 public class Collider {
 
-    void updateBall(int buffer, Ball ball, GameObject object) {
+    void updateBall(Ball ball, GameObject object) {
+
+        if(isSideCollision(ball, object.getBounds())) {
+
+            ball.flipX();
+        }
+        else {
+
+            ball.flipY();
+        }
+    }
+
+    private float getIntersectAmount(double obj1Start, double obj1End, double obj2Start, double obj2End) {
+
+        Rectangle2D obj1Rect = new Rectangle2D.Double(obj1Start, 0, obj1End, 1);
+        Rectangle2D obj2Rect = new Rectangle2D.Double(obj2Start, 0, obj2End, 1);
+
+        if(!obj1Rect.intersects(obj2Rect)) {
+
+            return 0;
+        }
+
+        //create a new rectangle with the new area and assign it to obj2Rect
+        Rectangle2D.intersect(obj1Rect, obj2Rect, obj2Rect);
+        return (float) (obj2Rect.getWidth() / obj1Rect.getWidth());
+    }
+
+    private double horContactAmount(Rectangle2D ballRect, Rectangle2D gameObjectRect) {
+
+        return getIntersectAmount(ballRect.getX(), ballRect.getWidth(), gameObjectRect.getX(), gameObjectRect.getWidth());
+    }
+
+    private double verContactAmount(Rectangle2D ballRect, Rectangle2D gameObjectRect) {
+
+        return getIntersectAmount(ballRect.getY(), ballRect.getHeight(), gameObjectRect.getY(), gameObjectRect.getHeight());
+    }
+
+    private boolean isSideCollision(Ball ball, Rectangle2D gameObjectRect) {
+
+        Rectangle2D ballRect = ball.getBounds();
+        return horContactAmount(ballRect, gameObjectRect) < verContactAmount(ballRect, gameObjectRect);
+    }
+
+    @Deprecated
+    void oldUpdateBall(int buffer, Ball ball, GameObject object) {
 
         //CENTER CHECK
         if(checkCenterBallPosition(ball, object)) {
@@ -50,7 +96,8 @@ public class Collider {
         }
     }
 
-    void oldUpdateBall(Ball ball, GameObject object) {
+    @Deprecated
+    void olderUpdateBall(Ball ball, GameObject object) {
 
         //CENTER CHECK
         if(checkCenterBallPosition(ball, object)) {
@@ -73,6 +120,7 @@ public class Collider {
         }
     }
 
+    @Deprecated
     private void flipBall(Ball ball, boolean ballIsLeft, boolean ballIsRight) {
 
         ball.getDirection().y = -1;
@@ -86,6 +134,7 @@ public class Collider {
         }
     }
 
+    @Deprecated
     private boolean checkCenterBallPosition(Ball ball, GameObject object) {    //SEEMS FINE??
 
         int ballCenterX = ball.getX() + ball.getWidth() / 2;
@@ -136,7 +185,24 @@ public class Collider {
         return (object.getY() + (divisionNumber / 3f) * object.getHeight());
     }
 
-    public void ballOnBall(Ball ballA, Ball ballB) {        //SEEMS TO BE WORKING FINE?
+    void ballOnBall(Ball ballA, Ball ballB) {
+
+        ballB.setLastObjectTouched(ballA);
+        if(isSideCollision(ballA, ballB.getBounds())) {
+
+            ballB.getDirection().x = ballA.getDirection().x;
+            ballA.flipX();
+        }
+        else {
+
+            ballB.getDirection().y = ballA.getDirection().y;
+            ballA.flipY();
+        }
+
+    }
+
+    @Deprecated
+    void oldBallOnBall(Ball ballA, Ball ballB) {        //SEEMS TO BE WORKING FINE?
 
         boolean ballA_TouchingFromTop = (ballA.getY() + ballA.getHeight() >= ballB.getY());// || (ballA.getY() <= ballB.getY() + ballB.getHeight());
         boolean ballA_TouchingFromLeft = (ballA.getX() + ballA.getWidth() >= ballB.getX());// || (ballA.getX() <= ballB.getX() + ballB.getWidth());

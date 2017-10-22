@@ -27,13 +27,12 @@ public class Sound {
      */
     public void play(boolean fromStart) {
 
-        /*
         if(fromStart) {
 
             clip.setFramePosition(0);
         }
 
-        clip.start();*/
+        clip.start();
     }
 
     public void stop() {
