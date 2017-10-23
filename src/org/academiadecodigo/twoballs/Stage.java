@@ -105,7 +105,7 @@ public class Stage {
         if(brickCounter == 0) {
 
             running = false;
-            titleText.updateText(PauseText.PLAYER_WIN.replace("X" , scoreManager.getWinner()+""));
+            titleText.updateText(PauseText.PLAYER_WIN.replace("X", scoreManager.getWinner() + ""));
             return;
             //spawnBricks(5, 8, 32, 64, 0);
         }
@@ -199,6 +199,11 @@ public class Stage {
 
         if(key == down || key == up) {
 
+            if(player.getDirection() != 0) {
+
+                return false;
+            }
+            
             player.updateDirection(key == up ? -1 : 1);
             return true;
         }
@@ -208,15 +213,38 @@ public class Stage {
 
     void keyReleased(int key) {
 
-        if(key == P1_DOWN || key == P1_UP) {
+        if(handleRelease(player1, key, P1_UP, P1_DOWN)) {
 
-            player1.updateDirection(0);
+            return;
         }
 
-        if(key == P2_DOWN || key == P2_UP) {
+        if(handleRelease(player2, key, P2_UP, P2_DOWN)) {
 
-            player2.updateDirection(0);
+            return;
+            //TODO more keys?
         }
+    }
+
+    private boolean handleRelease(Paddle player, int key, int keyUp, int keyDown) {
+
+        if(key == keyUp || key == keyDown) {
+
+            if(key == keyUp && player.getDirection() == 1) {
+
+                return false;
+            }
+
+            if(key == keyDown && player.getDirection() == -1) {
+
+                return false;
+            }
+
+            player.updateDirection(0);
+
+            return true;
+        }
+
+        return false;
     }
 
     public void removeObject(GameObject object) {

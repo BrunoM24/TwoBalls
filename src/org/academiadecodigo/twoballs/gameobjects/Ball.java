@@ -166,7 +166,6 @@ public class Ball extends GameObject implements Movable {
         return speed + 0.1f;
     }
 
-
     public Direction getDirection() {
 
         return direction;

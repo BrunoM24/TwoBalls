@@ -2,6 +2,7 @@ package org.academiadecodigo.twoballs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.twoballs.GameScreen;
+import org.academiadecodigo.twoballs.gameobjects.move.Direction;
 import org.academiadecodigo.twoballs.gameobjects.move.Movable;
 
 import java.awt.*;
@@ -78,5 +79,10 @@ public class Paddle extends GameObject implements Movable {
     public void freeze(int time) {
 
         freezeTimer = time * 60;
+    }
+
+    public int getDirection() {
+
+        return direction;
     }
 }

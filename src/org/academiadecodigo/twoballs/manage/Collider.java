@@ -15,6 +15,11 @@ public class Collider {
 
     void updateBall(Ball ball, GameObject object) {
 
+        if(checkCenterBallPosition(ball, object)) {
+
+            return;
+        }
+
         if(isSideCollision(ball, object.getBounds())) {
 
             ball.flipX();
@@ -134,7 +139,6 @@ public class Collider {
         }
     }
 
-    @Deprecated
     private boolean checkCenterBallPosition(Ball ball, GameObject object) {    //SEEMS FINE??
 
         int ballCenterX = ball.getX() + ball.getWidth() / 2;
